@@ -175,7 +175,7 @@ function Postman:_init_managers()
 	Managers.transition = TransitionManager:new()
 	Managers.changelog = rawget(_G, "UrlLoader") ~= nil and ChangelogManager:new() or ChangelogManagerOffline:new()
 	Managers.news_ticker = NewsTickerManager:new()
-	Managers.sale_popup = SalePopupManager:new("http://services.paradoxplaza.com/head/feeds/wotr-sales-popup-config/content")
+	Managers.sale_popup = SalePopupManager:new("http://0.0.0.0/head/feeds/wotr-sales-popup-config/content")
 end
 
 function Postman:_init_backend()

@@ -10,7 +10,7 @@ function NewsTickerManager:init()
 	end
 
 	self._loader = UrlLoader()
-	self._url = "http://services.paradoxplaza.com/head/feeds/wotr-news-ticker/content"
+	self._url = "http://0.0.0.0/head/feeds/wotr-news-ticker/content"
 end
 
 function NewsTickerManager:load(callback)
