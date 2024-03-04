@@ -155,44 +155,6 @@ function StateSplashScreen:_next_state()
 end
 
 function StateSplashScreen:_check_dependencies()
-	local is_fatal = self._is_fatal
-	local dependency_error = self._dependency_error
-
-	if GameSettingsDevelopment.network_mode == "steam" and not script_data.settings.dedicated_server and not self._dependency_error then
-		if not rawget(_G, "Steam") then
-			dependency_error = "error_steam_not_initialized"
-			is_fatal = true
-		elseif not Steam.connected() then
-			dependency_error = "error_no_connection_to_steam_servers"
-			is_fatal = true
-		elseif not Managers.backend:connected() then
-			dependency_error = "error_no_connection_to_backend"
-			is_fatal = true
-		elseif GameSettingsDevelopment.show_nda_in_splash_screen and not SaveData.nda_confirm then
-			dependency_error = "error_need_nda_confirm"
-			is_fatal = false
-			SaveData.nda_confirm = true
-		end
-	end
-
-	if dependency_error then
-		self._dependency_error = dependency_error
-
-		if is_fatal then
-			if dependency_error == "error_no_connection_to_backend" then
-				self._splash_screen_menu:goto("fatal_error_with_http_link_popup")
-			else
-				self._splash_screen_menu:goto("fatal_error_popup")
-			end
-		elseif dependency_error == "error_need_nda_confirm" then
-			self._splash_screen_menu:goto("nda_confirm_popup")
-		else
-			self._splash_screen_menu:goto("error_popup")
-		end
-
-		return false
-	end
-
 	if self:_show_changelog() then
 		return false
 	end
