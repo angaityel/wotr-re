@@ -36,11 +36,7 @@ GameSettingsDevelopment.all_on_same_team = false
 GameSettingsDevelopment.allow_multiple_dot_effects = false
 GameSettingsDevelopment.backend_timeout = 90
 
-if table.find(argv, "-eac") then
-	GameSettingsDevelopment.anti_cheat_enabled = true
-else
-	GameSettingsDevelopment.anti_cheat_enabled = false
-end
+GameSettingsDevelopment.anti_cheat_enabled = false
 
 if script_data.settings.dedicated_server then
 	GameSettingsDevelopment.network_mode = "steam"
