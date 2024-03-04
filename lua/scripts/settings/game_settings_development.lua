@@ -38,118 +38,19 @@ GameSettingsDevelopment.backend_timeout = 90
 
 GameSettingsDevelopment.anti_cheat_enabled = false
 
-if script_data.settings.dedicated_server then
-	GameSettingsDevelopment.network_mode = "steam"
-elseif script_data.settings.content_revision then
-	GameSettingsDevelopment.network_mode = "steam"
+GameSettingsDevelopment.network_mode = "steam"
+GameSettingsDevelopment.disable_full_game_licence_check = true
 
-	if rawget(_G, "Steam") then
-		if Steam.app_id() == 42160 then
-			GameSettingsDevelopment.enable_micro_transactions = true
-			GameSettingsDevelopment.allow_host_game = false
-			GameSettingsDevelopment.allow_host_practice = false
-			GameSettingsDevelopment.unlock_all = false
-			GameSettingsDevelopment.show_fps = Application.user_setting("show_fps") or false
-			GameSettingsDevelopment.hide_lan_tab = true
-			GameSettingsDevelopment.disable_singleplayer = false
-			GameSettingsDevelopment.disable_coat_of_arms_editor = false
-			GameSettingsDevelopment.disable_character_sheet = true
-			GameSettingsDevelopment.disable_key_mappings = false
-			GameSettingsDevelopment.disable_uniform_lod = not script_data.settings.uniform_lod
-			GameSettingsDevelopment.allow_old_join_game = false
-			GameSettingsDevelopment.show_version_info = false
-			GameSettingsDevelopment.backend_address = "ftdata.fatshark.se"
-		elseif Steam.app_id() == 203030 then
-			function DLCSettings.full_game()
-				return true
-			end
-
-			GameSettingsDevelopment.allow_host_game = false
-			GameSettingsDevelopment.allow_host_practice = true
-			GameSettingsDevelopment.unlock_all = false
-			GameSettingsDevelopment.show_fps = Application.user_setting("show_fps") or false
-			GameSettingsDevelopment.hide_lan_tab = true
-			GameSettingsDevelopment.disable_singleplayer = false
-			GameSettingsDevelopment.disable_coat_of_arms_editor = false
-			GameSettingsDevelopment.disable_character_sheet = true
-			GameSettingsDevelopment.disable_key_mappings = false
-			GameSettingsDevelopment.disable_uniform_lod = not script_data.settings.uniform_lod
-			GameSettingsDevelopment.allow_old_join_game = false
-			GameSettingsDevelopment.show_version_info = false
-			GameSettingsDevelopment.backend_address = "fttest01.fatshark.se"
-		elseif Steam.app_id() == 203790 then
-			function DLCSettings.full_game()
-				return true
-			end
-
-			GameSettingsDevelopment.enable_micro_transactions = false
-			GameSettingsDevelopment.allow_host_game = false
-			GameSettingsDevelopment.allow_host_practice = false
-			GameSettingsDevelopment.unlock_all = false
-			GameSettingsDevelopment.show_fps = false
-			GameSettingsDevelopment.hide_lan_tab = true
-			GameSettingsDevelopment.disable_character_sheet = true
-			GameSettingsDevelopment.all_on_same_team = true
-			GameSettingsDevelopment.allow_old_join_game = false
-			GameSettingsDevelopment.disable_uniform_lod = not script_data.settings.uniform_lod
-			GameSettingsDevelopment.backend_address = "fttest01.fatshark.se"
-		elseif Steam.app_id() == 206980 then
-			function DLCSettings.full_game()
-				return true
-			end
-
-			GameSettingsDevelopment.allow_host_game = false
-			GameSettingsDevelopment.allow_host_practice = true
-			GameSettingsDevelopment.unlock_all = false
-			GameSettingsDevelopment.show_fps = Application.user_setting("show_fps") or false
-			GameSettingsDevelopment.hide_lan_tab = true
-			GameSettingsDevelopment.disable_singleplayer = false
-			GameSettingsDevelopment.disable_coat_of_arms_editor = false
-			GameSettingsDevelopment.disable_character_sheet = true
-			GameSettingsDevelopment.disable_key_mappings = false
-			GameSettingsDevelopment.disable_uniform_lod = not script_data.settings.uniform_lod
-			GameSettingsDevelopment.allow_old_join_game = false
-			GameSettingsDevelopment.show_version_info = false
-			GameSettingsDevelopment.backend_address = "fttest01.fatshark.se"
-		else
-			function DLCSettings.full_game()
-				return true
-			end
-
-			GameSettingsDevelopment.enable_micro_transactions = false
-			GameSettingsDevelopment.allow_host_game = false
-			GameSettingsDevelopment.allow_host_practice = false
-			GameSettingsDevelopment.unlock_all = false
-			GameSettingsDevelopment.show_fps = Application.user_setting("show_fps") or false
-			GameSettingsDevelopment.hide_lan_tab = true
-			GameSettingsDevelopment.disable_singleplayer = false
-			GameSettingsDevelopment.disable_coat_of_arms_editor = false
-			GameSettingsDevelopment.disable_character_sheet = true
-			GameSettingsDevelopment.disable_key_mappings = false
-			GameSettingsDevelopment.disable_uniform_lod = not script_data.settings.uniform_lod
-			GameSettingsDevelopment.allow_old_join_game = false
-			GameSettingsDevelopment.backend_address = "fttest01.fatshark.se"
-		end
-	end
-elseif Application.build() == "dev" or Application.build() == "debug" then
-	GameSettingsDevelopment.disable_full_game_licence_check = true
-
-	function DLCSettings.full_game()
-		return true
-	end
-
-	GameSettingsDevelopment.network_mode = EDITOR_LAUNCH and "lan" or table.find(argv, "-force-steam") and "steam" or "lan"
-	GameSettingsDevelopment.unlock_all = true
-	GameSettingsDevelopment.all_on_same_team = true
-	GameSettingsDevelopment.allow_host_game = true
-	GameSettingsDevelopment.allow_host_practice = true
-	GameSettingsDevelopment.show_fps = true
-	GameSettingsDevelopment.enable_micro_transactions = false
-	GameSettingsDevelopment.backend_address = "fttest.fatshark.se"
-else
-	print("Running release game without content revision, quitting.")
-	Application.quit()
+function DLCSettings.full_game()
+	return true
 end
+
+GameSettingsDevelopment.unlock_all = true
+GameSettingsDevelopment.allow_host_game = true
+GameSettingsDevelopment.allow_host_practice = true
+GameSettingsDevelopment.show_fps = true
+GameSettingsDevelopment.enable_micro_transactions = false
+GameSettingsDevelopment.backend_address = "0.0.0.0"
 
 GameSettingsDevelopment.network_port = 10000
 GameSettingsDevelopment.network_revision_check_enabled = true
