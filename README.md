@@ -2,7 +2,7 @@
 Launch War of the Roses game without backend.
 - Everything's unlocked.
 - Practice and training with bots works.
-- Multiplayer not tested.
+- Multiplayer works! Select Multiplayer - Join or Host(You can change map and game mode).
 ## Using
 > [!WARNING]
 > Use at your own risk.
