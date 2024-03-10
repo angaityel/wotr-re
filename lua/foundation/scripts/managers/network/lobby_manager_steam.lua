@@ -18,7 +18,7 @@ local QOS_MIN_GAME_SERVER = 30
 local QOS_MIN_LOBBY_SERVER = 30
 
 function LobbyManagerSteam:init(options)
-	self.lobby_name = self:generate_lobby_name()
+	self.lobby_name = self:custom_lobby_name()
 	self.client = nil
 	self.lobby = nil
 	self.hosting = false
@@ -72,6 +72,27 @@ function LobbyManagerSteam:player_name()
 	local settings = Application.settings()
 
 	return settings.dedicated_server and self.game_server_settings.server_init_settings.server_name or Steam.user_name()
+end
+
+function LobbyManagerSteam:custom_lobby_name()
+	local argv = {
+		Application.argv()
+	}
+
+	local lobbyname = ""
+
+	for i,v in ipairs(argv) do
+		if argv[i] == "-lobbyname" then
+			lobbyname = argv[i + 1]
+		end
+	end
+
+	if lobbyname ~= "" then
+		return lobbyname
+	else
+		lobbyname = self:generate_lobby_name()
+		return lobbyname
+	end
 end
 
 function LobbyManagerSteam:generate_lobby_name()
