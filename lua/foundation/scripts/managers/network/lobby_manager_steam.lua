@@ -1,14 +1,34 @@
 ﻿-- chunkname: @foundation/scripts/managers/network/lobby_manager_steam.lua
 
 LobbyManagerSteam = class(LobbyManagerSteam)
+local argv = {
+	Application.argv()
+}
 LobbyState = LobbyState or {}
 LobbyState.OFFLINE = "offline"
 LobbyState.CREATING = "creating"
 LobbyState.JOINING = "joining"
 LobbyState.JOINED = "joined"
 LobbyState.FAILED = "failed"
+
 LobbyManagerSteam.LOBBY_TYPE = Network.STEAM_LOBBY_PUBLIC
+
+if table.find(argv, "-lobbyprivate") then
+	LobbyManagerSteam.LOBBY_TYPE = Network.STEAM_LOBBY_PRIVATE
+end
+
+if table.find(argv, "-lobbyfriends") then
+	LobbyManagerSteam.LOBBY_TYPE = Network.STEAM_LOBBY_FRIENDSONLY
+end
+
 LobbyManagerSteam.LOBBY_MAX_MEMBERS = 256
+
+for i,v in ipairs(argv) do
+	if argv[i] == "-lobbymaxmembers" then
+		LobbyManagerSteam.LOBBY_MAX_MEMBERS = tonumber(argv[i + 1])
+	end
+end
+
 LobbyManagerSteam.TYPE = "steam"
 LobbyManagerSteam.GAME_TAGS_SEPARATOR = ";"
 LobbyManagerSteam.GAME_TAG_SEPARATOR = "="
@@ -75,10 +95,6 @@ function LobbyManagerSteam:player_name()
 end
 
 function LobbyManagerSteam:custom_lobby_name()
-	local argv = {
-		Application.argv()
-	}
-
 	local lobbyname = ""
 
 	for i,v in ipairs(argv) do
