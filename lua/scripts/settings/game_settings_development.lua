@@ -10,7 +10,17 @@ UNLOCK_DLC = 230940
 IS_DEMO = false
 GameSettingsDevelopment.default_environment = "core/rendering/default_outdoor"
 GameSettingsDevelopment.default_time_limit = 500000
+for i,v in ipairs(argv) do
+	if argv[i] == "-timelimit" then
+		GameSettingsDevelopment.default_time_limit = tonumber(argv[i + 1])
+	end
+end
 GameSettingsDevelopment.default_win_score = 100
+for i,v in ipairs(argv) do
+	if argv[i] == "-winscore" then
+		GameSettingsDevelopment.default_win_score = tonumber(argv[i + 1])
+	end
+end
 GameSettingsDevelopment.buy_game_url = "http://www.waroftherosesthegame.com/buy"
 GameSettingsDevelopment.twitter_url = "http://twitter.com/AWarofRoses"
 GameSettingsDevelopment.facebook_url = "http://www.facebook.com/AWarofRoses"
@@ -32,7 +42,7 @@ GameSettingsDevelopment.show_version_info = true
 GameSettingsDevelopment.show_nda_in_splash_screen = false
 GameSettingsDevelopment.server_license_check = true
 GameSettingsDevelopment.enable_robot_player = false
-GameSettingsDevelopment.all_on_same_team = false
+GameSettingsDevelopment.all_on_same_team = true
 GameSettingsDevelopment.allow_multiple_dot_effects = false
 GameSettingsDevelopment.backend_timeout = 90
 
