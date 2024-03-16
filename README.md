@@ -23,7 +23,8 @@ Examples of how it should look like:
 Lobby name and player limit:
 - -lobbyname "server name": custom names for servers.
 - -lobbymaxmembers 256: server player limit, default value without command is 256.
-
+- -timelimit 123456: round time in seconds.
+- -winscore 123456: round win score.
 And lobby visibility:
 - -lobbyprivate: private server (probably useless, invites don't seem to work).
 - -lobbyfriends: friends only server (only friends can see or join? Not tested).
