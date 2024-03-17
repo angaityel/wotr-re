@@ -241,7 +241,7 @@ function AdminManager:set_max_squad_size(max_squad_size)
 end
 
 function AdminManager:lock_server()
-	self._server_locked = true
+	self._server_locked = false
 end
 
 function AdminManager:unlock_server()
