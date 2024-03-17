@@ -18,7 +18,11 @@ end
 GameSettingsDevelopment.default_win_score = 100
 for i,v in ipairs(argv) do
 	if argv[i] == "-winscore" then
-		GameSettingsDevelopment.default_win_score = tonumber(argv[i + 1])
+		if tonumber(argv[i + 1]) > 1000 then
+			GameSettingsDevelopment.default_win_score = 1000
+		else
+			GameSettingsDevelopment.default_win_score = tonumber(argv[i + 1])
+		end
 	end
 end
 GameSettingsDevelopment.buy_game_url = "http://www.waroftherosesthegame.com/buy"
