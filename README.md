@@ -24,7 +24,7 @@ Lobby name and player limit:
 - -lobbyname "server name": custom names for servers.
 - -lobbymaxmembers 256: server player limit, default value without command is 256.
 - -timelimit 123456: round time in seconds.
-- -winscore 123456: round win score.
+- -winscore 123: round win score (up to 1000).
 
 And lobby visibility:
 - -lobbyprivate: private server (probably useless, invites don't seem to work).
@@ -41,6 +41,32 @@ Or you can create a .bat file in game folder with:
 wotr.exe -bundle-dir bundle -lobbyname "my super-duper server" -lobbymaxmembers 8
 ```
 And launch game through .bat file.
+## Dedicated server
+> [!WARNING]
+> Server is VAC secured
+
+Check server_settings.ini and map_rotation.ini first.
+
+Maps and available modes:
+```
+St_Albans - town_02 - tdm, con, battle, ass
+Mortimers_Cross - village_02 - tdm, con, battle, ass
+Bamburgh_Castle - castle_02 - tdm, con, battle, ass
+Clitheroe_Forest - forest_01 - tdm, con, battle, ass
+London_Tournament - tournament_01 - tdm, battle
+Edgecote_Moor - moor_01 - tdm, con, battle
+Barnet - field_01 - tdm, con, battle
+Wakefield - wakefield_01 - tdm, con, battle
+Towton - towton_01 - tdm, con, battle
+Ravenspurn - ravenspurn_01 - tdm, con, battle
+Greenwood - greenwood_01 - tdm, battle
+Wakefield - wakefield_02 - ass
+```
+To launch (number = server_port from server_settings.ini - 10):
+```
+wotr_server.exe -bundle-dir bundle -ini dedicated_server_settings -server_server_port 27020
+```
+
 ## Build
 Use this version of LuaJIT for compiling lua files:
 
