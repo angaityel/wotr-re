@@ -49,7 +49,7 @@ function PersistenceManagerServer:post_init()
 	self._settings.connection.address = backend_address
 	self._settings.project_id = app_id
 
-	self:connect()
+	--self:connect()
 end
 
 function PersistenceManagerServer:connect()
@@ -156,7 +156,7 @@ function PersistenceManagerServer:setup(stats_collection)
 		self._external_tweaks:refresh()
 		Managers.state.event:register(self, "player_joined", "event_player_joined")
 	else
-		self:connect()
+		--self:connect()
 	end
 end
 
@@ -364,6 +364,7 @@ function PersistenceManagerServer:cb_attributes_saved(player, response)
 end
 
 function PersistenceManagerServer:update(t, dt)
+	--[[
 	local reconnect = self._state == "error" or self._state == "connected" and not Managers.backend:connected()
 
 	if reconnect then
@@ -372,6 +373,7 @@ function PersistenceManagerServer:update(t, dt)
 		Managers.chat:send_chat_message(1, "Connection to the backend has been lost. Your progress may not be saved.")
 		Managers.chat:send_chat_message(1, "Reconnecting...")
 	end
+	--]]
 end
 
 function PersistenceManagerServer:destroy()
