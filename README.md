@@ -45,6 +45,8 @@ And launch game through .bat file.
 > [!WARNING]
 > Server is VAC secured
 
+Create steam_appid.txt in game folder with wotr appid 42160
+
 Check server_settings.ini and map_rotation.ini first.
 
 Maps and available modes:
@@ -64,7 +66,7 @@ Wakefield - wakefield_02 - ass
 ```
 To launch (number = server_port from server_settings.ini - 10):
 ```
-wotr_server.exe -bundle-dir bundle -ini dedicated_server_settings -server_server_port 27020
+wotr_server.exe -bundle-dir bundle -no-rendering -ini dedicated_server_settings -server_server_port 27020
 ```
 
 ## Build
