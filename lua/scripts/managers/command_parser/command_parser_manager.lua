@@ -62,7 +62,7 @@ function CommandParserManager:destroy()
 end
 
 Commands = {}
---[[
+
 function Commands:script(lua_code, player)
 	local code_function = loadstring(lua_code)
 
@@ -101,7 +101,7 @@ end
 function Commands:location(text)
 	Managers.state.event:trigger("location_print_requested")
 end
---]]
+
 function Commands:say(text, player)
 	if text and text ~= "" then
 		local spawn_state = player.spawn_data.state
@@ -121,7 +121,7 @@ function Commands:say_team(text, player)
 		Managers.chat:send_chat_message(channel_id, text)
 	end
 end
---[[
+
 function Commands:say_admin(text, player)
 	if Managers.lobby.server and text ~= "" then
 		Managers.chat:send_chat_message(1, text, "rpc_admin_chat_message")
@@ -129,7 +129,7 @@ function Commands:say_admin(text, player)
 		return true, ""
 	end
 end
---]]
+
 function Commands:kill(text, player)
 	local network_manager = Managers.state.network
 	local unit = player.player_unit
@@ -152,7 +152,7 @@ function Commands:kill(text, player)
 		end
 	end
 end
---[[
+
 function Commands:console(args, player)
 	if Application.build() ~= "dev" then
 		return
@@ -237,7 +237,7 @@ end
 function Commands:next_level()
 	Managers.state.event:trigger("next_level")
 end
---]]
+
 function Commands:list_players()
 	local players = Managers.player:players()
 
@@ -245,7 +245,7 @@ function Commands:list_players()
 		Managers.state.hud:output_console_text(player:name() .. "\t\t" .. player:network_id())
 	end
 end
---[[
+
 function Commands:kick_player(args)
 	if Managers.lobby.server then
 		args = string.split(args, " ")
@@ -534,4 +534,3 @@ function Commands:vote_map(map_pair, player)
 		return true, "/vote_map can't be executed as an RCON command."
 	end
 end
---]]
