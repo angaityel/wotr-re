@@ -52,19 +52,25 @@ GameSettingsDevelopment.backend_timeout = 90
 
 GameSettingsDevelopment.anti_cheat_enabled = false
 
-GameSettingsDevelopment.network_mode = "steam"
-GameSettingsDevelopment.disable_full_game_licence_check = true
+if script_data.settings.dedicated_server then
+	GameSettingsDevelopment.network_mode = "steam"
+elseif script_data.settings.content_revision then
+	GameSettingsDevelopment.network_mode = "steam"
 
-function DLCSettings.full_game()
-	return true
+	GameSettingsDevelopment.disable_full_game_licence_check = true
+
+	function DLCSettings.full_game()
+		return true
+	end
+
+	GameSettingsDevelopment.unlock_all = true
+	GameSettingsDevelopment.allow_host_game = true
+	GameSettingsDevelopment.allow_host_practice = true
+	GameSettingsDevelopment.show_fps = true
+	GameSettingsDevelopment.enable_micro_transactions = false
+	GameSettingsDevelopment.disable_uniform_lod = not script_data.settings.uniform_lod
+	GameSettingsDevelopment.backend_address = "0.0.0.0"
 end
-
-GameSettingsDevelopment.unlock_all = true
-GameSettingsDevelopment.allow_host_game = true
-GameSettingsDevelopment.allow_host_practice = true
-GameSettingsDevelopment.show_fps = true
-GameSettingsDevelopment.enable_micro_transactions = false
-GameSettingsDevelopment.backend_address = "0.0.0.0"
 
 GameSettingsDevelopment.network_port = 10000
 GameSettingsDevelopment.network_revision_check_enabled = true
