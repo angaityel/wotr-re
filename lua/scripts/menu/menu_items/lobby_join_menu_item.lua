@@ -28,10 +28,11 @@ function LobbyJoinMenuItem:render(dt, t, gui, layout_settings)
 
 	if self._refresh then
 		lobby_manager:refresh_lobby_browser()
-
+		--[[
 		if GameSettingsDevelopment.network_mode == "steam" then
 			lobby_manager:refresh_server_browser()
 		end
+		--]]
 
 		self._refresh = false
 	end
@@ -139,7 +140,7 @@ function LobbyJoinMenuItem:render(dt, t, gui, layout_settings)
 				end
 			end
 		end
-
+		--[[
 		if GameSettingsDevelopment.network_mode == "steam" then
 			local servers = lobby_manager:server_browser_content({
 				"level_key",
@@ -165,22 +166,23 @@ function LobbyJoinMenuItem:render(dt, t, gui, layout_settings)
 				end
 			end
 		end
-
+		--]]
 		if GameSettingsDevelopment.network_mode == "steam" then
 			local refreshing_lobbies = lobby_manager:is_refreshing_lobby_browser()
-			local refreshing_servers = lobby_manager:is_refreshing_server_browser()
+			--local refreshing_servers = lobby_manager:is_refreshing_server_browser()
 
 			if refreshing_lobbies then
 				ScriptGUI.text(gui, "Refreshing lobbies...", font, layout_settings.font_size, font_material, Vector3(x, text_y, 1), Color(255, 255, 255))
 
 				text_y = text_y + text_offset_y
 			end
-
+			--[[
 			if refreshing_servers then
 				ScriptGUI.text(gui, "Refreshing servers...", font, layout_settings.font_size, font_material, Vector3(x, text_y, 1), Color(255, 255, 255))
 
 				text_y = text_y + text_offset_y
 			end
+			--]]
 		end
 
 		ScriptGUI.text(gui, "---------------------------------------------------------------------", font, layout_settings.font_size, font_material, Vector3(x, text_y, 1), Color(255, 255, 255))
