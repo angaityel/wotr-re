@@ -36,12 +36,12 @@ function PersistenceManagerServer:post_init()
 
 	if script_data.settings.content_revision then
 		if app_id == 42160 then
-			backend_address = GameSettingsDevelopment.backend_address or "ftdata.fatshark.se"
+			backend_address = GameSettingsDevelopment.backend_address or "0.0.0.0"
 		else
-			backend_address = GameSettingsDevelopment.backend_address or "fttest01.fatshark.se"
+			backend_address = GameSettingsDevelopment.backend_address or "0.0.0.0"
 		end
 	elseif Application.build() == "dev" or Application.build() == "debug" then
-		backend_address = GameSettingsDevelopment.backend_address or "fttest01.fatshark.se"
+		backend_address = GameSettingsDevelopment.backend_address or "0.0.0.0"
 	end
 
 	self._telemetry = self._settings.telemetry.enabled == true and TelemetryCollector:new(self._settings.telemetry.template_name) or TelemetryCollectorOffline:new()
