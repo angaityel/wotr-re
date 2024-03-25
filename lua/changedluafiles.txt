@@ -1,0 +1,10 @@
+scripts/settings/game_settings_development.lua
+scripts/game_state/state_splash_screen.lua
+scripts/managers/changelog/changelog_manager.lua
+scripts/managers/news_ticker/news_ticker_manager.lua
+scripts/boot.lua
+foundation/scripts/managers/network/lobby_manager_steam.lua
+scripts/managers/network/game_network_manager.lua
+scripts/managers/admin/admin_manager.lua
+scripts/managers/persistence/persistence_manager_server.lua
+scripts/menu/menu_items/lobby_join_menu_item.lua

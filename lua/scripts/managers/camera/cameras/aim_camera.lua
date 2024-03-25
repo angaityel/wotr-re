@@ -1,0 +1,34 @@
+﻿-- chunkname: @scripts/managers/camera/cameras/aim_camera.lua
+
+require("scripts/managers/camera/cameras/base_camera")
+
+AimCamera = class(AimCamera, BaseCamera)
+
+function AimCamera:init(root_node)
+	BaseCamera.init(self, root_node)
+
+	self._root_node = root_node
+end
+
+function AimCamera:parse_parameters(camera_settings, parent_node)
+	BaseCamera.parse_parameters(self, camera_settings, parent_node)
+end
+
+function AimCamera:set_root_unit(unit, object)
+	BaseCamera.set_root_unit(self, unit, object)
+end
+
+function AimCamera:set_root_rotation(rotation)
+	BaseCamera.set_root_rotation(self, rotation)
+end
+
+function AimCamera:update(dt, position, rotation, data)
+	local root_node = self._root_node
+	local aim_pitch = root_node:aim_pitch()
+	local aim_yaw = root_node:aim_yaw()
+	local rotation_pitch = Quaternion(Vector3(1, 0, 0), aim_pitch)
+	local rotation_yaw = Quaternion(Vector3(0, 0, 1), aim_yaw)
+	local new_rotation = Quaternion.multiply(rotation_yaw, rotation_pitch)
+
+	BaseCamera.update(self, dt, position, new_rotation, data)
+end
