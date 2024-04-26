@@ -42,7 +42,7 @@ GameSettingsDevelopment.disable_key_mappings = false
 GameSettingsDevelopment.disable_uniform_lod = false
 GameSettingsDevelopment.allow_old_join_game = true
 GameSettingsDevelopment.network_timeout = 10
-GameSettingsDevelopment.show_version_info = true
+GameSettingsDevelopment.show_version_info = false
 GameSettingsDevelopment.show_nda_in_splash_screen = false
 GameSettingsDevelopment.server_license_check = true
 GameSettingsDevelopment.enable_robot_player = false
@@ -66,7 +66,7 @@ elseif script_data.settings.content_revision then
 	GameSettingsDevelopment.unlock_all = true
 	GameSettingsDevelopment.allow_host_game = true
 	GameSettingsDevelopment.allow_host_practice = true
-	GameSettingsDevelopment.show_fps = true
+	GameSettingsDevelopment.show_fps = Application.user_setting("show_fps") or false
 	GameSettingsDevelopment.enable_micro_transactions = false
 	GameSettingsDevelopment.disable_uniform_lod = not script_data.settings.uniform_lod
 	GameSettingsDevelopment.backend_address = "0.0.0.0"
