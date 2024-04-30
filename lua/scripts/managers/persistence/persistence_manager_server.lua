@@ -12,6 +12,13 @@ require("scripts/settings/server_browser_score")
 
 PersistenceManagerServer = class(PersistenceManagerServer, PersistenceManagerCommon)
 
+local argv = {
+	Application.argv()
+}
+if table.find(argv, "-localbackend") then
+	os.execute("mkdir stats")
+end
+
 function PersistenceManagerServer:init(settings)
 	PersistenceManagerServer.super.init(self)
 	fassert(settings, "No backend settings supplied")
@@ -151,17 +158,21 @@ function PersistenceManagerServer:setup(stats_collection)
 	self._ranks = Ranks:new(stats_collection)
 	self._server_browser_score = ServerBrowserScore:new(stats_collection)
 
-	if Managers.backend:connected() then
+	if table.find(argv, "-localbackend") or table.find(argv, "-onlinebackend") then
 		self._telemetry:setup()
 		self._external_tweaks:refresh()
 		Managers.state.event:register(self, "player_joined", "event_player_joined")
-	else
-		--self:connect()
 	end
 end
 
 function PersistenceManagerServer:event_player_joined(player)
 	local profile_id = player.backend_profile_id
+	local network_id = player:network_id()
+
+	if profile_id == -1 then
+		local profile_id_hex = string.sub(network_id, -8)
+		profile_id = tonumber(profile_id_hex, 16) --set "Steam3 ID" as backend id
+	end
 
 	if player.remote and profile_id ~= -1 then
 		player.round_time_joined = Managers.time:time("round")
@@ -177,14 +188,59 @@ function PersistenceManagerServer:event_player_joined(player)
 			}
 		end
 
-		Managers.backend:get_profile_attributes(profile_id, callback(self, "cb_profile_attributes_received", profile_id, player))
+		local response = {
+			attributes = {
+				experience = 0 --is set manually, if stats are not loaded server will crash (scripts/settings/ranks.lua:442: in function xp_to_rank)
+			},
+			error = nil
+		}
+
+		if table.find(argv, "-localbackend") then
+			local file = io.open("stats/" .. network_id, "r")
+			if file ~= nil then
+				local player_stats = file:read()
+				file:close()
+
+				for k,v in string.gmatch(player_stats, "(%S+)=(%S+)") do 
+					if v == "false" then
+						v = false
+					elseif v == "true" then
+						v = true
+					else
+						v = tonumber(v)
+					end
+					response.attributes[k] = v
+				end
+			end
+			self:cb_profile_attributes_received(profile_id, player, response)
+
+		elseif table.find(argv, "-onlinebackend") then
+			Managers.changelog:get_stats(callback(self, "cb_profile_attributes_received", profile_id, player, response), network_id)
+		end
+		
+		--Managers.backend:get_profile_attributes(profile_id, callback(self, "cb_profile_attributes_received", profile_id, player))
 	else
 		print("Ignoring player", player:name(), "with backend profile id", profile_id)
 		CommandWindow.print("[Backend]", "Ignoring player", player:name(), "with backend profile id", profile_id)
 	end
 end
 
-function PersistenceManagerServer:cb_profile_attributes_received(profile_id, player, response)
+function PersistenceManagerServer:cb_profile_attributes_received(profile_id, player, response, info)
+	if info ~= nil then
+		if info.body ~= "404" then
+			for k,v in string.gmatch(info.body, "(%S+)=(%S+)") do 
+				if v == "false" then
+					v = false
+				elseif v == "true" then
+					v = true
+				else
+					v = tonumber(v)
+				end
+				response.attributes[k] = v
+			end
+		end
+	end
+
 	if response.error == nil then
 		printf("Profile attributes received for player %q (%d)", player:name(), player.backend_profile_id)
 
@@ -241,7 +297,7 @@ end
 function PersistenceManagerServer:save(callback)
 	print("Save progress", self._settings.save_progress)
 
-	if self:_check_requirements() and self._settings.save_progress then
+	if self._settings.save_progress then
 		self._callback = callback
 
 		self:_save_profiles()
@@ -274,11 +330,39 @@ function PersistenceManagerServer:_save_profiles()
 
 	local profile_stats_to_save = {}
 
+	local response = {
+		attributes = {},
+		error = nil
+	}
+
 	for profile_id, profile_data in pairs(self._profiles) do
 		local player = profile_data.player
 		local network_id = player:network_id()
 		local profile_attributes = profile_data.attributes
 		local profile_attributes_to_save = {}
+		local profile_attributes_to_save_string = ""
+
+
+		if table.find(argv, "-localbackend") then
+			local file = io.open("stats/" .. network_id, "r")
+			if file ~= nil then
+				local player_stats = file:read()
+				file:close()
+
+				for k,v in string.gmatch(player_stats, "(%S+)=(%S+)") do 
+					if v == "false" then
+						v = false
+					elseif v == "true" then
+						v = true
+					else
+						v = tonumber(v)
+					end
+					response.attributes[k] = v
+				end
+			end
+		end
+
+		
 
 		for stat_name, stat_props in pairs(StatsContexts.player) do
 			if stat_props.backend.save then
@@ -295,10 +379,17 @@ function PersistenceManagerServer:_save_profiles()
 						profile_attributes_to_save[stat_name] = {
 							[Backend.PROFILE_ATTRIBUTE_SET] = tostring(stat_value)
 						}
+
+						response.attributes[stat_name] = stat_value
 					elseif stat_props.backend.save_mode == "inc" and stat_value > 0 then
 						profile_attributes_to_save[stat_name] = {
 							[Backend.PROFILE_ATTRIBUTE_INC] = stat_value
 						}
+
+						if response.attributes[stat_name] ~= nil then
+							stat_value = response.attributes[stat_name] + stat_value 
+						end
+						response.attributes[stat_name] = stat_value
 					elseif type(stat_props.backend.save_mode) == "table" then
 						local save_mode, source_stat = next(stat_props.backend.save_mode)
 						local source_value = self._stats:get(network_id, source_stat)
@@ -306,26 +397,65 @@ function PersistenceManagerServer:_save_profiles()
 						profile_attributes_to_save[stat_name] = {
 							[Backend.PROFILE_ATTRIBUTE_INC] = source_value
 						}
+
+						--experience, source_value = experience_round
+						if table.find(argv, "-localbackend") then
+							if response.attributes[stat_name] ~= nil then
+								response.attributes[stat_name] = response.attributes[stat_name] + source_value
+							else
+								response.attributes[stat_name] = source_value 
+							end
+						elseif table.find(argv, "-onlinebackend") then
+							response.attributes[stat_name] = source_value 
+						end
 					end
 				end
 			end
 		end
 
+
+		if table.find(argv, "-localbackend") then
+			for k, v in pairs(response.attributes) do
+				profile_attributes_to_save_string = profile_attributes_to_save_string .. k .. "=" .. tostring(v) .. " "
+			end
+			local file = io.open("stats/" .. network_id, "w")
+			file:write(profile_attributes_to_save_string)
+			file:close()
+		elseif table.find(argv, "-onlinebackend") then
+			for k, v in pairs(response.attributes) do
+				profile_attributes_to_save_string = profile_attributes_to_save_string .. k .. "=" .. tostring(v) .. ";"
+			end
+
+			local newUrl = ""
+			for i,v in ipairs(argv) do
+				if argv[i] == "-onlinebackend" then
+					newUrl = argv[i + 1] .. "/savestats/" .. network_id .. "/" .. profile_attributes_to_save_string
+				end
+			end
+			local loader = UrlLoader()
+			UrlLoader.load_text(loader, newUrl)
+		end
+
+
 		if not table.is_empty(profile_attributes_to_save) then
 			self._profiles_saving[player] = true
 
-			local callback = callback(self, "cb_attributes_saved", player)
+			--local callback = callback(self, "cb_attributes_saved", player)
 
-			Managers.backend:update_profile_attributes(profile_id, profile_attributes_to_save, callback)
+			self:cb_attributes_saved(player, response)
+
+			--Managers.backend:update_profile_attributes(profile_id, profile_attributes_to_save, callback)
 		end
 	end
 
 	if not table.is_empty(profile_stats_to_save) and self._settings.stats then
 		cprint("[Backend] Saving profile stats")
 
-		local callback = callback(self, "cb_stats_saved")
+		--local callback = callback(self, "cb_stats_saved")
 
-		Managers.backend:save_stats(profile_stats_to_save, callback)
+		self:cb_stats_saved(response)
+
+		--Managers.backend:save_stats(profile_stats_to_save, callback)
 	end
 
 	if table.is_empty(self._profiles) then
