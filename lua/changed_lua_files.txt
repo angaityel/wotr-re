@@ -8,3 +8,4 @@ scripts/managers/network/game_network_manager.lua
 scripts/managers/admin/admin_manager.lua
 scripts/managers/persistence/persistence_manager_server.lua
 scripts/menu/menu_items/lobby_join_menu_item.lua
+scripts/managers/persistence/persistence_manager_client.lua
