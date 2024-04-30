@@ -1,0 +1,4 @@
+lua_compiled/
+lua/jit/
+lua/lua51.dll
+lua/luajit.exe
