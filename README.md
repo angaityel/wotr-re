@@ -68,9 +68,31 @@ To launch (number = server_port from server_settings.ini - 10):
 ```
 wotr_server.exe -bundle-dir bundle -no-rendering -ini dedicated_server_settings -server_server_port 27020
 ```
+## "Backend"
+Add one of the commands to the server launch options:
+```
+-localbackend
+```
+Server will save stats for each player locally (gamefolder/stats). 
 
+Cons: each server/group of servers will have different stats.
+
+or:
+```
+-onlinebackend 127.0.0.1:27844
+```
+Use wotr_mini_backend.py (http server with sqlite database) from repo as an improvised backend.
+
+Server will save stats for each player online (if someone would host it, can be used locally too).
+
+Pros: same stats for all servers.
+
+Cons: centralized, basically a "proof of concept", can't say if it's a good idea to use it.
 ## Build
 Use this version of LuaJIT for compiling lua files:
 
 https://github.com/LuaJIT/LuaJIT/releases/tag/v2.0.0-beta10
 
+To create patch files, use:
+
+https://github.com/angaityel/bundle-explorer
