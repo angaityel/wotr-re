@@ -4,12 +4,12 @@ from http.server import BaseHTTPRequestHandler
 from http.server import HTTPServer
 
 def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
-  server_address = ('127.0.0.1', 27844)
-  httpd = server_class(server_address, HttpGetHandler)
-  try:
-	  httpd.serve_forever()
-  except KeyboardInterrupt:
-	  httpd.server_close()
+	server_address = ('127.0.0.1', 27844)
+	httpd = server_class(server_address, HttpGetHandler)
+	try:
+		httpd.serve_forever()
+	except KeyboardInterrupt:
+		httpd.server_close()
 
 def save(network_id, stats):
 	sql_q = f"SELECT * FROM players WHERE network_id = '{network_id}'"
@@ -54,8 +54,8 @@ class HttpGetHandler(BaseHTTPRequestHandler):
 
 
 if not os.path.exists("loadstats"):
-    os.makedirs("loadstats")
-    
+		os.makedirs("loadstats")
+		
 db_file = "wotr.db"
 if os.path.isfile(db_file):
 	db = sqlite3.connect(db_file)
