@@ -11,9 +11,7 @@ function PersistenceManagerClient:init(settings)
 	fassert(settings, "No backend settings supplied")
 
 	self._settings = settings
-	local profile_id_hex = Steam.user_id()
-	profile_id_hex = string.sub(profile_id_hex, -8)
-	self._profile_id = tonumber(profile_id_hex, 16) --set "Steam3 ID" as backend id
+	self._profile_id = -1
 end
 
 function PersistenceManagerClient:connect(connect_callback)
