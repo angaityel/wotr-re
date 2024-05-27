@@ -1090,9 +1090,9 @@ function Ranks:_cb_ranked_up(player, rank)
 	if Managers.state.network:game() and Managers.state.team:stats_requirement_fulfilled() and rank > self._stats:get(player:network_id(), "rank") then
 		printf("%q has reached rank %d", player:network_id(), rank)
 
-		local unlocks = RANKS[rank].unlocks
+		--local unlocks = RANKS[rank].unlocks
 
-		Managers.persistence:process_unlocks(player.backend_profile_id, unlocks)
+		--Managers.persistence:process_unlocks(player.backend_profile_id, unlocks)
 		self._stats:set(player:network_id(), "rank", rank)
 		RPC.rpc_rank_up(player:network_id(), player.game_object_id, rank)
 	end
