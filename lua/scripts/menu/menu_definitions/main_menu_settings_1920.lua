@@ -10,8 +10,27 @@ require("scripts/menu/menu_definitions/final_scoreboard_menu_settings_1920")
 MainMenuSettings = MainMenuSettings or {}
 MainMenuSettings.items = MainMenuSettings.items or {}
 MainMenuSettings.pages = MainMenuSettings.pages or {}
+
+local args = {
+	Application.argv()
+}
+
+local default_level_name = "main_menu_kingmaker"
+
+if table.contains(args, "-main_menu_winter") then
+	default_level_name = "main_menu_winter"
+elseif table.contains(args, "-main_menu_halloween_01") then
+	default_level_name = "main_menu_halloween_01"
+elseif table.contains(args, "-main_menu_old") then
+	default_level_name = "main_menu"
+elseif table.contains(args, "-main_menu_hospitaller") then
+	default_level_name = "main_menu_hospitaller"
+elseif table.contains(args, "-main_menu_scottish") then
+	default_level_name = "main_menu_scottish"
+end
+
 MainMenuSettings.level = MainMenuSettings.level or {
-	level_name = "main_menu_kingmaker"
+	level_name = default_level_name
 }
 MainMenuSettings.music_events = {
 	on_menu_init = {

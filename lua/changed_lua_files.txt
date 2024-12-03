@@ -9,3 +9,5 @@ scripts/managers/admin/admin_manager.lua
 scripts/managers/persistence/persistence_manager_server.lua
 scripts/menu/menu_items/lobby_join_menu_item.lua
 scripts/settings/ranks.lua
+scripts/menu/menu_definitions/main_menu_settings_1366.lua
+scripts/menu/menu_definitions/main_menu_settings_1920.lua
