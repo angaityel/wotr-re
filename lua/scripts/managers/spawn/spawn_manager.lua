@@ -864,7 +864,7 @@ function SpawnManager:_spawn_player_unit(player, pos, rot, ghost_mode, profile_i
 		return
 	end
 
-	local profile_name = profile_index or player.state_data.spawn_profile
+	local profile_name = player.state_data.spawn_profile or profile_index
 	local profile = Managers.state.game_mode:squad_screen_spawning() and PlayerProfiles[profile_name] or SPProfiles[profile_name]
 
 	fassert(profile, "[SpawnManager] Trying to spawn with profile %q that doesn't exist in %q.", profile_name, Managers.lobby.lobby and "PlayerProfiles" or "SPProfiles")
