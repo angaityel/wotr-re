@@ -1344,29 +1344,9 @@ MainMenuDefinition = {
 					on_select = "cb_open_link",
 					type = "TextureLinkButtonMenuItem",
 					on_select_args = {
-						GameSettingsDevelopment.twitter_url
+						GameSettingsDevelopment.discord_url
 					},
 					layout_settings = MainMenuSettings.items.twitter
-				},
-				{
-					remove_func = "cb_controller_enabled",
-					name = "facebook",
-					on_select = "cb_open_link",
-					type = "TextureLinkButtonMenuItem",
-					on_select_args = {
-						GameSettingsDevelopment.facebook_url
-					},
-					layout_settings = MainMenuSettings.items.facebook
-				},
-				{
-					remove_func = "cb_controller_enabled",
-					name = "survey",
-					on_select = "cb_open_link",
-					type = "TextureLinkButtonMenuItem",
-					on_select_args = {
-						GameSettingsDevelopment.survey_url
-					},
-					layout_settings = MainMenuSettings.items.survey
 				}
 			}
 		}

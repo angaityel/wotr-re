@@ -27,6 +27,7 @@ for i,v in ipairs(argv) do
 end
 GameSettingsDevelopment.buy_game_url = "http://www.waroftherosesthegame.com/buy"
 GameSettingsDevelopment.twitter_url = "http://twitter.com/AWarofRoses"
+GameSettingsDevelopment.discord_url = "https://discord.gg/A6aCN2Eetj"
 GameSettingsDevelopment.facebook_url = "http://www.facebook.com/AWarofRoses"
 GameSettingsDevelopment.survey_url = "http://goo.gl/V4qXU"
 GameSettingsDevelopment.quicklaunch_params = GameSettingsDevelopment.quicklaunch_params or {}
