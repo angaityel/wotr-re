@@ -19,7 +19,25 @@ Examples of how it should look like:
 "D:\Games\SteamLibrary\steamapps\common\War of the Roses\wotr.exe" %command%
 ```
 - Launch game
+## Alternative method for Linux (Works for Windows too)
+
+- Download [latest release](https://github.com/angaityel/wotr-re/releases)
+- Unpack files from bundle.zip to bundle folder
+- Delete run_game.exe
+- Make copy of wotr.exe
+- Rename copy to run_game.exe
+- Run it with Proton Experimental
+
 ## Additional launch options
+
+Main menu themes:
+- -main_menu_old
+- -main_menu_winter
+- -main_menu_halloween_01
+- -main_menu_hospitaller
+- -main_menu_scottish
+![wotr](https://github.com/user-attachments/assets/e076098a-2fa5-45fb-8148-43a46899a16a)
+
 Lobby name and player limit:
 - -lobbyname "server name": custom names for servers.
 - -lobbymaxmembers 256: server player limit, default value without command is 256.
