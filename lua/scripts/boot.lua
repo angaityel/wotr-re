@@ -113,7 +113,7 @@ function Postman:_require_scripts()
 	core_require("bitsquid_splash", "bitsquid_splash")
 	foundation_require("managers", "localization/localization_manager", "event/event_manager")
 	game_require("settings", "dlc_settings", "ai_settings", "game_settings", "game_settings_development", "controller_settings")
-	game_require("game_state", "state_context", "state_splash_screen", "state_menu", "state_menu_main", "state_loading", "state_ingame", "state_ingame_running", "state_dedicated_server_init", "state_automatic_dedicated_server_join", "state_invite_join", "state_test_gear")
+	game_require("game_state", "state_context", "state_splash_screen", "state_menu", "state_menu_main", "state_loading", "state_ingame", "state_ingame_running", "state_dedicated_server_init", "state_automatic_dedicated_server_join", "state_automatic_localhost_host", "state_invite_join", "state_test_gear")
 	game_require("entity_system", "entity_system")
 	game_require("managers", "command_parser/command_parser_manager", "player/player_manager", "save/save_manager", "save/save_data", "perfhud/perfhud_manager", "backend/backend_manager", "music/music_manager", "admin/admin_manager", "persistence/persistence_manager_server", "persistence/persistence_manager_server_offline", "persistence/persistence_manager_client", "persistence/persistence_manager_client_offline", "persistence/persistence_manager_common", "transition/transition_manager", "changelog/changelog_manager", "changelog/changelog_manager_offline", "news_ticker/news_ticker_manager", "sale_popup/sale_popup_manager")
 
@@ -151,6 +151,10 @@ function Postman:_init_managers()
 	self:_init_localizer()
 	self:_init_lobby_manager()
 
+	local args = {
+		Application.argv()
+	}
+
 	if script_data.settings.dedicated_server then
 		local server_settings = Managers.lobby.game_server_settings or {
 			server_init_settings = {}
@@ -163,6 +167,13 @@ function Postman:_init_managers()
 		AntiCheatClient.initialize(13, Postman.anti_cheat_key)
 	else
 		Postman.anti_cheat_key = Application.make_hash()
+	end
+
+	if table.find(args, "-autohost") then
+		local server_settings = Managers.lobby.game_server_settings or {
+			server_init_settings = {}
+		}
+		Managers.admin = AdminManager:new(server_settings)
 	end
 
 	self:_init_backend()
@@ -425,10 +436,13 @@ function Postman:entrypoint()
 	}
 	local flythrough_command_line = false
 	local test_gear_command_line = false
+	local localhost_auto_settings
 
 	for i = 1, #args do
 		if args[i] == "-flythrough" then
 			flythrough_command_line = true
+		elseif args[i] == "-autohost" or args[i] == "-auto-host" then
+			localhost_auto_settings = "host"
 		end
 	end
 
@@ -502,6 +516,28 @@ function Postman:entrypoint()
 		Boot.loading_context = loading_context
 
 		return StateSplashScreen
+	elseif localhost_auto_settings and localhost_auto_settings == "host" then
+		Managers.package:load("resource_packages/menu")
+		Managers.package:load("resource_packages/ingame")
+		Managers.package:load("resource_packages/weapons")
+
+		local i = table.find(args, "-level")
+		local level = args[i + 1] or "whitebox"
+
+		i = table.find(args, "-game-mode")
+
+		local game_mode = args[i + 1] or "tdm"
+		local i = table.find(args, "-network-hash")
+		local network_hash = args[i + 1] or "auto"
+
+		Boot.loading_context = {}
+		Boot.loading_context.network_hash = network_hash
+		Boot.loading_context.level_key = level
+		Boot.loading_context.game_mode_key = game_mode
+		Boot.loading_context.win_score = GameSettingsDevelopment.default_win_score
+		Boot.loading_context.time_limit = GameSettingsDevelopment.default_time_limit
+
+		return StateAutomaticLocalhostHost
 	elseif GameSettingsDevelopment.start_state == "fly_through" or flythrough_command_line then
 		Managers.package:load("resource_packages/menu")
 		Managers.package:load("resource_packages/ingame")
