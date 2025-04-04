@@ -524,13 +524,13 @@ function Commands:list_levels()
 end
 
 function Commands:vote_map(map_pair, player)
-	if not Managers.lobby.server then
-		local network_manager = Managers.state.network
+	--if not Managers.lobby.server then
+	local network_manager = Managers.state.network
 
-		if network_manager:game() then
-			network_manager:send_rpc_server("rpc_vote_map", player:player_id(), map_pair or "")
-		end
-	else
-		return true, "/vote_map can't be executed as an RCON command."
+	if network_manager:game() then
+		network_manager:send_rpc_server("rpc_vote_map", player:player_id(), map_pair or "")
 	end
+	--else
+	--	return true, "/vote_map can't be executed as an RCON command."
+	--end
 end
