@@ -59,6 +59,27 @@ Or you can create a .bat file in game folder with:
 wotr.exe -bundle-dir bundle -lobbyname "my super-duper server" -lobbymaxmembers 8
 ```
 And launch game through .bat file.
+
+## Hosting games with map rotation and commands
+
+Change map_rotation.ini. First map must be specified in launch options. For example:
+```
+maps = [
+	{
+		game_mode = "tdm"
+		level = "castle_02"
+		game_mode_size = 64
+		time_limit = 1234
+		win_score = 100
+	}
+	{
+	...
+```
+Then launch options should look like this:
+```
+wotr.exe -bundle-dir bundle -autohost -network-hash "" -level castle_02 -game-mode tdm -timelimit 1234 -lobbyname "server name" -ini launch_server_settings
+```
+
 ## Dedicated server
 > [!WARNING]
 > Server is VAC secured
