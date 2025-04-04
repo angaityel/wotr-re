@@ -15,3 +15,4 @@ scripts/menu/menu_definitions/main_menu_definition.lua
 scripts/settings/game_mode_settings.lua
 scripts/managers/spawn/spawn_manager.lua
 scripts/game_state/state_automatic_localhost_host.lua
+scripts/game_state/state_ingame_running.lua

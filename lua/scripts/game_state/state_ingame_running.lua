@@ -668,7 +668,7 @@ end
 function StateInGameRunning:_execute_chat_input()
 	self._chat_input_active = false
 
-	local command = Managers.command_parser:execute(self._chat_input_blackboard.text, self.player)
+	local success, msg, command, argument = Managers.command_parser:execute(self._chat_input_blackboard.text, self.player)
 
 	if command then
 		self._chat_input_prefix = Managers.command_parser:build_command_line(command, "")
