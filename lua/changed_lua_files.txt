@@ -17,3 +17,4 @@ scripts/managers/spawn/spawn_manager.lua
 scripts/game_state/state_automatic_localhost_host.lua
 scripts/game_state/state_ingame_running.lua
 scripts/managers/command_parser/command_parser_manager.lua
+scripts/settings/dlc_settings.lua
