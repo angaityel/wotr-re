@@ -534,3 +534,10 @@ function Commands:vote_map(map_pair, player)
 	--	return true, "/vote_map can't be executed as an RCON command."
 	--end
 end
+
+Commands.v = Commands.vote_map
+Commands.vote = Commands.vote_map
+Commands.list_maps = Commands.list_levels
+Commands.list = Commands.list_levels
+Commands.maps = Commands.list_levels
+Commands.l = Commands.list_levels
