@@ -221,6 +221,8 @@ GameModeSettings.mou.key = "mou"
 GameModeSettings.mou.display_name = "gm_tourney_mounted"
 GameModeSettings.grail = table.clone(GameModeSettings.base)
 GameModeSettings.grail.key = "grail"
+GameModeSettings.grail.class_name = "GameModeGrail"
+GameModeSettings.grail.deserter_timer = 3600
 GameModeSettings.grail.display_name = "gm_grail"
 GameModeSettings.grail.battle_details = {
 	lost = "battle_details_grail_lost",
@@ -230,6 +232,8 @@ GameModeSettings.grail.battle_details = {
 GameModeSettings.grail.object_sets = {
 	gm_grail = true
 }
+GameModeSettings.grail.visible = true
+GameModeSettings.grail.show_in_server_browser = true
 GameModeSettings.gpu_prof = table.clone(GameModeSettings.base)
 GameModeSettings.gpu_prof.class_name = "GameModeGpuProf"
 GameModeSettings.gpu_prof.key = "gpu_prof"

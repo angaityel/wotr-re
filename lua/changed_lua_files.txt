@@ -18,3 +18,8 @@ scripts/game_state/state_automatic_localhost_host.lua
 scripts/game_state/state_ingame_running.lua
 scripts/managers/command_parser/command_parser_manager.lua
 scripts/settings/dlc_settings.lua
+scripts/settings/level_settings.lua
+scripts/managers/stats/stats_contexts.lua
+scripts/managers/game_mode/game_modes/game_mode_grail.lua
+scripts/managers/game_mode/game_mode_manager.lua
+scripts/entity_system/systems/deserting/deserting_system.lua

@@ -75,16 +75,20 @@ function DesertingSystem:_set_desert_timer(unit, player, t)
 	local game_mode_key = Managers.state.game_mode:game_mode_key()
 	local deserter_timer = t + GameModeSettings[game_mode_key].deserter_timer
 
-	Unit.set_data(unit, "deserter_timer", deserter_timer)
-
-	if player.remote then
-		local network_manager = Managers.state.network
-		local player_network_id = player:network_id()
-		local player_id = player:player_id()
-
-		RPC.rpc_player_deserting(player_network_id, player_id, true, deserter_timer - t)
+	if GameModeSettings[game_mode_key].deserter_timer > 100 then
+		--hack for grail mode
 	else
-		Managers.state.event:trigger("event_deserting_activated", player, deserter_timer - t)
+		Unit.set_data(unit, "deserter_timer", deserter_timer)
+
+		if player.remote then
+			local network_manager = Managers.state.network
+			local player_network_id = player:network_id()
+			local player_id = player:player_id()
+
+			RPC.rpc_player_deserting(player_network_id, player_id, true, deserter_timer - t)
+		else
+			Managers.state.event:trigger("event_deserting_activated", player, deserter_timer - t)
+		end
 	end
 end
 
