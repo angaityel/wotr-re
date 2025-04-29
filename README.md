@@ -95,7 +95,7 @@ Mortimers_Cross - village_02 - tdm, con, battle, ass
 Bamburgh_Castle - castle_02 - tdm, con, battle, ass
 Clitheroe_Forest - forest_01 - tdm, con, battle, ass
 London_Tournament - tournament_01 - tdm, battle
-Edgecote_Moor - moor_01 - tdm, con, battle
+Edgecote_Moor - moor_01 - tdm, con, battle, grail
 Barnet - field_01 - tdm, con, battle
 Wakefield - wakefield_01 - tdm, con, battle
 Towton - towton_01 - tdm, con, battle
