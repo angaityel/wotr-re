@@ -74,6 +74,7 @@ elseif script_data.settings.content_revision then
 	GameSettingsDevelopment.backend_address = "0.0.0.0"
 end
 
+GameSettingsDevelopment.fix_version = "v0.2.11"
 GameSettingsDevelopment.network_port = 10000
 GameSettingsDevelopment.network_revision_check_enabled = true
 GameSettingsDevelopment.disable_loading_screen_menu = EDITOR_LAUNCH and true or false

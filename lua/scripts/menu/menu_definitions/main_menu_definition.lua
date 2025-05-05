@@ -1339,6 +1339,28 @@ MainMenuDefinition = {
 					}
 				},
 				{
+					disabled = true,
+					type = "TextureMenuItem",
+					layout_settings = MainMenuSettings.items.delimiter_texture
+				},
+				{
+					disabled = true,
+					text = GameSettingsDevelopment.fix_version,
+					type = "TextMenuItem",
+					layout_settings = MainMenuSettings.items.text_right_aligned,
+					page = {
+						z = 50,
+						environment = "blurred",
+						type = "Level2MenuPage",
+						layout_settings = MainMenuSettings.pages.level_2,
+						sounds = MenuSettings.sounds.default,
+						item_groups = {
+							item_list = {
+							}
+						}
+					}
+				},
+				{
 					remove_func = "cb_controller_enabled",
 					name = "twitter",
 					on_select = "cb_open_link",
