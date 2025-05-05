@@ -856,6 +856,16 @@ IngameMenuDefinition = {
 									type = "TextureButtonMenuItem",
 									layout_settings = SquadMenuSettings.items.centered_button,
 									page = LeaveBattlePopupPage
+								},
+								{
+									text = "main_menu_edit_profiles_lower",
+									on_select = "cb_goto",
+									disabled_func = "cb_goto_outfit_editor_disabled",
+									type = "TextureButtonMenuItem",
+									on_select_args = {
+										"outfit_editor"
+									},
+									layout_settings = SquadMenuSettings.items.centered_button
 								}
 							}
 						}
@@ -919,6 +929,16 @@ IngameMenuDefinition = {
 									type = "TextureButtonMenuItem",
 									layout_settings = SquadMenuSettings.items.centered_button,
 									page = LeaveBattlePopupPage
+								},
+								{
+									text = "main_menu_edit_profiles_lower",
+									on_select = "cb_goto",
+									disabled_func = "cb_goto_outfit_editor_disabled",
+									type = "TextureButtonMenuItem",
+									on_select_args = {
+										"outfit_editor"
+									},
+									layout_settings = SquadMenuSettings.items.centered_button
 								}
 							}
 						}
@@ -1173,6 +1193,16 @@ IngameMenuDefinition = {
 									type = "TextureButtonMenuItem",
 									layout_settings = SquadMenuSettings.items.centered_button,
 									page = LeaveBattlePopupPage
+								},
+								{
+									text = "main_menu_edit_profiles_lower",
+									on_select = "cb_goto",
+									disabled_func = "cb_goto_outfit_editor_disabled",
+									type = "TextureButtonMenuItem",
+									on_select_args = {
+										"outfit_editor"
+									},
+									layout_settings = SquadMenuSettings.items.centered_button
 								}
 							}
 						}
@@ -1502,6 +1532,16 @@ IngameMenuDefinition = {
 									type = "TextureButtonMenuItem",
 									layout_settings = SquadMenuSettings.items.centered_button,
 									page = LeaveBattlePopupPage
+								},
+								{
+									text = "main_menu_edit_profiles_lower",
+									on_select = "cb_goto",
+									disabled_func = "cb_goto_outfit_editor_disabled",
+									type = "TextureButtonMenuItem",
+									on_select_args = {
+										"outfit_editor"
+									},
+									layout_settings = SquadMenuSettings.items.centered_button
 								}
 							}
 						}

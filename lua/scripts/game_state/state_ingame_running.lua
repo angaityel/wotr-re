@@ -410,9 +410,9 @@ function StateInGameRunning:update(dt, t)
 	local spawn_data = player.spawn_data
 
 	if self._ingame_menu:active() and Managers.time:time("round") >= 0 then
-		if self._ingame_menu:current_page_type() == "outfit_editor" or self._ingame_menu:current_parent_page_type() == "outfit_editor" then
-			self._ingame_menu:goto("select_team")
-		end
+		--if self._ingame_menu:current_page_type() == "outfit_editor" or self._ingame_menu:current_parent_page_type() == "outfit_editor" then
+		--	self._ingame_menu:goto("select_team")
+		--end
 	elseif (spawn_data.state == "dead" or spawn_data.state == "not_spawned") and spawn_data.mode == "unconfirmed_squad_member" then
 		local spawn_target = spawn_data.squad_unit
 

@@ -134,7 +134,7 @@ function IngameMenuCallbacks:cb_team_selection_highlight_item()
 end
 
 function IngameMenuCallbacks:cb_goto_outfit_editor_disabled()
-	return Managers.time:time("round") >= 0
+	return false
 end
 
 function IngameMenuCallbacks:cb_character_profiles_options()
