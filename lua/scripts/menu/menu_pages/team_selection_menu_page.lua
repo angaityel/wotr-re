@@ -264,14 +264,19 @@ end
 function TeamSelectionMenuPage:cb_auto_join_team()
 	local red_verified = Managers.state.team:verify_join_team(self._local_player, "red")
 	local white_verified = Managers.state.team:verify_join_team(self._local_player, "white")
+	local player_team = self._local_player.team.name
 	local join_team
-
-	if red_verified and white_verified then
-		join_team = Math.random(1, 2) == 1 and "red" or "white"
-	elseif red_verified then
-		join_team = "red"
-	elseif white_verified then
-		join_team = "white"
+	
+	if player_team == "unassigned" then
+		if red_verified and white_verified then
+			join_team = Math.random(1, 2) == 1 and "red" or "white"
+		elseif red_verified then
+			join_team = "red"
+		elseif white_verified then
+			join_team = "white"
+		end
+	else
+		join_team = player_team
 	end
 
 	if join_team then

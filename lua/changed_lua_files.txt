@@ -26,3 +26,4 @@ scripts/entity_system/systems/deserting/deserting_system.lua
 scripts/settings/player_profiles.lua
 scripts/menu/menu_callbacks/ingame_menu_callbacks.lua
 scripts/menu/menu_definitions/ingame_menu_definition.lua
+scripts/menu/menu_pages/team_selection_menu_page.lua
