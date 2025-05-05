@@ -830,6 +830,83 @@ PlayerProfiles = PlayerProfiles or {
 	}
 }
 
+local EMPTY_CUSTOM = {
+	head = "squire",
+	armour = "armour_medium_tights",
+	display_name = "profile_slot_custom",
+	market_price = 500000,
+	unlock_key = "customizable_profile",
+	demo_locked = true,
+	release_name = "jwp",
+	armour_attachments = {
+		patterns = 1
+	},
+	perks = {},
+	wielded_gear = {
+		{
+			name = "arming_sword"
+		}
+	},
+	gear = {
+		{
+			name = "ballock_dagger",
+			attachments = {
+				fighting_style = {
+					"english_style"
+				},
+				pommel = {
+					"standard"
+				},
+				blade = {
+					"steel"
+				},
+				edge_grind = {
+					"flat"
+				}
+			}
+		},
+		{
+			name = "arming_sword",
+			attachments = {
+				fighting_style = {
+					"english_style"
+				},
+				pommel = {
+					"standard"
+				},
+				blade = {
+					"steel"
+				},
+				edge_grind = {
+					"flat"
+				}
+			}
+		}
+	},
+	helmet = {
+		name = "helmet_medium_mail_coif",
+		show_crest = false,
+		attachments = {}
+	}
+}
+
+local function add_custom_profile(profile_template, display_name, unlock_key, index)
+	local profile = table.clone(profile_template)
+
+	profile.unlock_key = unlock_key
+	profile.display_name = display_name
+	profile.original_display_name = profile.display_name
+	PlayerProfiles[index] = profile
+end
+
+local CUSTOM_SLOTS = 33
+local LOCKED_SLOTS = 4
+
+for i = 1, CUSTOM_SLOTS do
+	local index = LOCKED_SLOTS + i
+	add_custom_profile(EMPTY_CUSTOM, "Custom " .. i, "profile_custom_" .. i, index)
+end
+
 function profile_index_by_unlock(unlock_key)
 	for index, profile in pairs(PlayerProfiles) do
 		if profile.unlock_key == unlock_key then

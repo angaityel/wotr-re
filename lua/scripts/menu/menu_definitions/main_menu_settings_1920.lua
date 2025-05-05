@@ -3099,6 +3099,21 @@ MainMenuSettings.pages.level_2_character_profiles[1680][1050].delimiter_texture 
 MainMenuSettings.pages.level_2_character_profiles[1680][1050].text_back = MainMenuSettings.items.text_right_aligned
 MainMenuSettings.pages.level_2_character_profiles[1680][1050].center_items = table.clone(FinalScoreboardMenuSettings.pages.main_page[1680][1050].center_items)
 MainMenuSettings.pages.level_2_character_profiles[1680][1050].center_items.pivot_offset_y = 0
+MainMenuSettings.pages.level_2_character_profiles[1680][1050].item_list = {
+	screen_align_y = "top",
+	screen_offset_x = 0,
+	pivot_offset_x = 540,
+	screen_offset_y = -0.25,
+	pivot_align_x = "right",
+	pivot_align_y = "top",
+	screen_align_x = "left",
+	pivot_offset_y = 0,
+	number_of_columns = 2,
+	column_alignment = {
+		"right",
+		"right"
+	}
+}
 MainMenuSettings.pages.level_2_character_profiles[1680][1050].profile_info = {
 	pivot_offset_y = 0,
 	screen_offset_x = 0,

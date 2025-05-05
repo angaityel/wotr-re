@@ -3240,6 +3240,21 @@ MainMenuSettings.pages.level_2_character_profiles[1366][768].text_back = MainMen
 MainMenuSettings.pages.level_2_character_profiles[1366][768].buy_coins = MainMenuSettings.items.buy_coins_right_aligned
 MainMenuSettings.pages.level_2_character_profiles[1366][768].center_items = table.clone(FinalScoreboardMenuSettings.pages.main_page[1366][768].center_items)
 MainMenuSettings.pages.level_2_character_profiles[1366][768].center_items.pivot_offset_y = 0
+MainMenuSettings.pages.level_2_character_profiles[1366][768].item_list = {
+	screen_align_y = "top",
+	screen_offset_x = 0,
+	pivot_align_y = "top",
+	screen_offset_y = -0.25,
+	pivot_align_x = "right",
+	pivot_offset_y = 0,
+	screen_align_x = "left",
+	pivot_offset_x = 540 * SCALE_1366,
+	number_of_columns = 2,
+	column_alignment = {
+		"right",
+		"right"
+	}
+}
 MainMenuSettings.pages.level_2_character_profiles[1366][768].profile_info = {
 	screen_align_y = "center",
 	screen_offset_x = 0,
