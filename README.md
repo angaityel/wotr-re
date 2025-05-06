@@ -26,7 +26,7 @@ Examples of how it should look like:
 - Delete run_game.exe
 - Make copy of wotr.exe
 - Rename copy to run_game.exe
-- Run it with Proton Experimental
+- Run it with Proton 9.0-4
 
 ## Additional launch options
 
