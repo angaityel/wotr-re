@@ -573,6 +573,10 @@ function GameNetworkManager:create_game_object(object_template, data_table, loca
 		print("CREATING GAME OBJECT")
 	end
 
+	if object_template == "generic_unit_interactable" and data_table.owner == nil then
+		data_table.owner = 1
+	end
+
 	local game_object_id = GameSession.create_game_object(self._game, object_template, data_table)
 
 	self._game_object_types[game_object_id] = object_template
