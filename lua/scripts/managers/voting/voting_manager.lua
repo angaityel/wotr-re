@@ -141,16 +141,19 @@ function VotingManager:_server_update(dt, t)
 		local round_time = Managers.time:time("round")
 		local network_manager = Managers.state.network
 		local game = network_manager:game()
-		local settings = current_vote.settings
-		local id = current_vote.id
-		local end_time = GameSession.game_object_field(game, id, "end_time")
-		local result = self:_is_enough_votes(current_vote)
+		if game then
+			local settings = current_vote.settings
+			local id = current_vote.id
+			local end_time = GameSession.game_object_field(game, id, "end_time")
+			local result = self:_is_enough_votes(current_vote)
 
-		if result then
-			self:_end_vote(result)
-		elseif end_time < round_time then
-			self:_end_vote("fail")
-		end
+			if result then
+				self:_end_vote(result)
+			elseif end_time < round_time then
+				self:_end_vote("fail")
+			end
+		else
+			self._current_vote = nil
 	end
 end
 
