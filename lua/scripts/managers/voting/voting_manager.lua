@@ -154,6 +154,7 @@ function VotingManager:_server_update(dt, t)
 			end
 		else
 			self._current_vote = nil
+		end
 	end
 end
 
