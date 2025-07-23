@@ -69,6 +69,8 @@ function ScriptRconServer:rcon_command(id, command_string)
 			local say_text = vararg.join(" ", select(2, unpack_string(command_string)))
 
 			Commands:say_admin(say_text)
+		elseif command == "unban_player" then
+			Commands:unban_player(argument)
 		else
 			return "unknown command"
 		end

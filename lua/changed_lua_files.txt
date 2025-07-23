@@ -28,3 +28,4 @@ scripts/menu/menu_callbacks/ingame_menu_callbacks.lua
 scripts/menu/menu_definitions/ingame_menu_definition.lua
 scripts/menu/menu_pages/team_selection_menu_page.lua
 scripts/managers/voting/voting_manager.lua
+scripts/managers/admin/script_rcon_server.lua
