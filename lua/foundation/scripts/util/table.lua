@@ -217,3 +217,49 @@ function table.set(list)
 
 	return set
 end
+
+function table.table_to_string(o, indent, visited)
+	indent = indent or ""
+	visited = visited or {}
+
+	if type(o) == "number" then
+		return tostring(o)
+	elseif type(o) == "boolean" then
+		return tostring(o)
+	elseif type(o) == "string" then
+		return string.format("%q", o)
+	elseif type(o) == "table" then
+		if visited[o] then
+			print("Cannot serialize recursive tables")
+		end
+		visited[o] = true
+
+		local parts = {}
+		table.insert(parts, "{\n")
+
+		local next_indent = indent .. "    "
+		for k, v in pairs(o) do
+			local key_repr
+			if type(k) == "string" and k:match("^[_%a][_%w]*$") then
+				key_repr = k
+			else
+				key_repr = "[" .. table.table_to_string(k, next_indent, visited) .. "]"
+			end
+
+			local value_repr = table.table_to_string(v, next_indent, visited)
+			table.insert(parts,
+				next_indent
+				.. key_repr
+				.. " = "
+				.. value_repr
+				.. ",\n"
+			)
+		end
+
+		table.insert(parts, indent .. "}")
+		visited[o] = nil
+		return table.concat(parts)
+	else
+		print("Cannot serialize type " .. type(o))
+	end
+end

@@ -8,6 +8,7 @@ require("scripts/menu/menu_pages/outfit_editor/outfit_editor_slot_menu_page")
 require("scripts/menu/menu_containers/profile_info_menu_container")
 require("scripts/settings/demo_settings")
 require("scripts/helpers/profile_helper")
+require("scripts/utils/base64")
 
 OutfitEditorProfileMenuPage = class(OutfitEditorProfileMenuPage, Level2MenuPage)
 
@@ -50,6 +51,8 @@ function OutfitEditorProfileMenuPage:init(config, item_groups, world)
 	Managers.state.event:register(self, "event_outfit_editor_gear_attachments_selected", "gear_attachments_selected")
 	Managers.state.event:register(self, "event_outfit_editor_armour_attachments_selected", "armour_attachments_selected")
 	Managers.state.event:register(self, "event_profiles_reload_current_profile", "reload_current_profile")
+	Managers.state.event:register(self, "event_profiles_copy_current_profile", "copy_current_profile")
+	Managers.state.event:register(self, "event_profiles_paste_current_profile", "paste_current_profile")
 	Managers.state.event:register(self, "event_profiles_reset_current_profile", "reset_current_profile")
 	Managers.state.event:register(self, "event_profile_name_updated", "profile_name_updated")
 	Managers.state.event:register(self, "event_outfit_editor_save_profile", "save_profile")
@@ -635,6 +638,32 @@ function OutfitEditorProfileMenuPage:reload_current_profile()
 	self._current_profile_copy = table.clone(PlayerProfiles[self._current_profile_name])
 
 	self:_profile_updated("profile")
+end
+
+function OutfitEditorProfileMenuPage:copy_current_profile()
+	local base64_table_string = "base64:" .. base64_encode("return " .. table.table_to_string(PlayerProfiles[self._current_profile_name]))
+	os.execute("echo " .. base64_table_string .. "|clip.exe")
+end
+
+function OutfitEditorProfileMenuPage:paste_current_profile()
+	local pipe = io.popen([[powershell -NoProfile -Command "Get-Clipboard"]])
+	local clip_text = pipe:read("*a")
+	pipe:close()
+
+	if string.find(clip_text, "base64:") then
+		clip_text = string.sub(clip_text, 8)
+		clip_text = clip_text:gsub("[\r\n]+$", "")
+
+		local table_string = base64_decode(clip_text)
+		local func = loadstring(table_string)
+		local result = func()	
+
+		PlayerProfiles[self._current_profile_name] = table.clone(result)
+
+		self:reload_current_profile()
+	else
+		print("Not valid build string")
+	end
 end
 
 function OutfitEditorProfileMenuPage:reset_current_profile()

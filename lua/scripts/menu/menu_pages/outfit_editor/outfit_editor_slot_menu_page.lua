@@ -117,6 +117,52 @@ function OutfitEditorSlotMenuPage:_add_items()
 
 	self:add_item(delimiter_item, "item_list")
 
+	--
+
+	local copy_build_popup_page = MenuHelper:create_confirmation_popup_page(self._world, self, self, "cb_copy_build_popup_enter", "cb_copy_build_popup_item_selected", self.config.z + 50, self.config.sounds, "copy_build", "menu_empty", MainMenuSettings.pages.text_input_popup, MainMenuSettings.items.popup_header, MainMenuSettings.items.popup_text, MainMenuSettings.items.popup_button)
+	local copy_build_config = {
+		text = "copy_build",
+		page = copy_build_popup_page,
+		z = self.config.z + 1,
+		layout_settings = layout_settings.text,
+		parent_page = self,
+		sounds = self.config.sounds.items.text
+	}
+	local copy_build_input_item = TextMenuItem.create_from_config({
+		world = self._world
+	}, copy_build_config, self)
+
+	self:add_item(copy_build_input_item, "item_list")
+
+	--
+	local paste_build_popup_page = MenuHelper:create_confirmation_popup_page(self._world, self, self, "cb_paste_build_popup_enter", "cb_paste_build_popup_item_selected", self.config.z + 50, self.config.sounds, "paste_build", "menu_empty", MainMenuSettings.pages.text_input_popup, MainMenuSettings.items.popup_header, MainMenuSettings.items.popup_text, MainMenuSettings.items.popup_button)
+	local paste_build_config = {
+		text = "paste_build",
+		page = paste_build_popup_page,
+		z = self.config.z + 1,
+		layout_settings = layout_settings.text,
+		parent_page = self,
+		sounds = self.config.sounds.items.text
+	}
+	local paste_build_input_item = TextMenuItem.create_from_config({
+		world = self._world
+	}, paste_build_config, self)
+
+	self:add_item(paste_build_input_item, "item_list")
+	
+	local delimiter_item_config = {
+		disabled = true,
+		parent_page = self,
+		layout_settings = layout_settings.delimiter_texture
+	}
+	local delimiter_item = TextureMenuItem.create_from_config({
+		world = self._world
+	}, delimiter_item_config, self)
+
+	self:add_item(delimiter_item, "item_list")
+
+	--
+
 	local back_item_config = {
 		text = "main_menu_cancel",
 		on_select = "cb_cancel",
@@ -161,6 +207,35 @@ function OutfitEditorSlotMenuPage:cb_name_popup_save_button_disabled(args)
 
 	if not input_text_item:validate_text_length() then
 		return true
+	end
+end
+
+function OutfitEditorSlotMenuPage:cb_copy_build_popup_enter(args)
+	local profile_name = self._current_profile.display_name
+	local message_text = string.format("Copy build to clipboard?", profile_name)
+
+	args.popup_page:find_item_by_name("text_message"):set_text(message_text)
+end
+
+function OutfitEditorSlotMenuPage:cb_copy_build_popup_item_selected(args)
+	if args.action == "confirm" then
+		Managers.state.event:trigger("event_profiles_copy_current_profile")
+	end
+end
+
+function OutfitEditorSlotMenuPage:cb_paste_build_popup_enter(args)
+	local profile_name = self._current_profile.display_name
+	local message_text = string.format("Paste build from clipboard? Current build will be reset!", profile_name)
+
+	args.popup_page:find_item_by_name("text_message"):set_text(message_text)
+end
+
+function OutfitEditorSlotMenuPage:cb_paste_build_popup_item_selected(args)
+	if args.action == "confirm" then
+		--Managers.state.event:trigger("event_profiles_reset_current_profile")
+		Managers.state.event:trigger("event_profiles_paste_current_profile")
+		Managers.state.event:trigger("event_outfit_editor_save_profile")
+		Managers.state.event:trigger("event_profile_name_updated")
 	end
 end
 
