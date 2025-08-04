@@ -332,7 +332,7 @@ function StateInGameRunning:event_location_print_requested()
 	local camera_pos = Managers.state.camera:camera_position(viewport_name)
 	local camera_rot = Managers.state.camera:camera_rotation(viewport_name)
 
-	Managers.state.hud:output_console_text("Camera position: " .. camera_pos .. "  Camera rotation: " .. camera_rot)
+	Managers.state.hud:output_console_text("Camera position: " .. tostring(camera_pos) .. "  Camera rotation: " .. tostring(camera_rot))
 end
 
 function StateInGameRunning:_setup_camera()
