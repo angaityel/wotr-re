@@ -7,6 +7,10 @@ require("scripts/menu/menu_pages/outfit_editor/outfit_editor_category_menu_page"
 
 OutfitEditorSlotMenuPage = class(OutfitEditorSlotMenuPage, Level3MenuPage)
 
+local argv = {
+	Application.argv()
+}
+
 function OutfitEditorSlotMenuPage:init(config, item_groups, world, viewport)
 	OutfitEditorSlotMenuPage.super.init(self, config, item_groups, world)
 
@@ -118,48 +122,49 @@ function OutfitEditorSlotMenuPage:_add_items()
 	self:add_item(delimiter_item, "item_list")
 
 	--
+	if table.find(argv, "-allowcopypaste") then
+		local copy_build_popup_page = MenuHelper:create_confirmation_popup_page(self._world, self, self, "cb_copy_build_popup_enter", "cb_copy_build_popup_item_selected", self.config.z + 50, self.config.sounds, "copy_build", "menu_empty", MainMenuSettings.pages.text_input_popup, MainMenuSettings.items.popup_header, MainMenuSettings.items.popup_text, MainMenuSettings.items.popup_button)
+		local copy_build_config = {
+			text = "copy_build",
+			page = copy_build_popup_page,
+			z = self.config.z + 1,
+			layout_settings = layout_settings.text,
+			parent_page = self,
+			sounds = self.config.sounds.items.text
+		}
+		local copy_build_input_item = TextMenuItem.create_from_config({
+			world = self._world
+		}, copy_build_config, self)
 
-	local copy_build_popup_page = MenuHelper:create_confirmation_popup_page(self._world, self, self, "cb_copy_build_popup_enter", "cb_copy_build_popup_item_selected", self.config.z + 50, self.config.sounds, "copy_build", "menu_empty", MainMenuSettings.pages.text_input_popup, MainMenuSettings.items.popup_header, MainMenuSettings.items.popup_text, MainMenuSettings.items.popup_button)
-	local copy_build_config = {
-		text = "copy_build",
-		page = copy_build_popup_page,
-		z = self.config.z + 1,
-		layout_settings = layout_settings.text,
-		parent_page = self,
-		sounds = self.config.sounds.items.text
-	}
-	local copy_build_input_item = TextMenuItem.create_from_config({
-		world = self._world
-	}, copy_build_config, self)
+		self:add_item(copy_build_input_item, "item_list")
 
-	self:add_item(copy_build_input_item, "item_list")
+		--
+		local paste_build_popup_page = MenuHelper:create_confirmation_popup_page(self._world, self, self, "cb_paste_build_popup_enter", "cb_paste_build_popup_item_selected", self.config.z + 50, self.config.sounds, "paste_build", "menu_empty", MainMenuSettings.pages.text_input_popup, MainMenuSettings.items.popup_header, MainMenuSettings.items.popup_text, MainMenuSettings.items.popup_button)
+		local paste_build_config = {
+			text = "paste_build",
+			page = paste_build_popup_page,
+			z = self.config.z + 1,
+			layout_settings = layout_settings.text,
+			parent_page = self,
+			sounds = self.config.sounds.items.text
+		}
+		local paste_build_input_item = TextMenuItem.create_from_config({
+			world = self._world
+		}, paste_build_config, self)
 
-	--
-	local paste_build_popup_page = MenuHelper:create_confirmation_popup_page(self._world, self, self, "cb_paste_build_popup_enter", "cb_paste_build_popup_item_selected", self.config.z + 50, self.config.sounds, "paste_build", "menu_empty", MainMenuSettings.pages.text_input_popup, MainMenuSettings.items.popup_header, MainMenuSettings.items.popup_text, MainMenuSettings.items.popup_button)
-	local paste_build_config = {
-		text = "paste_build",
-		page = paste_build_popup_page,
-		z = self.config.z + 1,
-		layout_settings = layout_settings.text,
-		parent_page = self,
-		sounds = self.config.sounds.items.text
-	}
-	local paste_build_input_item = TextMenuItem.create_from_config({
-		world = self._world
-	}, paste_build_config, self)
+		self:add_item(paste_build_input_item, "item_list")
+		
+		local delimiter_item_config = {
+			disabled = true,
+			parent_page = self,
+			layout_settings = layout_settings.delimiter_texture
+		}
+		local delimiter_item = TextureMenuItem.create_from_config({
+			world = self._world
+		}, delimiter_item_config, self)
 
-	self:add_item(paste_build_input_item, "item_list")
-	
-	local delimiter_item_config = {
-		disabled = true,
-		parent_page = self,
-		layout_settings = layout_settings.delimiter_texture
-	}
-	local delimiter_item = TextureMenuItem.create_from_config({
-		world = self._world
-	}, delimiter_item_config, self)
-
-	self:add_item(delimiter_item, "item_list")
+		self:add_item(delimiter_item, "item_list")
+	end
 
 	--
 
