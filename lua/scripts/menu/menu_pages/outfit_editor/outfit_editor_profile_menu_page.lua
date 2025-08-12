@@ -641,7 +641,9 @@ function OutfitEditorProfileMenuPage:reload_current_profile()
 end
 
 function OutfitEditorProfileMenuPage:copy_current_profile()
-	local base64_table_string = "base64:" .. base64_encode("return " .. table.table_to_string(PlayerProfiles[self._current_profile_name]))
+	local table_to_copy = table.clone(PlayerProfiles[self._current_profile_name])
+	table_to_copy["display_name"] = "new_profile"
+	local base64_table_string = "base64:" .. base64_encode("return " .. table.table_to_string(table_to_copy))
 	os.execute("echo " .. base64_table_string .. "|clip.exe")
 end
 
@@ -656,11 +658,17 @@ function OutfitEditorProfileMenuPage:paste_current_profile()
 
 		local table_string = base64_decode(clip_text)
 		local func = loadstring(table_string)
-		local result = func()	
+		local result = func()
 
-		PlayerProfiles[self._current_profile_name] = table.clone(result)
+		if result["display_name"] == "new_profile" then
+			result["unlock_key"] = PlayerProfiles[self._current_profile_name]["unlock_key"]
 
-		self:reload_current_profile()
+			PlayerProfiles[self._current_profile_name] = table.clone(result)
+
+			self:reload_current_profile()
+		else
+			print("Not valid build string")
+		end
 	else
 		print("Not valid build string")
 	end
