@@ -3226,21 +3226,18 @@ function GameNetworkManager:send_rpc_all_except(rpc_name, except, ...)
 end
 
 function GameNetworkManager:rpc_set_game_speed(sender, multiplier)
-	--[[
 	if Managers.lobby.server then
 		self:send_rpc_clients("rpc_set_game_speed", multiplier)
 	end
 
 	Application.set_time_step_policy("external_multiplier", multiplier)
-	]]--
 end
 
 function GameNetworkManager:rpc_toggle_disable_damage(sender)
-	--script_data.disable_damage = not script_data.disable_damage
+	script_data.disable_damage = not script_data.disable_damage
 end
 
 function GameNetworkManager:rpc_toggle_unlimited_ammo(sender, bool)
-	--[[
 	if Managers.lobby.server then
 		script_data.unlimited_ammo = not script_data.unlimited_ammo
 
@@ -3248,21 +3245,17 @@ function GameNetworkManager:rpc_toggle_unlimited_ammo(sender, bool)
 	else
 		script_data.unlimited_ammo = bool
 	end
-	]]--
 end
 
 function GameNetworkManager:rpc_teleport_all_to(sender, position, rotation, camera_rotation)
-	--[[
 	if Managers.lobby.server then
 		self:send_rpc_clients("rpc_teleport_all_to", position, rotation, camera_rotation)
 	end
 
 	Managers.state.event:trigger("teleport_all_to", position, rotation, camera_rotation)
-	]]--
 end
 
 function GameNetworkManager:rpc_teleport_unit_to(sender, unit_id, position, rotation, camera_rotation)
-	--[[
 	local unit = self._units[unit_id]
 
 	if Unit.alive(unit) then
@@ -3272,17 +3265,14 @@ function GameNetworkManager:rpc_teleport_unit_to(sender, unit_id, position, rota
 
 		Managers.state.event:trigger("teleport_unit_to", unit, position, rotation, camera_rotation)
 	end
-	]]--
 end
 
 function GameNetworkManager:rpc_teleport_team_to(sender, team_id, position, rotation, camera_rotation)
-	--[[
 	if Managers.lobby.server then
 		self:send_rpc_clients("rpc_teleport_team_to", team_id, position, rotation, camera_rotation)
 	end
 
 	Managers.state.event:trigger("teleport_team_to", NetworkLookup.team[team_id], position, rotation, camera_rotation)
-	]]--
 end
 
 function GameNetworkManager:rpc_set_team_object_set_visible(sender, key, visibility)
