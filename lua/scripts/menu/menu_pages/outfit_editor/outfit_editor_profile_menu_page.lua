@@ -9,6 +9,7 @@ require("scripts/menu/menu_containers/profile_info_menu_container")
 require("scripts/settings/demo_settings")
 require("scripts/helpers/profile_helper")
 require("scripts/utils/base64")
+require("scripts/utils/clipboard")
 
 OutfitEditorProfileMenuPage = class(OutfitEditorProfileMenuPage, Level2MenuPage)
 
@@ -644,17 +645,14 @@ function OutfitEditorProfileMenuPage:copy_current_profile()
 	local table_to_copy = table.clone(PlayerProfiles[self._current_profile_name])
 	table_to_copy["display_name"] = "new_profile"
 	local base64_table_string = "base64:" .. base64_encode("return " .. table.table_to_string(table_to_copy))
-	os.execute("echo " .. base64_table_string .. "|clip.exe")
+	clipboard_set(base64_table_string)
 end
 
 function OutfitEditorProfileMenuPage:paste_current_profile()
-	local pipe = io.popen([[powershell -NoProfile -Command "Get-Clipboard"]])
-	local clip_text = pipe:read("*a")
-	pipe:close()
-
+	local clip_text = clipboard_get()
 	if string.find(clip_text, "base64:") then
-		clip_text = string.sub(clip_text, 8)
 		clip_text = clip_text:gsub("[\r\n]+$", "")
+		clip_text = string.sub(clip_text, 8, -2)
 
 		local table_string = base64_decode(clip_text)
 		local func = loadstring(table_string)
