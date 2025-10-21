@@ -34,3 +34,4 @@ foundation/scripts/util/table.lua
 scripts/menu/menu_pages/outfit_editor/outfit_editor_slot_menu_page.lua
 scripts/menu/menu_pages/outfit_editor/outfit_editor_profile_menu_page.lua
 scripts/utils/clipboard.lua
+scripts/unit_extensions/objectives/zone_capture_point_server.lua

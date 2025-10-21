@@ -9,6 +9,13 @@ local CAPTURE_SPEED = 0.04
 local IDLE_REVERT_SPEED_NEUTRALIZED = 0.02
 local IDLE_REVERT_SPEED = 0.25
 
+if script_data.settings.dedicated_server then
+	NEUTRALIZE_SPEED = script_data.settings.steam.game_server_settings.neutralize_speed or 0.5
+	CAPTURE_SPEED = script_data.settings.steam.game_server_settings.capture_speed or 0.04
+	IDLE_REVERT_SPEED_NEUTRALIZED = script_data.settings.steam.game_server_settings.idle_revert_speed_neutralized or 0.02
+	IDLE_REVERT_SPEED = script_data.settings.steam.game_server_settings.idle_revert_speed or 0.25
+end
+
 function ZoneCapturePointServer:init(world, unit)
 	ZoneCapturePointServer.super.init(self, world, unit)
 
