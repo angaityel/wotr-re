@@ -246,8 +246,8 @@ function ServerBrowserMenuPage:_update_server_info(server_num)
 
 	self:find_item_by_name("info_server_name").config.text = server.server_name or ""
 	self:find_item_by_name("server_info_description").config.text = server.game_description or ""
-	self:find_item_by_name("info_server_map").config.text = L("menu_map_lower") .. ": " .. (server.level_key and L(LevelSettings[server.level_key].display_name) or "?")
-	self:find_item_by_name("info_server_game_mode").config.text = L("menu_game_mode_lower") .. ": " .. (server.game_mode_key and L(GameModeSettings[server.game_mode_key].display_name) or "?")
+	self:find_item_by_name("info_server_map").config.text = L("menu_map_lower") .. ": " .. (server.level_key and LevelSettings[server.level_key] and L(LevelSettings[server.level_key].display_name) or server.level_key or "?")
+	self:find_item_by_name("info_server_game_mode").config.text = L("menu_game_mode_lower") .. ": " .. (server.game_mode_key and GameModeSettings[server.game_mode_key] and L(GameModeSettings[server.game_mode_key].display_name) or server.game_mode_key or "?")
 	self:find_item_by_name("info_server_type").config.text = L("menu_type_lower") .. ": " .. "?"
 	self:find_item_by_name("info_server_password").config.text = L("menu_password_protected_lower") .. ": " .. (server.password == true and L("menu_yes_lower") or server.password == false and L("menu_no_lower") or "?")
 	self:find_item_by_name("info_server_players").config.text = L("menu_players_lower") .. ": " .. (server.num_players or "?") .. "/" .. (server and server.max_players or "?")

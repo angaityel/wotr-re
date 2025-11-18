@@ -128,7 +128,7 @@ function ServerMenuItem:render(dt, t, gui, layout_settings)
 
 	column_offset_x = column_offset_x + layout_settings.column_width[4]
 
-	local game_mode = server.game_mode_key and L(GameModeSettings[server.game_mode_key].display_name) or "?"
+	local game_mode = server.game_mode_key and GameModeSettings[server.game_mode_key] and L(GameModeSettings[server.game_mode_key].display_name) or server.game_mode_key or "?"
 
 	ScriptGUI.text(gui, game_mode, font, layout_settings.font_size, font_material, Vector3(math.floor(self._x + column_offset_x + layout_settings.text_offset_x), math.floor(self._y + layout_settings.text_offset_y), self._z + 2), color, shadow_color, shadow_offset)
 
