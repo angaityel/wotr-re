@@ -84,7 +84,7 @@ function VotingTypes.change_level.text(game, id)
 end
 
 function VotingTypes.change_level:voter_eligible(...)
-	print("VotingTypes.change_level.voter_eligible", ...)
+	--print("VotingTypes.change_level.voter_eligible", ...)
 
 	return true
 end
