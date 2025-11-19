@@ -3492,8 +3492,19 @@ function GameNetworkManager:rpc_map_rotation(sender)
 	local maps = Managers.admin:settings().map_rotation.maps
 	local map_rotation_string = ""
 
+	local maps_table = {}
+
 	for _, map in pairs(maps) do
-		map_rotation_string = map_rotation_string .. sprintf("MAP: %s GAME MODE: %s\n", LevelSettings[map.level].game_server_map_name, map.game_mode)
+		if not maps_table[LevelSettings[map.level].game_server_map_name] then
+			maps_table[LevelSettings[map.level].game_server_map_name] = {}
+		end
+		table.insert(maps_table[LevelSettings[map.level].game_server_map_name], map.game_mode)
+	end
+
+	for map_name, mode_names in pairs(maps_table) do
+		table.sort(mode_names)
+		local modes = table.concat(mode_names, ",")
+		map_rotation_string = map_rotation_string .. sprintf("%s %s\n", map_name, modes)
 	end
 
 	RPC.rpc_map_rotation_reply(sender, map_rotation_string)
@@ -3505,7 +3516,9 @@ function GameNetworkManager:rpc_map_rotation_reply(sender, map_rotation_string)
 	local maps = string.split(map_rotation_string, "\n")
 
 	for _, map in pairs(maps) do
-		Managers.state.hud:output_console_text(map)
+		local server_map_name, server_game_modes = unpack_string(map)
+		server_game_modes = server_game_modes:gsub(",", ", ")
+		Managers.state.hud:output_console_text("MAP: " .. server_map_name .. " " .. "GAME MODES: " .. server_game_modes)
 	end
 end
 
