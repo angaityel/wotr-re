@@ -70,6 +70,9 @@ VotingTypes.change_level.minimum_votes_pass = 1
 VotingTypes.change_level.minimum_procent_pass = 0.51
 
 function VotingTypes.change_level.text(game, id)
+	local vote_player_id = GameSession.game_object_field(game, id, "vote_player_id")
+	local network_manager = Managers.state.network
+	local vote_player = Managers.player:player(network_manager:temp_player_index(vote_player_id))
 	local map_name = GameSession.game_object_field(game, id, "map")
 
 	map_name = NetworkLookup.server_map_names[map_name]
@@ -80,7 +83,7 @@ function VotingTypes.change_level.text(game, id)
 
 	game_mode = NetworkLookup.game_mode_keys[game_mode]
 
-	return sprintf("Change level to: %s (%s)", display_name, game_mode:upper())
+	return sprintf("Change level to: %s (%s) - %s", display_name, game_mode:upper(), vote_player:name())
 end
 
 function VotingTypes.change_level:voter_eligible(...)
