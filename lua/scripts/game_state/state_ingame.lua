@@ -371,6 +371,7 @@ function StateIngame:update(dt)
 			local next_level = level_cycle[level_cycle_count]
 			local level_key = next_level.level
 			local game_mode_key = next_level.game_mode
+			local game_mode_size = next_level.game_mode_size
 			local win_score = next_level.win_score
 			local time_limit = next_level.time_limit
 			local level = LevelSettings[level_key]
@@ -384,7 +385,7 @@ function StateIngame:update(dt)
 				lobby_manager:set_game_tag("game_mode_key", game_mode_key)
 			end
 
-			network_manager:load_next_level(level_key, game_mode_key, win_score, time_limit)
+			network_manager:load_next_level(level_key, game_mode_key, win_score, time_limit, game_mode_size)
 		end
 	end
 
@@ -397,6 +398,7 @@ function StateIngame:update(dt)
 			if network_game then
 				local level_key = self.change_level.name
 				local game_mode_key = self.change_level.settings.game_mode
+				local game_mode_size = self.change_level.settings.game_mode_size
 				local win_score = self.change_level.settings.win_score
 				local time_limit = self.change_level.settings.time_limit
 				local lobby_manager = Managers.lobby
@@ -410,7 +412,7 @@ function StateIngame:update(dt)
 				end
 
 				Managers.admin:set_rcon_admin(nil)
-				network_manager:load_next_level(level_key, game_mode_key, win_score, time_limit)
+				network_manager:load_next_level(level_key, game_mode_key, win_score, time_limit, game_mode_size)
 			end
 		end
 	end
@@ -577,6 +579,7 @@ function StateIngame:_check_exit(t)
 			self.parent.loading_context.time_limit = next_level_settings.time_limit
 			self.parent.loading_context.win_score = next_level_settings.win_score
 			self.parent.loading_context.game_start_countdown = next_level_settings.game_start_countdown
+			self.parent.loading_context.game_mode_size = next_level_settings.game_mode_size
 
 			print("[StateIngame] Transition to StateLoading on \"load_next_level\"")
 
@@ -667,7 +670,7 @@ function StateIngame:setup_state_context(reload_level_context)
 	local server_game_mode_scale
 
 	if Managers.lobby.server then
-		server_game_mode_scale = self.parent.loading_context.level_cycle[self.parent.loading_context.level_cycle_count].game_mode_size
+		server_game_mode_scale = self.parent.loading_context.game_mode_size or self.parent.loading_context.level_cycle[self.parent.loading_context.level_cycle_count].game_mode_size
 	end
 
 	Managers.state.game_mode = GameModeManager:new(self.world, self._game_mode_key, self._level_key, self._win_score, self._time_limit, server_game_mode_scale)

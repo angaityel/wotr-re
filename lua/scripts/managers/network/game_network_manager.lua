@@ -463,7 +463,7 @@ function GameNetworkManager:rpc_reload_level(sender)
 	print("reload_level", sender)
 end
 
-function GameNetworkManager:load_next_level(level_key, game_mode_key, win_score, time_limit)
+function GameNetworkManager:load_next_level(level_key, game_mode_key, win_score, time_limit, game_mode_size)
 	local lobby_manager = Managers.lobby
 
 	if lobby_manager.server then
@@ -475,7 +475,8 @@ function GameNetworkManager:load_next_level(level_key, game_mode_key, win_score,
 			game_mode_key = game_mode_key,
 			game_start_countdown = game_start_countdown,
 			win_score = win_score,
-			time_limit = time_limit
+			time_limit = time_limit,
+			game_mode_size = game_mode_size
 		}
 
 		local level = LevelSettings[level_key]
