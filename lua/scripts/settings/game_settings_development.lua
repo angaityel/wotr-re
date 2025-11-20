@@ -48,7 +48,7 @@ GameSettingsDevelopment.show_version_info = false
 GameSettingsDevelopment.show_nda_in_splash_screen = false
 GameSettingsDevelopment.server_license_check = false
 GameSettingsDevelopment.enable_robot_player = false
-GameSettingsDevelopment.all_on_same_team = true
+GameSettingsDevelopment.all_on_same_team = false
 GameSettingsDevelopment.allow_multiple_dot_effects = false
 GameSettingsDevelopment.backend_timeout = 90
 
