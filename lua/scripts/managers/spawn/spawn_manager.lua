@@ -695,7 +695,18 @@ function SpawnManager:_spawn_player_unit_in_area(player, area_name)
 	if not poly then
 		print("[SpawnManager] No valid spawn found at spawn", area_name, " check nav graph at location.")
 
-		if GameSettingsDevelopment.prototype_spawn_fallback then
+		local level_key = Managers.state.game_mode:level_key()
+		local level_list = {"level_test_01", "de_dust2"}
+
+		local level_in_list = false
+		for _, item in ipairs(level_list) do
+		    if item == level_key then
+		        level_in_list = true
+		        break
+		    end
+		end
+
+		if GameSettingsDevelopment.prototype_spawn_fallback or level_in_list then
 			local rot = QuaternionBox.unbox(area.spawn_rotations[player.team.name])
 
 			self:_spawn_player_unit(player, spawn_point, rot, ghost_mode, profile)
