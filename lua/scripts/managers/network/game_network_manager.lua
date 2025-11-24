@@ -3515,7 +3515,7 @@ function GameNetworkManager:rpc_map_rotation_reply(sender, map_rotation_string)
 	Managers.state.hud:output_console_text("--- Map Rotation ---")
 
 	local maps = string.split(map_rotation_string, "\n")
-
+	table.sort(maps)
 	for _, map in pairs(maps) do
 		local server_map_name, server_game_modes = unpack_string(map)
 		server_game_modes = server_game_modes:gsub(",", ", ")
