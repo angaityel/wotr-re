@@ -111,7 +111,7 @@ GameModeSettings.battle.spawn_settings = {
 	yield_timer = 5,
 	type = "battle"
 }
-GameModeSettings.battle.allow_ghost_talking = false
+GameModeSettings.battle.allow_ghost_talking = true
 GameModeSettings.battle.allowed_spawning.single_player = false
 GameModeSettings.battle.allowed_spawning.pulse = false
 GameModeSettings.battle.allowed_spawning.personal = false
