@@ -117,7 +117,6 @@ GameModeSettings.battle.allowed_spawning.pulse = false
 GameModeSettings.battle.allowed_spawning.personal = false
 GameModeSettings.battle.allowed_spawning.battle = true
 GameModeSettings.battle.time_limit = 1200
-GameModeSettings.battle.deserter_timer = 3600
 GameModeSettings.battle.display_name = "gm_pitched_battle"
 GameModeSettings.battle.object_sets = {
 	gm_battle = true

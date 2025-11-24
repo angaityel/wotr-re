@@ -158,7 +158,7 @@ function PersistenceManagerServer:setup(stats_collection)
 	self._ranks = Ranks:new(stats_collection)
 	self._server_browser_score = ServerBrowserScore:new(stats_collection)
 
-	if table.find(argv, "-localbackend") or table.find(argv, "-onlinebackend") then
+	if table.find(argv, "-localbackend") then
 		self._telemetry:setup()
 		self._external_tweaks:refresh()
 		Managers.state.event:register(self, "player_joined", "event_player_joined")
@@ -213,9 +213,6 @@ function PersistenceManagerServer:event_player_joined(player)
 				end
 			end
 			self:cb_profile_attributes_received(profile_id, player, response)
-
-		elseif table.find(argv, "-onlinebackend") then
-			Managers.changelog:get_stats(callback(self, "cb_profile_attributes_received", profile_id, player, response), network_id)
 		end
 		
 		--Managers.backend:get_profile_attributes(profile_id, callback(self, "cb_profile_attributes_received", profile_id, player))
@@ -225,22 +222,7 @@ function PersistenceManagerServer:event_player_joined(player)
 	end
 end
 
-function PersistenceManagerServer:cb_profile_attributes_received(profile_id, player, response, info)
-	if info ~= nil then
-		if info.body ~= "404" then
-			for k,v in string.gmatch(info.body, "(%S+)=(%S+)") do 
-				if v == "false" then
-					v = false
-				elseif v == "true" then
-					v = true
-				else
-					v = tonumber(v)
-				end
-				response.attributes[k] = v
-			end
-		end
-	end
-
+function PersistenceManagerServer:cb_profile_attributes_received(profile_id, player, response)
 	if response.error == nil then
 		printf("Profile attributes received for player %q (%d)", player:name(), player.backend_profile_id)
 
@@ -405,8 +387,6 @@ function PersistenceManagerServer:_save_profiles()
 							else
 								response.attributes[stat_name] = source_value 
 							end
-						elseif table.find(argv, "-onlinebackend") then
-							response.attributes[stat_name] = source_value 
 						end
 					end
 				end
@@ -421,21 +401,7 @@ function PersistenceManagerServer:_save_profiles()
 			local file = io.open("stats/" .. network_id, "w")
 			file:write(profile_attributes_to_save_string)
 			file:close()
-		elseif table.find(argv, "-onlinebackend") then
-			for k, v in pairs(response.attributes) do
-				profile_attributes_to_save_string = profile_attributes_to_save_string .. k .. "=" .. tostring(v) .. ";"
-			end
-
-			local newUrl = ""
-			for i,v in ipairs(argv) do
-				if argv[i] == "-onlinebackend" then
-					newUrl = argv[i + 1] .. "/savestats/" .. network_id .. "/" .. profile_attributes_to_save_string
-				end
-			end
-			local loader = UrlLoader()
-			UrlLoader.load_text(loader, newUrl)
 		end
-
 
 		if not table.is_empty(profile_attributes_to_save) then
 			self._profiles_saving[player] = true
