@@ -544,7 +544,7 @@ LevelSettings = {
 	},
 	wakefield_01 = {
 		package_name = "resource_packages/levels/wakefield_01",
-		game_server_map_name = "Wakefield",
+		game_server_map_name = "Wakefield1",
 		show_in_server_browser = true,
 		ghost_mode_setting = "ghost_mode",
 		map_id = 13,
