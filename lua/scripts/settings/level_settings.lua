@@ -775,6 +775,140 @@ LevelSettings = {
 			texture_1366 = "whitebox_loading_1920"
 		}
 	},
+	de_dust2 = {
+		ui_description = "level_description_missing",
+		show_in_server_browser = true,
+		voice_intro = "vo_intro_mp_bamburgh_both_01",
+		level_name = "levels/de_dust2/world",
+		display_name = "de_dust2",
+		minimap_texture = "map_de_dust2",
+		sort_index = 18,
+		map_id = 19,
+		game_server_map_name = "Dust2",
+		sp_requirement_id = 0,
+		knocked_down_setting = "knocked_down",
+		stop_music = "Stop_castle_music",
+		wounded_setting = "wounded",
+		music = "Play_castle_music",
+		package_name = "resource_packages/levels/castle_02",
+		sp_progression_id = 0,
+		visible = true,
+		ghost_mode_setting = "ghost_mode",
+		single_player = false,
+		executed_setting = "executed",
+		sp_progression_id = 3,
+		sp_requirement_id = 0,
+		tip_of_the_day = DEFAULT_TIP_LIST,
+		minimap = {
+			p1 = Vector3Box(67.2454, -21.1483, 0),
+			p2 = Vector3Box(307.626, -383.136, 0)
+		},
+		game_modes = {
+			GameModeSettings.tdm,
+			GameModeSettings.con,
+			GameModeSettings.ass,
+			GameModeSettings.battle
+		},
+		level_particle_effects = {},
+		level_screen_effects = {},
+		loading_screen_preview = {
+			texture_1920 = "de_dust2_loading_1920",
+			texture_1366 = "de_dust2_loading_1920"
+		},
+		custom_win_scale_criteria = {
+			ass = {
+				critical = 0.6,
+				intense = 0.6
+			}
+		}
+	},
+	castle_02_night = {
+		game_server_map_name = "Bamburgh_Castle_Night",
+		package_name = "resource_packages/levels/castle_02",
+		show_in_server_browser = true,
+		ghost_mode_setting = "ghost_mode",
+		map_id = 20,
+		sort_index = 19,
+		display_name = "level_castle_02",
+		executed_setting = "executed",
+		voice_intro = "vo_intro_mp_bamburgh_both_01",
+		visible = true,
+		single_player = true,
+		minimap_texture = "map_castle",
+		ui_description = "level_description_mp_castle_02",
+		stop_music = "Stop_castle_music",
+		wounded_setting = "wounded",
+		music = "Play_castle_music",
+		knocked_down_setting = "knocked_down",
+		level_name = "levels/castle_02_night/world",
+		sp_progression_id = 3,
+		sp_requirement_id = 0,
+		tip_of_the_day = DEFAULT_TIP_LIST,
+		minimap = {
+			p1 = Vector3Box(-159.819, -21.1483, 0),
+			p2 = Vector3Box(80.5617, -383.136, 0)
+		},
+		game_modes = {
+			GameModeSettings.tdm,
+			GameModeSettings.con,
+			GameModeSettings.battle,
+			GameModeSettings.ass
+		},
+		level_particle_effects = {
+		},
+		level_screen_effects = {
+		},
+		loading_screen_preview = {
+			texture_1920 = "castle_night_loading_1920",
+			texture_1366 = "castle_night_loading_1920"
+		},
+		custom_win_scale_criteria = {
+			ass = {
+				critical = 0.6,
+				intense = 0.6
+			}
+		}
+	},
+	towton_01_day = {
+		package_name = "resource_packages/levels/towton_01",
+		game_server_map_name = "Towton_Day",
+		show_in_server_browser = true,
+		ghost_mode_setting = "ghost_mode",
+		map_id = 21,
+		sort_index = 20,
+		display_name = "level_towton_01",
+		on_spawn_flow_event = "cold_breath_activate",
+		stop_music = "Stop_winter_music",
+		visible = true,
+		single_player = false,
+		minimap_texture = "map_towton",
+		ui_description = "level_description_mp_towton_01",
+		executed_setting = "executed",
+		wounded_setting = "wounded",
+		music = "Play_winter_music",
+		knocked_down_setting = "knocked_down",
+		level_name = "levels/towton_01_day/world",
+		sp_progression_id = 6,
+		sp_requirement_id = 0,
+		tip_of_the_day = DEFAULT_TIP_LIST,
+		minimap = {
+			p1 = Vector3Box(-181.723, -373.175, 0),
+			p2 = Vector3Box(170.159, 256.795, 0)
+		},
+		game_modes = {
+			GameModeSettings.tdm,
+			GameModeSettings.con,
+			GameModeSettings.battle
+		},
+		level_particle_effects = {
+			"fx/snow_test"
+		},
+		level_screen_effects = {},
+		loading_screen_preview = {
+			texture_1920 = "towton_day_loading_1920",
+			texture_1366 = "towton_day_loading_1920"
+		}
+	},
 	character_sheet = {
 		ui_description = "level_description_missing",
 		level_name = "levels/outfit_display/character_sheet/world",
