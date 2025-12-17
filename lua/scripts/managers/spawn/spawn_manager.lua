@@ -878,6 +878,11 @@ function SpawnManager:_spawn_player_unit(player, pos, rot, ghost_mode, profile_i
 	local profile_name = player.state_data.spawn_profile or profile_index
 	local profile = Managers.state.game_mode:squad_screen_spawning() and PlayerProfiles[profile_name] or SPProfiles[profile_name]
 
+	local game_mode = Managers.state.game_mode:game_mode_key()
+	if game_mode == "grail" then
+		profile = Managers.state.game_mode:squad_screen_spawning() and GrailProfiles[profile_name]
+	end
+
 	fassert(profile, "[SpawnManager] Trying to spawn with profile %q that doesn't exist in %q.", profile_name, Managers.lobby.lobby and "PlayerProfiles" or "SPProfiles")
 
 	local unit_name = Armours[profile.armour].player_unit

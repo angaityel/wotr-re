@@ -21,6 +21,20 @@ function populate_player_profiles_from_save(save_data)
 	end
 
 	save_data.profiles = PlayerProfiles
+	
+	create_grail_profiles(table.clone(PlayerProfiles))
+end
+
+function create_grail_profiles(profiles)
+	for key, profile in ipairs(profiles) do
+		local mount = profile.mount
+
+		if mount then
+			profile.mount = nil
+		end
+
+		GrailProfiles[key] = profile
+	end
 end
 
 PlayerProfiles = PlayerProfiles or {
@@ -916,3 +930,4 @@ function profile_index_by_unlock(unlock_key)
 end
 
 PlayerProfilesDefault = PlayerProfilesDefault or table.clone(PlayerProfiles)
+GrailProfiles = table.clone(PlayerProfiles)
