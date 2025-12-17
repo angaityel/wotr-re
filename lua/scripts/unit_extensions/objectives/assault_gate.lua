@@ -17,6 +17,7 @@ function AssaultGate:init(world, unit, input)
 	self._blackboard.active_team_sides_destructible = {}
 	self._blackboard.destructible_enabled = true
 	self._interaction_timer = nil
+	self._level_key = Managers.state.game_mode:level_key()
 end
 
 function AssaultGate:event_start_round()
@@ -63,7 +64,7 @@ function AssaultGate:_server_update(t, dt)
 	if self._perma_open == false and self._state == "open" then
 		local num_nearby_defenders = table.size(self._nearby_defenders)
 
-		if num_nearby_defenders == 0 then
+		if num_nearby_defenders == 0 or self._level_key == "town_02" then
 			self._close_timer = self._close_timer - dt
 
 			if self._close_timer <= 0 then

@@ -39,3 +39,4 @@ scripts/menu/menu_items/server_menu_item.lua
 scripts/menu/menu_pages/server_browser_menu_page.lua
 scripts/game_state/state_ingame.lua
 scripts/managers/persistence/persistence_manager_client.lua
+scripts/unit_extensions/objectives/assault_gate.lua
