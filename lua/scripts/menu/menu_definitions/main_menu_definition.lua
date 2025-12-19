@@ -1362,23 +1362,23 @@ MainMenuDefinition = {
 				},
 				{
 					remove_func = "cb_controller_enabled",
-					name = "twitter",
+					name = "discord",
 					on_select = "cb_open_link",
 					type = "TextureLinkButtonMenuItem",
 					on_select_args = {
 						GameSettingsDevelopment.discord_url
 					},
-					layout_settings = MainMenuSettings.items.twitter
+					layout_settings = MainMenuSettings.items.discord
 				},
 				{
 					remove_func = "cb_controller_enabled",
-					name = "facebook",
+					name = "steam_chat",
 					on_select = "cb_open_link",
 					type = "TextureLinkButtonMenuItem",
 					on_select_args = {
 						GameSettingsDevelopment.steam_chat_url
 					},
-					layout_settings = MainMenuSettings.items.facebook
+					layout_settings = MainMenuSettings.items.steam_chat
 				}
 			}
 		}

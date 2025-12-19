@@ -2,3 +2,4 @@ lua_compiled/
 lua/jit/
 lua/lua51.dll
 lua/luajit.exe
+game_assets/bundle/

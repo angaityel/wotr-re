@@ -3840,6 +3840,25 @@ MainMenuSettings.items.survey[1680][1050] = MainMenuSettings.items.survey[1680][
 	indentation = 0.02,
 	texture_height = 50
 }
+MainMenuSettings.items.discord = MainMenuSettings.items.discord or {}
+MainMenuSettings.items.discord[1680] = MainMenuSettings.items.discord[1680] or {}
+MainMenuSettings.items.discord[1680][1050] = MainMenuSettings.items.discord[1680][1050] or {
+	texture = "discord",
+	texture_align = "bottom_left",
+	texture_width = 50,
+	indentation = 0.02,
+	texture_height = 50
+}
+MainMenuSettings.items.steam_chat = MainMenuSettings.items.steam_chat or {}
+MainMenuSettings.items.steam_chat[1680] = MainMenuSettings.items.steam_chat[1680] or {}
+MainMenuSettings.items.steam_chat[1680][1050] = MainMenuSettings.items.steam_chat[1680][1050] or {
+	texture_extra_offset = 60,
+	texture = "steam_chat",
+	texture_align = "bottom_left",
+	texture_width = 50,
+	indentation = 0.02,
+	texture_height = 50
+}
 MainMenuSettings.pages.filter_popup = MainMenuSettings.pages.filter_popup or {}
 MainMenuSettings.pages.filter_popup[1680] = MainMenuSettings.pages.filter_popup[1680] or {}
 MainMenuSettings.pages.filter_popup[1680][1050] = MainMenuSettings.pages.filter_popup[1680][1050] or table.clone(MainMenuSettings.pages.text_input_popup[1680][1050])
