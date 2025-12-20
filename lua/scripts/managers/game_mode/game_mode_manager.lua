@@ -531,6 +531,8 @@ function GameModeManager:trigger_end(round_end, t)
 		local side = Managers.state.team:side(self._winning_team_name or "red")
 
 		Level.trigger_event(level, side .. "_win")
+	elseif round_end then
+		self._end_timer = t - 4
 	else
 		self._end_timer = t + 5
 	end
