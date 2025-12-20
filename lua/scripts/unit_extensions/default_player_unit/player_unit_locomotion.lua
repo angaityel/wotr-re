@@ -118,6 +118,16 @@ function PlayerUnitLocomotion:init(world, unit, player_index, ghost_mode, profil
 	end
 
 	self._auto_leave_ghost_mode_time = 0
+
+	local level_list = {"tournament_02", "de_dust2", "level_test_01"}
+	self.level_in_list = false
+	for _, item in ipairs(level_list) do
+		if item == level_settings.level_key then
+			self.level_in_list = true
+			self._auto_leave_ghost_mode_time = Managers.time:time("game") + 5
+			break
+		end
+	end
 end
 
 function PlayerUnitLocomotion:_setup_debug_variables(unit)
@@ -759,6 +769,12 @@ end
 function PlayerUnitLocomotion:_update_leave_ghost_mode(dt, t)
 	local controller = self.controller
 	local player = self.player
+
+	if self.level_in_list and self.ghost_mode and t >= self._auto_leave_ghost_mode_time then
+		self._auto_leave_ghost_mode_time = t + 2
+
+		Managers.state.spawn:request_leave_ghost_mode(player, self.unit)
+	end
 
 	if GameSettingsDevelopment.enable_robot_player and self.ghost_mode and t >= self._auto_leave_ghost_mode_time or controller and controller:get("leave_ghost_mode") and self.ghost_mode and Managers.state.spawn:allowed_to_leave_ghost_mode(player) then
 		self._auto_leave_ghost_mode_time = t + 2
