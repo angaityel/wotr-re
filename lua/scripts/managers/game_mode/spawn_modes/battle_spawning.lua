@@ -101,5 +101,5 @@ function BattleSpawning:_are_teams_ready()
 
 	local min_players = self._minimum_players_per_team
 
-	return red_ready >= 0 and min_players <= white_ready
+	return min_players <= red_ready and min_players <= white_ready
 end
