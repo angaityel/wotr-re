@@ -41,3 +41,4 @@ scripts/game_state/state_ingame.lua
 scripts/managers/persistence/persistence_manager_client.lua
 scripts/unit_extensions/objectives/assault_gate.lua
 scripts/managers/game_mode/spawn_modes/battle_spawning.lua
+scripts/unit_extensions/default_player_unit/player_unit_locomotion.lua
