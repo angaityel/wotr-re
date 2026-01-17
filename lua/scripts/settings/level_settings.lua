@@ -651,7 +651,8 @@ LevelSettings = {
 		game_modes = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
-			GameModeSettings.battle
+			GameModeSettings.battle,
+			GameModeSettings.ass
 		},
 		level_particle_effects = {},
 		level_screen_effects = {},
