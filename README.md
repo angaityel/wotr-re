@@ -53,13 +53,13 @@ Maps and available modes:
 St_Albans - town_02 - tdm, con, battle, ass
 Mortimers_Cross - village_02 - tdm, con, battle, ass
 Bamburgh_Castle - castle_02 - tdm, con, battle, ass
-Clitheroe_Forest - forest_01 - tdm, con, battle, ass
+Clitheroe_Forest - forest_01 - tdm, con, battle, ass, grail
 London_Tournament - tournament_01 - tdm, battle
 Edgecote_Moor - moor_01 - tdm, con, battle, grail
 Barnet - field_01 - tdm, con, battle
 Wakefield1 - wakefield_01 - tdm, con, battle
 Towton - towton_01 - tdm, con, battle
-Ravenspurn - ravenspurn_01 - tdm, con, battle
+Ravenspurn - ravenspurn_01 - tdm, con, battle, ass
 Greenwood - greenwood_01 - tdm, battle
 Wakefield - wakefield_02 - ass
 Practice - practice - tdm
@@ -76,6 +76,7 @@ Random rotation
 ```
 -random-map
 ```
+Using -random-map [number], you can limit how many maps are in random rotation. For example, with 52 total variants, setting -random-map 38 would exclude last 14 maps (e.g., all Battle mode maps), but they remain available for voting.
 ## "Backend"
 Add one of the commands to the server launch options:
 ```
