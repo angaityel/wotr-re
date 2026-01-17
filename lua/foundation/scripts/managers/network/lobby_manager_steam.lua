@@ -72,7 +72,7 @@ function LobbyManagerSteam:set_network_hash(extra_hash)
 	local engine_revision = Application.build_identifier()
 
 	if GameSettingsDevelopment.network_revision_check_enabled then
-		self.combined_hash = Application.make_hash(self.network_hash, trunk_revision, engine_revision, self.project_hash or "", extra_hash or "")
+		self.combined_hash = Application.make_hash(self.network_hash, trunk_revision, engine_revision, self.project_hash or "", GameSettingsDevelopment.fix_version)
 	else
 		self.combined_hash = self.network_hash
 	end
