@@ -811,8 +811,12 @@ LevelSettings = {
 			GameModeSettings.ass,
 			GameModeSettings.battle
 		},
-		level_particle_effects = {},
-		level_screen_effects = {},
+		level_particle_effects = {
+			"fx/environment_rain_castle"
+		},
+		level_screen_effects = {
+			"fx/screenspace_raindrops"
+		},
 		loading_screen_preview = {
 			texture_1920 = "de_dust2_loading_1920",
 			texture_1366 = "de_dust2_loading_1920"
@@ -857,8 +861,10 @@ LevelSettings = {
 			GameModeSettings.ass
 		},
 		level_particle_effects = {
+			"fx/environment_rain_castle"
 		},
 		level_screen_effects = {
+			"fx/screenspace_raindrops"
 		},
 		loading_screen_preview = {
 			texture_1920 = "castle_night_loading_1920",
