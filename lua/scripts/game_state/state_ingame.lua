@@ -362,8 +362,20 @@ function StateIngame:update(dt)
 			local level_cycle_length = #level_cycle
 			local level_cycle_count = self.parent.loading_context.level_cycle_count % level_cycle_length + 1
 
-			if table.find(argv, "-random-map") then
-				level_cycle_count = math.random(1, level_cycle_length)
+			for i = 1, #argv do
+				if argv[i] == "-random-map" then
+					local max_random = level_cycle_length
+					
+					if i < #argv then
+						local num = tonumber(argv[i + 1])
+						if num and num > 0 then
+							max_random = math.min(num, level_cycle_length)
+						end
+					end
+					
+					level_cycle_count = math.random(1, max_random)
+					break
+				end
 			end
 
 			self.parent.loading_context.level_cycle_count = level_cycle_count
