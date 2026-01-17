@@ -3228,32 +3228,47 @@ end
 
 function GameNetworkManager:rpc_set_game_speed(sender, multiplier)
 	if Managers.lobby.server then
-		self:send_rpc_clients("rpc_set_game_speed", multiplier)
+		local player = self:player_from_peer_id(sender)
+		Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " game_speed", "rpc_admin_chat_message")
+		print("[CHEAT] " .. sender .. " " .. player:name() .. " game_speed")
+		self:send_rpc_clients("rpc_set_game_speed", 1)
 	end
 
-	Application.set_time_step_policy("external_multiplier", multiplier)
+	Application.set_time_step_policy("external_multiplier", 1)
 end
 
 function GameNetworkManager:rpc_toggle_disable_damage(sender)
-	script_data.disable_damage = not script_data.disable_damage
+	if Managers.lobby.server then
+		local player = self:player_from_peer_id(sender)
+		Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " disable_damage", "rpc_admin_chat_message")
+		print("[CHEAT] " .. sender .. " " .. player:name() .. " disable_damage")
+	end
+	script_data.disable_damage = false
 end
 
 function GameNetworkManager:rpc_toggle_unlimited_ammo(sender, bool)
 	if Managers.lobby.server then
-		script_data.unlimited_ammo = not script_data.unlimited_ammo
+		local player = self:player_from_peer_id(sender)
+		Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " unlimited_ammo", "rpc_admin_chat_message")
+		print("[CHEAT] " .. sender .. " " .. player:name() .. " unlimited_ammo")
+		script_data.unlimited_ammo = false
 
 		self:send_rpc_clients("rpc_toggle_unlimited_ammo", script_data.unlimited_ammo)
 	else
-		script_data.unlimited_ammo = bool
+		script_data.unlimited_ammo = false
 	end
 end
 
 function GameNetworkManager:rpc_teleport_all_to(sender, position, rotation, camera_rotation)
 	if Managers.lobby.server then
-		self:send_rpc_clients("rpc_teleport_all_to", position, rotation, camera_rotation)
+		local player = self:player_from_peer_id(sender)
+		Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " teleport_all_to", "rpc_admin_chat_message")
+		print("[CHEAT] " .. sender .. " " .. player:name() .. " teleport_all_to")
+		--self:send_rpc_clients("rpc_teleport_all_to", position, rotation, camera_rotation)
+
 	end
 
-	Managers.state.event:trigger("teleport_all_to", position, rotation, camera_rotation)
+	--Managers.state.event:trigger("teleport_all_to", position, rotation, camera_rotation)
 end
 
 function GameNetworkManager:rpc_teleport_unit_to(sender, unit_id, position, rotation, camera_rotation)
@@ -3261,19 +3276,25 @@ function GameNetworkManager:rpc_teleport_unit_to(sender, unit_id, position, rota
 
 	if Unit.alive(unit) then
 		if Managers.lobby.server then
-			self:send_rpc_clients("rpc_teleport_unit_to", unit_id, position, rotation, camera_rotation)
+			local player = self:player_from_peer_id(sender)
+			Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " teleport_unit_to", "rpc_admin_chat_message")
+			print("[CHEAT] " .. sender .. " " .. player:name() .. " teleport_unit_to")
+			--self:send_rpc_clients("rpc_teleport_unit_to", unit_id, position, rotation, camera_rotation)
 		end
 
-		Managers.state.event:trigger("teleport_unit_to", unit, position, rotation, camera_rotation)
+		--Managers.state.event:trigger("teleport_unit_to", unit, position, rotation, camera_rotation)
 	end
 end
 
 function GameNetworkManager:rpc_teleport_team_to(sender, team_id, position, rotation, camera_rotation)
 	if Managers.lobby.server then
-		self:send_rpc_clients("rpc_teleport_team_to", team_id, position, rotation, camera_rotation)
+		local player = self:player_from_peer_id(sender)
+		Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " teleport_team_to", "rpc_admin_chat_message")
+		print("[CHEAT] " .. sender .. " " .. player:name() .. " teleport_team_to")
+		--self:send_rpc_clients("rpc_teleport_team_to", team_id, position, rotation, camera_rotation)
 	end
 
-	Managers.state.event:trigger("teleport_team_to", NetworkLookup.team[team_id], position, rotation, camera_rotation)
+	--Managers.state.event:trigger("teleport_team_to", NetworkLookup.team[team_id], position, rotation, camera_rotation)
 end
 
 function GameNetworkManager:rpc_set_team_object_set_visible(sender, key, visibility)
