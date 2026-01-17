@@ -303,6 +303,7 @@ LevelSettings = {
 		},
 		game_modes = {
 			GameModeSettings.tdm,
+			GameModeSettings.grail,
 			GameModeSettings.con,
 			GameModeSettings.battle,
 			GameModeSettings.ass
