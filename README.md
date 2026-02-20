@@ -67,6 +67,8 @@ Whitebox - whitebox - tdm
 Dust2 - de_dust2 - tdm, con, battle, ass
 Bamburgh_Castle_Night - castle_02_night - tdm, con, battle, ass
 Towton_Day - towton_01_day - tdm, con, battle
+Tower_of_London - tower_01 - tdm, con, battle, ass
+Seasick - seasick_01 - tdm, battle
 ```
 To launch (number = server_port from server_settings.ini - 10):
 ```
