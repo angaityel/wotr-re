@@ -917,6 +917,84 @@ LevelSettings = {
 			texture_1366 = "towton_day_loading_1920"
 		}
 	},
+	seasick_01 = {
+		package_name = "resource_packages/levels/ravenspurn_01",
+		game_server_map_name = "Seasick",
+		show_in_server_browser = true,
+		ghost_mode_setting = "ghost_mode",
+		map_id = 22,
+		sort_index = 21,
+		display_name = "level_seasick_01",
+		on_spawn_flow_event = "cold_breath_activate",
+		stop_music = "Stop_ravenspurn_music",
+		visible = true,
+		single_player = false,
+		minimap_texture = "map_seasick",
+		ui_description = "level_description_mp_ravenspurn_01",
+		executed_setting = "executed",
+		wounded_setting = "wounded",
+		music = "Play_ravenspurn_music",
+		knocked_down_setting = "knocked_down",
+		level_name = "levels/seasick_01/world",
+		sp_progression_id = 6,
+		sp_requirement_id = 0,
+		tip_of_the_day = DEFAULT_TIP_LIST,
+		minimap = {
+			p1 = Vector3Box(-636, -142, 0),
+			p2 = Vector3Box(-574, -184, 0)
+		},
+		game_modes = {
+			GameModeSettings.tdm,
+			GameModeSettings.battle
+		},
+		level_particle_effects = {},
+		level_screen_effects = {},
+		loading_screen_preview = {
+			texture_1920 = "seasick_loading_1920",
+			texture_1366 = "seasick_loading_1920"
+		}
+	},
+	tower_01 = {
+		package_name = "resource_packages/levels/wakefield_02",
+		game_server_map_name = "Tower_of_London",
+		show_in_server_browser = true,
+		ghost_mode_setting = "ghost_mode",
+		map_id = 23,
+		sort_index = 22,
+		display_name = "level_tower_01",
+		voice_intro = "vo_intro_mp_tournament_both_01",
+		stop_music = "Stop_winter_music",
+		visible = true,
+		single_player = false,
+		minimap_texture = "map_tower",
+		ui_description = "level_description_mp_tournament_01",
+		executed_setting = "executed",
+		wounded_setting = "wounded",
+		music = "Play_winter_music",
+		knocked_down_setting = "knocked_down",
+		level_name = "levels/tower_01/world",
+		sp_progression_id = 5,
+		sp_requirement_id = 0,
+		tip_of_the_day = DEFAULT_TIP_LIST,
+		minimap = {
+			p1 = Vector3Box(-209.866, 81.4195, 0),
+			p2 = Vector3Box(375.475, -502.014, 0)
+		},
+		game_modes = {
+			GameModeSettings.tdm,
+			GameModeSettings.con,
+			GameModeSettings.battle,
+			GameModeSettings.ass
+		},
+		level_particle_effects = {
+			"fx/snow_test"
+		},
+		level_screen_effects = {},
+		loading_screen_preview = {
+			texture_1920 = "tower_loading_1920",
+			texture_1366 = "tower_loading_1920"
+		}
+	},
 	character_sheet = {
 		ui_description = "level_description_missing",
 		level_name = "levels/outfit_display/character_sheet/world",

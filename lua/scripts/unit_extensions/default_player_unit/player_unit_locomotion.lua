@@ -119,7 +119,7 @@ function PlayerUnitLocomotion:init(world, unit, player_index, ghost_mode, profil
 
 	self._auto_leave_ghost_mode_time = 0
 
-	local level_list = {"tournament_02", "de_dust2", "level_test_01"}
+	local level_list = {"seasick_01", "tower_01", "de_dust2", "level_test_01"}
 	self.level_in_list = false
 	for _, item in ipairs(level_list) do
 		if item == level_settings.level_key then
