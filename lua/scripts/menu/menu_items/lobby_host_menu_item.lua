@@ -120,6 +120,10 @@ function LobbyHostMenuItem:render(dt, t, gui, layout_settings)
 			self:select_next_level()
 			Managers.lobby:set_lobby_data("level_key", self:selected_level())
 			Managers.lobby:set_lobby_data("game_mode_key", self:selected_game_mode())
+		elseif Keyboard.pressed(Keyboard.button_index("n")) then
+			self:select_prev_level()
+			Managers.lobby:set_lobby_data("level_key", self:selected_level())
+			Managers.lobby:set_lobby_data("game_mode_key", self:selected_game_mode())
 		elseif Keyboard.pressed(Keyboard.button_index("g")) or Pad1.pressed(Pad1.button_index("y")) then
 			self:select_next_game_mode()
 			Managers.lobby:set_lobby_data("game_mode_key", self:selected_game_mode())
@@ -160,6 +164,18 @@ function LobbyHostMenuItem:select_next_level()
 	local selected_level_index = self._selected_level_index
 
 	selected_level_index = selected_level_index >= self._num_levels and 1 or selected_level_index + 1
+	self._selected_level_index = selected_level_index
+	self._game_modes = self:_game_mode_list()
+	self._selected_game_mode_index = 1
+end
+
+function LobbyHostMenuItem:select_prev_level()
+	local selected_level_index = self._selected_level_index
+
+	if selected_level_index ~= 1 then
+		selected_level_index = selected_level_index - 1
+	end
+
 	self._selected_level_index = selected_level_index
 	self._game_modes = self:_game_mode_list()
 	self._selected_game_mode_index = 1
