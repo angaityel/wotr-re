@@ -353,6 +353,14 @@ MenuSettings = {
 			material = "arial_16_masked",
 			font = "materials/fonts/arial_16"
 		},
+		arial_36 = {
+			material = "arial_36",
+			font = "materials/fonts/arial_36"
+		},
+		arial_36_masked = {
+			material = "arial_36_masked",
+			font = "materials/fonts/arial_36"
+		},
 		wotr_hud_text_36 = WOTR_HUD_TEXT_36,
 		ingame_font = {
 			material = "debug",

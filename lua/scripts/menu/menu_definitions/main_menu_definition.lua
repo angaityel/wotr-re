@@ -1247,6 +1247,48 @@ MainMenuDefinition = {
 									}
 								},
 								{
+									text = "menu_new_settings",
+									type = "TextMenuItem",
+									layout_settings = MainMenuSettings.items.text_right_aligned,
+									page = {
+										static_tooltip_callback = "cb_restart_req_func",
+										z = 100,
+										show_revision = true,
+										type = "Level3MenuPage",
+										layout_settings = MainMenuSettings.pages.level_3,
+										sounds = MenuSettings.sounds.default,
+										item_groups = {
+											item_list = {
+												{
+													text = "menu_new_settings",
+													disabled = true,
+													type = "TextMenuItem",
+													layout_settings = MainMenuSettings.items.header_text_right_aligned
+												},
+												{
+													text = "menu_chat_font_size",
+													on_init_options = "cb_chat_font_size",
+													on_option_changed = "cb_chat_font_size_changed",
+													type = "EnumMenuItem",
+													layout_settings = MainMenuSettings.items.text_right_aligned
+												},
+												{
+													disabled = true,
+													type = "TextureMenuItem",
+													layout_settings = MainMenuSettings.items.delimiter_texture
+												},
+												{
+													text = "main_menu_cancel",
+													callback_object = "page",
+													on_select = "cb_cancel",
+													type = "TextMenuItem",
+													layout_settings = MainMenuSettings.items.text_right_aligned
+												}
+											}
+										}
+									}
+								},
+								{
 									disabled = true,
 									type = "TextureMenuItem",
 									layout_settings = MainMenuSettings.items.delimiter_texture

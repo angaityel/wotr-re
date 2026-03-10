@@ -5,6 +5,18 @@ require("scripts/settings/level_settings")
 
 SCALE_1366 = 0.7114583333333333
 HUDSettings = HUDSettings or {}
+HUDSettings.chat_font_size = Application.user_setting("chat_font_size") or 26
+HUDSettings.chat_font_scale = HUDSettings.chat_font_size / 16
+if HUDSettings.chat_font_size <= 21 then
+	HUDSettings.chat_font = MenuSettings.fonts.arial_16_masked
+	HUDSettings.chat_padding = 1
+elseif HUDSettings.chat_font_size <= 31 then
+	HUDSettings.chat_font = MenuSettings.fonts.arial_36_masked
+	HUDSettings.chat_padding = 3
+else
+	HUDSettings.chat_font = MenuSettings.fonts.arial_36_masked
+	HUDSettings.chat_padding = 7
+end
 HUDSettings.show_hud = true
 HUDSettings.show_reticule = true
 HUDSettings.show_damage_numbers = true
@@ -2313,24 +2325,24 @@ HUDSettings.chat.container[1680][1050] = HUDSettings.chat.container[1680][1050] 
 HUDSettings.chat.input_text = HUDSettings.chat.input_text or {}
 HUDSettings.chat.input_text[1680] = HUDSettings.chat.input_text[1680] or {}
 HUDSettings.chat.input_text[1680][1050] = HUDSettings.chat.input_text[1680][1050] or {
-	pivot_offset_y = -280,
-	height = 26,
+	pivot_offset_y = -280*HUDSettings.chat_font_scale,
+	height = 26*HUDSettings.chat_font_scale,
 	pivot_align_y = "bottom",
 	screen_offset_x = 0,
 	avoid_growth = true,
-	text_offset_y = 8,
-	marker_height = 18,
-	marker_width = 2,
-	border_size = 1,
-	text_offset_x = 5,
+	text_offset_y = 8*HUDSettings.chat_font_scale,
+	marker_height = 18*HUDSettings.chat_font_scale,
+	marker_width = 2*HUDSettings.chat_font_scale,
+	border_size = 1*HUDSettings.chat_font_scale,
+	text_offset_x = 5*HUDSettings.chat_font_scale,
 	screen_align_y = "top",
-	font_size = 16,
+	font_size = HUDSettings.chat_font_size,
 	screen_align_x = "left",
-	pivot_offset_x = 25,
+	pivot_offset_x = 25*HUDSettings.chat_font_scale,
 	screen_offset_y = 0,
 	pivot_align_x = "left",
-	width = 380,
-	font = MenuSettings.fonts.arial_16_masked,
+	width = 380*HUDSettings.chat_font_scale,
+	font = HUDSettings.chat_font,
 	text_color = {
 		255,
 		255,
@@ -2360,29 +2372,31 @@ HUDSettings.chat.output_window = HUDSettings.chat.output_window or {
 	life_time = 15,
 	max_lines = 15,
 	scroll_speed = 800,
-	font_size = 16,
+	font_size = HUDSettings.chat_font_size,
+	font_padding = HUDSettings.chat_padding,
 	max_posts = 50,
+	scale_size = HUDSettings.chat_font_scale,
 	gui_material = "materials/fonts/arial",
 	text_scroll_time = 0.25,
-	font = MenuSettings.fonts.arial_16_masked,
+	font = HUDSettings.chat_font,
 	window_settings = {
 		outer_window = {
-			size_x = 410,
-			size_y = 285,
-			x = 15,
-			y_offset = 290
+			size_x = 410*HUDSettings.chat_font_scale,
+			size_y = 285*HUDSettings.chat_font_scale,
+			x = 15*HUDSettings.chat_font_scale,
+			y_offset = 290*HUDSettings.chat_font_scale
 		},
 		chat_field = {
-			size_x = 390,
-			size_y = 26,
-			x = 25,
-			y_offset = 280
+			size_x = 390*HUDSettings.chat_font_scale,
+			size_y = 26*HUDSettings.chat_font_scale,
+			x = 25*HUDSettings.chat_font_scale,
+			y_offset = 280*HUDSettings.chat_font_scale
 		},
 		inner_window = {
-			size_x = 390,
-			size_y = 233,
-			x = 25,
-			y_offset = 245
+			size_x = 390*HUDSettings.chat_font_scale,
+			size_y = 233*HUDSettings.chat_font_scale,
+			x = 25*HUDSettings.chat_font_scale,
+			y_offset = 245*HUDSettings.chat_font_scale
 		}
 	}
 }

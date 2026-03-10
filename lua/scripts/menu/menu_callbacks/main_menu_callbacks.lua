@@ -228,6 +228,121 @@ function MainMenuCallbacks:cb_show_announcements_option_changed(option)
 	HUDSettings.show_announcements = option.key
 end
 
+function MainMenuCallbacks:cb_chat_font_size()
+	local options = {
+		{
+			value = "16",
+			key = 16
+		},
+		{
+			value = "18",
+			key = 18
+		},
+		{
+			value = "20",
+			key = 20
+		},
+		{
+			value = "22",
+			key = 22
+		},
+		{
+			value = "24",
+			key = 24
+		},
+		{
+			value = "26",
+			key = 26
+		},
+		{
+			value = "28",
+			key = 28
+		},
+		{
+			value = "30",
+			key = 30
+		},
+		{
+			value = "32",
+			key = 32
+		},
+		{
+			value = "34",
+			key = 34
+		},
+		{
+			value = "36",
+			key = 36
+		},
+		{
+			value = "38",
+			key = 38
+		},
+		{
+			value = "40",
+			key = 40
+		},
+		{
+			value = "42",
+			key = 42
+		},
+		{
+			value = "44",
+			key = 44
+		},
+		{
+			value = "46",
+			key = 46
+		},
+		{
+			value = "48",
+			key = 48
+		},
+		{
+			value = "50",
+			key = 50
+		},
+		{
+			value = "52",
+			key = 52
+		},
+		{
+			value = "54",
+			key = 54
+		},
+		{
+			value = "56",
+			key = 56
+		}
+	}
+	local default_value = 26
+	local user_settings_value = Application.user_setting("chat_font_size")
+	local default_index, selected_index
+
+	for i, option in ipairs(options) do
+		if option.key == user_settings_value then
+			selected_index = i
+		end
+
+		if option.key == default_value then
+			default_index = i
+		end
+	end
+
+	if user_settings_value then
+		return options, selected_index
+	else
+		return options, default_index
+	end
+end
+
+function MainMenuCallbacks:cb_chat_font_size_changed(option)
+	Application.set_user_setting("chat_font_size", option.key)
+	Application.save_user_settings()
+
+	HUDSettings.chat_font_size = option.key
+end
+
 function MainMenuCallbacks:cb_invert_pose_control_x_options()
 	local options = {
 		{

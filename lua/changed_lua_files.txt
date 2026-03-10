@@ -43,3 +43,8 @@ scripts/unit_extensions/objectives/assault_gate.lua
 scripts/managers/game_mode/spawn_modes/battle_spawning.lua
 scripts/unit_extensions/default_player_unit/player_unit_locomotion.lua
 scripts/menu/menu_items/lobby_host_menu_item.lua
+scripts/managers/hud/hud_chat/chat_output_window.lua
+scripts/menu/menu_callbacks/main_menu_callbacks.lua
+scripts/menu/menu_pages/level_3_menu_page.lua
+scripts/settings/hud_settings.lua
+scripts/settings/menu_settings.lua

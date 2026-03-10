@@ -75,6 +75,10 @@ function Level3MenuPage:cb_controller_help_func()
 	end
 end
 
+function Level3MenuPage:cb_restart_req_func()
+	return "\n\n\n\n *Restart the game to apply settings"
+end
+
 function Level3MenuPage.create_from_config(compiler_data, page_config, parent_page, item_groups, callback_object)
 	local config = {
 		render_parent_page = true,

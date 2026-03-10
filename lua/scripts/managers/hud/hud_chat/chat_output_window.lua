@@ -248,11 +248,12 @@ function ChatOutputWindow:_render_texts(gui, texts, active, scroll_offset)
 		local active = self._active
 		local scroll_offset = self._scroll_offset
 		local font_size = tweak_variables.font_size
+		local scale_size = tweak_variables.scale_size
 		local lines = 1
 		local top = h - window_settings.inner_window.y_offset + window_settings.inner_window.size_y
 		local bottom = top - window_settings.inner_window.size_y
 		local offset, new_text_offset = self:_calculate_offset(gui, texts, active, top, bottom)
-		local pos = Vector3(30, math.max(top - offset, bottom + 5) - new_text_offset - scroll_offset, 500)
+		local pos = Vector3(30 * scale_size, math.max(top - offset, bottom + 5) - new_text_offset - scroll_offset, 500)
 		local width = window_settings.outer_window.size_x
 
 		Gui.triangle(gui, Vector3(0, 0, 0), Vector3(0, 0, h), Vector3(w, 0, 0), -1, Color(0, 0, 0), "clear_mask")
@@ -269,6 +270,7 @@ function ChatOutputWindow:_render_texts(gui, texts, active, scroll_offset)
 			local extents = texts[i].extents
 			local material = tweak_variables.font.material
 			local font = tweak_variables.font.font
+			local padding = tweak_variables.font_padding
 			local text_time = texts[i].time
 			local time = Managers.time:time("game")
 			local time_diff = time - text_time
@@ -286,7 +288,7 @@ function ChatOutputWindow:_render_texts(gui, texts, active, scroll_offset)
 
 					if pos[2] > bottom - 16 and top > pos[2] then
 						Gui.text(gui, text, font, font_size, material, pos, Color(alpha * 255, color[1], color[2], color[3]))
-						Gui.text(gui, text, font, font_size, material, pos + Vector3(1, -1, -1), Color(alpha * alpha * 255, 0, 0, 0))
+						Gui.text(gui, text, font, font_size, material, pos + Vector3(scale_size, -scale_size, -scale_size), Color(alpha * alpha * 255, 0, 0, 0))
 
 						if j == 1 and name then
 							local name_text = name .. ": "
@@ -296,7 +298,7 @@ function ChatOutputWindow:_render_texts(gui, texts, active, scroll_offset)
 							if channel_name then
 								local text_min, text_max = Gui.text_extents(gui, "[" .. channel_name .. "] ", font, font_size, material)
 
-								offset = offset + Vector3(text_max.x - text_min.x, 0, 0)
+								offset = offset + Vector3(text_max.x - text_min.x + padding, 0, 0)
 							end
 
 							Gui.text(gui, name_text, font, font_size, material, pos + offset, name_color)
