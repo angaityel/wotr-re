@@ -48,3 +48,5 @@ scripts/menu/menu_callbacks/main_menu_callbacks.lua
 scripts/menu/menu_pages/level_3_menu_page.lua
 scripts/settings/hud_settings.lua
 scripts/settings/menu_settings.lua
+scripts/settings/ai_profiles.lua
+scripts/entity_system/systems/behaviour/behaviour_trees.lua

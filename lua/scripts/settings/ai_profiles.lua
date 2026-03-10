@@ -207,7 +207,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -336,7 +336,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -465,7 +465,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -594,7 +594,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -984,7 +984,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -1118,7 +1118,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -1253,7 +1253,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -1940,7 +1940,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -2075,7 +2075,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -2210,7 +2210,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -2354,7 +2354,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -2498,7 +2498,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -2640,7 +2640,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -2782,7 +2782,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -2924,7 +2924,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -3066,7 +3066,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -3208,7 +3208,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -3370,7 +3370,7 @@ AIProfiles = {
 					morale_manager = "melee_manager"
 				},
 				{
-					main = "melee_offensive"
+					main = "melee_test"
 				}
 			}
 		},
@@ -3532,7 +3532,7 @@ AIProfiles = {
 					morale_manager = "melee_manager"
 				},
 				{
-					main = "melee_offensive"
+					main = "melee_test"
 				}
 			}
 		},
@@ -3808,7 +3808,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -3937,7 +3937,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -4066,7 +4066,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -4195,7 +4195,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -4457,7 +4457,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -4591,7 +4591,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -4723,7 +4723,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -5407,7 +5407,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -5539,7 +5539,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -5683,7 +5683,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -5845,7 +5845,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -6007,7 +6007,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -6169,7 +6169,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -6331,7 +6331,7 @@ AIProfiles = {
 					morale_manager = "melee_manager"
 				},
 				{
-					main = "melee_offensive"
+					main = "melee_test"
 				}
 			}
 		},
@@ -6493,7 +6493,7 @@ AIProfiles = {
 					morale_manager = "melee_manager"
 				},
 				{
-					main = "melee_offensive"
+					main = "melee_test"
 				}
 			}
 		},
@@ -6778,7 +6778,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},
@@ -6940,7 +6940,7 @@ AIProfiles = {
 					morale_manager = "melee_manager"
 				},
 				{
-					main = "melee_offensive"
+					main = "melee_test"
 				}
 			}
 		},
@@ -7064,7 +7064,7 @@ AIProfiles = {
 					morale_manager = "nil_tree"
 				},
 				{
-					main = "melee"
+					main = "melee_test"
 				}
 			}
 		},

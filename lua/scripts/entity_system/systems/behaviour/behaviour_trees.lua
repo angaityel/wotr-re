@@ -180,21 +180,7 @@ BehaviourTreeDefinitions = BehaviourTreeDefinitions or {
 					{
 						class = "BTChangeBehaviourAction",
 						data = {
-							behaviour = "melee_offensive",
-							slot = "main"
-						}
-					},
-					{
-						class = "BTChangeBehaviourAction",
-						data = {
-							behaviour = "melee_defensive",
-							slot = "main"
-						}
-					},
-					{
-						class = "BTChangeBehaviourAction",
-						data = {
-							behaviour = "melee_crazy",
+							behaviour = "melee_test",
 							slot = "main"
 						}
 					},
@@ -396,6 +382,56 @@ BehaviourTreeDefinitions = BehaviourTreeDefinitions or {
 			},
 			class = "BTUnitAliveCondition",
 			input = "target_player"
+		}
+	},
+	melee_test = {
+		{
+			{
+				{
+					class = "BTMeleeAimAction",
+					input = "target_player"
+				},
+				class = "BTUnitAliveCondition",
+				input = "target_player"
+			},
+			{
+				data = {
+					max = 0.1,
+					min = 0.05
+				},
+				{
+					data = {
+						range = "attack_range"
+					},
+					{
+						class = "BTSelector",
+						{
+							{
+								class = "BTBlockAction",
+								input = "target_player"
+							},
+							class = "BTUnitAttackingCondition",
+							input = "target_player"
+						},
+						{
+							class = "BTMeleeAttackAction",
+							input = "target_player",
+							data = {
+								swing_weights = {
+									down = 2,
+									up = 2,
+									left = 2,
+									right = 2
+								}
+							}
+						}
+					},
+					class = "BTWithinRangeCondition",
+					input = "target_player"
+				},
+				class = "BTUpdateFilter"
+			},
+			class = "BTSequence"
 		}
 	},
 	melee_crazy = {
