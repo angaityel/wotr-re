@@ -346,10 +346,6 @@ function StatsCollectorServer:_gain_xp_and_coins(player, reason, xp_amount, coin
 	local xp = xp_multiplier * (xp_amount or ExperienceSettings[reason])
 	local coins = coin_multiplier * (coin_amount or CurrencySettings[reason])
 
-	if not Managers.state.team:stats_requirement_fulfilled() then
-		xp, coins = 0, 0
-	end
-
 	self._stats:increment(player:network_id(), "experience_round", xp)
 	self._stats:increment(player:network_id(), "coins", coins)
 
@@ -360,10 +356,6 @@ end
 
 function StatsCollectorServer:_penalty(player, reason, amount)
 	local penalty_amount = amount or ExperienceSettings[reason]
-
-	if not Managers.state.team:stats_requirement_fulfilled() then
-		penalty_amount = 0
-	end
 
 	if Managers.state.network:game() then
 		RPC.rpc_xp_penalty(player:network_id(), NetworkLookup.penalty_reason[reason], penalty_amount)

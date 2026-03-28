@@ -21,7 +21,7 @@ ExperienceSettings = {
 	revive = 300,
 	tag_kill = 20,
 	longshot = 100,
-	MULTIPLIER = 1,
+	MULTIPLIER = 10,
 	objective_captured_assist = 250,
 	squad_spawn = 25
 }

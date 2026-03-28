@@ -68,3 +68,6 @@ scripts/menu/menu_pages/final_scoreboard_menu_page.lua
 scripts/menu/menu_pages/scoreboard_menu_page.lua
 scripts/settings/game_mode_objectives.lua
 scripts/unit_extensions/default_player_unit/player_unit_interaction.lua
+scripts/settings/experience_settings.lua
+scripts/settings/achievements.lua
+scripts/managers/stats/stats_collector_server.lua

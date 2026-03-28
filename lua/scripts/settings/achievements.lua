@@ -100,7 +100,7 @@ Achievements.COLLECTION = {
 	[21] = {
 		"headshots_with_crossbow",
 		">=",
-		2001
+		21
 	},
 	[22] = {
 		"teabags",
