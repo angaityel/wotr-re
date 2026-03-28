@@ -6,6 +6,7 @@ require("scripts/settings/game_mode_settings")
 require("scripts/settings/game_mode_objectives")
 require("scripts/managers/game_mode/game_mode_events")
 require("scripts/managers/game_mode/game_modes/game_mode_tdm")
+require("scripts/managers/game_mode/game_modes/game_mode_ffa")
 require("scripts/managers/game_mode/game_modes/game_mode_battle")
 require("scripts/managers/game_mode/game_modes/game_mode_conquest")
 require("scripts/managers/game_mode/game_modes/game_mode_assault")
@@ -436,7 +437,9 @@ end
 function GameModeManager:round_started()
 	local level = LevelHelper:current_level(self._world)
 	local round_started_string = self._game_mode_key .. "_round_started"
-
+	if self._game_mode_key == "ffa" then
+		round_started_string = "tdm_round_started"
+	end
 	Managers.state.event:trigger("event_round_pre_started")
 	Level.trigger_event(level, round_started_string)
 
@@ -448,6 +451,9 @@ function GameModeManager:round_started()
 
 	Managers.state.event:trigger("event_round_started", {})
 	self._spawning:round_started()
+	if self._game_mode_key == "ffa" then
+		Managers.state.team:flow_cb_set_team_side("unassigned", "defenders")
+	end
 end
 
 function GameModeManager:next_spawn_time(player)
@@ -491,15 +497,25 @@ function GameModeManager:server_update(dt, t)
 			self:trigger_end(end_of_round_only, t)
 
 			local win_score = self._game_mode:win_score()
-			local red_team_score = Managers.state.team:team_by_name("red").score
-			local red_team_score_clamped = math.clamp(red_team_score, 0, win_score)
-			local white_team_score = Managers.state.team:team_by_name("white").score
-			local white_team_score_clamped = math.clamp(white_team_score, 0, win_score)
-			local winning_team_name = winning_team and winning_team.name or "draw"
+			if self._game_mode_key == "ffa" then
+				local purple_team_score = Managers.state.team:team_by_name("unassigned").score
+				local purple_team_score_clamped = math.clamp(purple_team_score, 0, win_score)
+				local winning_team_name = winning_team and winning_team.name or "draw"
 
-			self._winning_team_name = winning_team_name
+				self._winning_team_name = winning_team_name
 
-			self:trigger_event("end_conditions_met", winning_team_name, math.floor(red_team_score_clamped), math.floor(white_team_score_clamped), end_of_round_only or false)
+				self:trigger_event("end_conditions_met", winning_team_name, math.floor(purple_team_score_clamped), 0, end_of_round_only or false)
+			else
+				local red_team_score = Managers.state.team:team_by_name("red").score
+				local red_team_score_clamped = math.clamp(red_team_score, 0, win_score)
+				local white_team_score = Managers.state.team:team_by_name("white").score
+				local white_team_score_clamped = math.clamp(white_team_score, 0, win_score)
+				local winning_team_name = winning_team and winning_team.name or "draw"
+
+				self._winning_team_name = winning_team_name
+
+				self:trigger_event("end_conditions_met", winning_team_name, math.floor(red_team_score_clamped), math.floor(white_team_score_clamped), end_of_round_only or false)
+			end
 		end
 	elseif self._end_timer and (self._ready_to_transition and t >= self._end_timer or t >= self._end_timer + GameSettingsDevelopment.backend_save_timeout) then
 		Managers.state.event:trigger("event_level_ended", self._round_end)
@@ -798,7 +814,7 @@ end
 function GameModeManager:event_player_damaged(damagee, damager, damage, gear_name, hit_zone, damage_range_type, range, mirrored)
 	if damagee == damager then
 		Managers.state.stats_collector:player_self_damage(damagee, damage, gear_name, hit_zone, damage_range_type, mirrored)
-	elseif damagee.team == damager.team then
+	elseif damagee.team == damager.team and damager.team.name ~= "unassigned" then
 		Managers.state.stats_collector:player_team_damage(damagee, damager, damage, gear_name, hit_zone, damage_range_type)
 	else
 		Managers.state.stats_collector:player_enemy_damage(damagee, damager, damage, gear_name, hit_zone, damage_range_type, range)

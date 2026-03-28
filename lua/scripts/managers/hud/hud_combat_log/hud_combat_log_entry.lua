@@ -22,6 +22,16 @@ function HUDCombatLogEntry:set_entry_data(attacking_player, victim_player, gear_
 	self._weapon_texture_settings = layout_settings.texture_atlas_settings[weapon_texture_name]
 	self._attacker_color = attacking_player.team == self._local_player.team and HUDSettings.player_colors.team_member or HUDSettings.player_colors.enemy
 	self._victim_color = victim_player.team == self._local_player.team and HUDSettings.player_colors.team_member or HUDSettings.player_colors.enemy
+
+	local is_attacker_ffa = attacking_player.team.name == "unassigned"
+	local is_victim_ffa = victim_player.team.name == "unassigned"
+	if is_attacker_ffa then
+		self._attacker_color = HUDSettings.player_colors.ffa
+	end
+	if is_victim_ffa then
+		self._victim_color = HUDSettings.player_colors.ffa
+	end
+
 end
 
 function HUDCombatLogEntry:width()

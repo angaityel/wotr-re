@@ -17,6 +17,10 @@ function CoatOfArmsHelper:set_material_properties(settings, unit, mesh_name, mat
 	local material = Mesh.material(mesh, material_name)
 	local color_index = "material_color"
 
+	if team_name == "unassigned" then
+		team_name = "white"
+	end
+
 	if settings.field_color == "team_primary" or settings.field_color == "team_secondary" then
 		color_index = color_index .. "_team_" .. team_name
 	end

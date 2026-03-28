@@ -13,6 +13,9 @@ function HUDGameModeStatus:init(world, player)
 	self._gui = World.create_screen_gui(world, "material", "materials/hud/hud", "material", MenuSettings.font_group_materials.wotr_hud_text, "immediate")
 	self._objective_text = ""
 
+	local game_mode_key = Managers.state.game_mode:game_mode_key()
+	self._is_ffa = game_mode_key == "ffa"
+
 	self:_setup()
 	Managers.state.event:register(self, "refresh_game_mode_objective", "event_refresh_objective")
 	Managers.state.event:register(self, "set_game_mode_objective_text", "event_set_objective_text")
@@ -215,7 +218,7 @@ end
 function HUDGameModeStatus:disabled_post_update(dt, t)
 	local player = self._player
 
-	if not player.team or player.team.name == "unassigned" then
+	if not player.team or (player.team.name == "unassigned" and not self._is_ffa) then
 		return
 	end
 
@@ -225,7 +228,7 @@ end
 function HUDGameModeStatus:post_update(dt, t)
 	local player = self._player
 
-	if not player.team or player.team.name == "unassigned" or script_data.map_dump_mode then
+	if not player.team or (player.team.name == "unassigned" and not self._is_ffa) or script_data.map_dump_mode then
 		return
 	end
 
@@ -236,7 +239,11 @@ function HUDGameModeStatus:post_update(dt, t)
 
 	self._objective_text_element.config.text = self._objective_text
 	self._own_team_score.config.text = Managers.state.game_mode:hud_score_text(own_team_name)
-	self._enemy_team_score.config.text = Managers.state.game_mode:hud_score_text(enemy_team_name)
+	if self._is_ffa then
+		self._enemy_team_score.config.text = Managers.state.game_mode:hud_score_text(own_team_name)
+	else
+		self._enemy_team_score.config.text = Managers.state.game_mode:hud_score_text(enemy_team_name)
+	end
 
 	local timer_text, timer_alert = Managers.state.game_mode:hud_timer_text()
 

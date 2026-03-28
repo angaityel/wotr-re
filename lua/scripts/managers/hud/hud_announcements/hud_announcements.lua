@@ -8,6 +8,9 @@ HUDAnnouncements = class(HUDAnnouncements, HUDBase)
 function HUDAnnouncements:init(world, player)
 	HUDAnnouncements.super.init(self, world, player)
 
+	local game_mode_key = Managers.state.game_mode:game_mode_key()
+	self._is_ffa = game_mode_key == "ffa"
+
 	self._world = world
 	self._player = player
 	self._gui = World.create_screen_gui(world, "material", "materials/hud/hud", "material", MenuSettings.font_group_materials.font_gradient_100, "material", MenuSettings.font_group_materials.hell_shark, "immediate")
@@ -106,7 +109,8 @@ function HUDAnnouncements:event_player_wounded(player)
 end
 
 function HUDAnnouncements:_update_game_mode_announcements(player)
-	if not player.team or player.team.name == "unassigned" then
+
+	if not player.team or (player.team.name == "unassigned" and not self._is_ffa) then
 		return
 	end
 

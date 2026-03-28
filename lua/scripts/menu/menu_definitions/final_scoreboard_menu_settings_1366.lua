@@ -73,6 +73,7 @@ FinalScoreboardMenuSettings.items.left_team_rose[1366] = FinalScoreboardMenuSett
 FinalScoreboardMenuSettings.items.left_team_rose[1366][768] = FinalScoreboardMenuSettings.items.left_team_rose[1366][768] or {
 	texture_red = "big_rose_red",
 	texture_white = "big_rose_white",
+	texture_purple = "big_rose_purple",
 	texture_width = 444 * SCALE_1366,
 	texture_height = 488 * SCALE_1366,
 	padding_top = 0 * SCALE_1366,
@@ -85,6 +86,7 @@ FinalScoreboardMenuSettings.items.center_team_rose[1366] = FinalScoreboardMenuSe
 FinalScoreboardMenuSettings.items.center_team_rose[1366][768] = FinalScoreboardMenuSettings.items.center_team_rose[1366][768] or {
 	texture_red = "big_rose_red",
 	texture_white = "big_rose_white",
+	texture_purple = "big_rose_purple",
 	texture_width = 444 * SCALE_1366,
 	texture_height = 488 * SCALE_1366,
 	padding_top = 100 * SCALE_1366,
@@ -97,6 +99,7 @@ FinalScoreboardMenuSettings.items.right_team_rose[1366] = FinalScoreboardMenuSet
 FinalScoreboardMenuSettings.items.right_team_rose[1366][768] = FinalScoreboardMenuSettings.items.right_team_rose[1366][768] or {
 	texture_red = "big_rose_red",
 	texture_white = "big_rose_white",
+	texture_purple = "big_rose_purple",
 	texture_width = 444 * SCALE_1366,
 	texture_height = 488 * SCALE_1366,
 	padding_top = 0 * SCALE_1366,
@@ -148,6 +151,7 @@ FinalScoreboardMenuSettings.items.left_team_text[1366][768] = FinalScoreboardMen
 	line_height = 21 * SCALE_1366,
 	color_red = HUDSettings.player_colors.red_team,
 	color_white = HUDSettings.player_colors.white_team,
+	color_purple = HUDSettings.player_colors.ffa,
 	drop_shadow_color = {
 		120,
 		0,
@@ -176,6 +180,7 @@ FinalScoreboardMenuSettings.items.right_team_text[1366][768] = FinalScoreboardMe
 	line_height = 21 * SCALE_1366,
 	color_red = HUDSettings.player_colors.red_team,
 	color_white = HUDSettings.player_colors.white_team,
+	color_purple = HUDSettings.player_colors.ffa,
 	drop_shadow_color = {
 		120,
 		0,

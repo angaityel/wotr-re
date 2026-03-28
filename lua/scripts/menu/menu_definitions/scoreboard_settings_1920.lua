@@ -459,6 +459,7 @@ ScoreboardSettings.items.left_team_rose[1680][1050] = ScoreboardSettings.items.l
 	padding_left = 0,
 	texture_width = 108,
 	texture_white = "medium_rose_white_1920",
+	texture_purple = "medium_rose_purple_1920",
 	padding_top = 0,
 	padding_right = 0,
 	texture_height = 108
@@ -471,6 +472,7 @@ ScoreboardSettings.items.right_team_rose[1680][1050] = ScoreboardSettings.items.
 	padding_left = 0,
 	texture_width = 108,
 	texture_white = "medium_rose_white_1920",
+	texture_purple = "medium_rose_purple_1920",
 	padding_top = 0,
 	padding_right = 0,
 	texture_height = 108
@@ -492,6 +494,7 @@ ScoreboardSettings.items.left_team_text[1680][1050] = ScoreboardSettings.items.l
 	font = MenuSettings.fonts.hell_shark_32,
 	color_red = HUDSettings.player_colors.red_team,
 	color_white = HUDSettings.player_colors.white_team,
+	color_purple = HUDSettings.player_colors.ffa,
 	drop_shadow_color = {
 		120,
 		0,
@@ -520,6 +523,7 @@ ScoreboardSettings.items.right_team_text[1680][1050] = ScoreboardSettings.items.
 	font = MenuSettings.fonts.hell_shark_32,
 	color_red = HUDSettings.player_colors.red_team,
 	color_white = HUDSettings.player_colors.white_team,
+	color_purple = HUDSettings.player_colors.ffa,
 	drop_shadow_color = {
 		120,
 		0,
@@ -560,6 +564,7 @@ ScoreboardSettings.items.team_num_members[1680][1050] = ScoreboardSettings.items
 	font = MenuSettings.fonts.hell_shark_32,
 	color_red = HUDSettings.player_colors.red_team,
 	color_white = HUDSettings.player_colors.white_team,
+	color_purple = HUDSettings.player_colors.ffa,
 	drop_shadow_color = {
 		120,
 		0,

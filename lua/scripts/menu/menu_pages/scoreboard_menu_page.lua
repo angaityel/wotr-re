@@ -8,6 +8,9 @@ ScoreboardMenuPage = class(ScoreboardMenuPage, TeamsMenuPage)
 function ScoreboardMenuPage:init(config, item_groups, world)
 	ScoreboardMenuPage.super.init(self, config, item_groups, world)
 
+	local game_mode_key = Managers.state.game_mode:game_mode_key()
+	self._is_ffa = game_mode_key == "ffa"
+
 	self._world = world
 	self._stats = Managers.state.stats_collection
 	self._local_player = config.local_player
@@ -36,7 +39,7 @@ function ScoreboardMenuPage:_update_container_size(dt, t)
 
 	local local_player = self._local_player
 
-	if not local_player.team or local_player.team.name == "unassigned" then
+	if not local_player.team or (local_player.team.name == "unassigned" and not self._is_ffa) then
 		return
 	end
 
@@ -112,7 +115,7 @@ function ScoreboardMenuPage:_update_container_position(dt, t)
 
 	local local_player = self._local_player
 
-	if not local_player.team or local_player.team.name == "unassigned" then
+	if not local_player.team or (local_player.team.name == "unassigned" and not self._is_ffa) then
 		return
 	end
 
@@ -133,64 +136,119 @@ end
 function ScoreboardMenuPage:render(dt, t)
 	local local_player = self._local_player
 
-	if not local_player.team or local_player.team.name == "unassigned" then
+	if not local_player.team or (local_player.team.name == "unassigned" and not self._is_ffa) then
 		return
 	end
 
-	local player_team = local_player.team
-	local player_team_name = player_team.name
-	local enemy_team_name = player_team_name == "red" and "white" or "red"
-	local enemy_team = Managers.state.team:team_by_name(enemy_team_name)
-	local red_team_score = Managers.state.game_mode:hud_score_text("red")
-	local white_team_score = Managers.state.game_mode:hud_score_text("white")
-	local own_team_score_item = self:find_item_by_name("left_team_score")
+	if self._is_ffa then
+		local player_team = local_player.team
+		local player_team_name = player_team.name
+		local enemy_team_name = player_team_name == "red" and "white" or "red"
+		local enemy_team = Managers.state.team:team_by_name(enemy_team_name)
+		local purple_team_score = Managers.state.game_mode:hud_score_text("unassigned")
+		local own_team_score_item = self:find_item_by_name("left_team_score")
 
-	own_team_score_item.config.text = player_team_name == "red" and red_team_score or white_team_score
+		own_team_score_item.config.text = purple_team_score
 
-	local enemy_team_score_item = self:find_item_by_name("right_team_score")
+		local enemy_team_score_item = self:find_item_by_name("right_team_score")
 
-	enemy_team_score_item.config.text = player_team_name == "red" and white_team_score or red_team_score
+		enemy_team_score_item.config.text = 0
 
-	local own_team_rose_item = self:find_item_by_name("left_team_rose")
-	local layout_settings = MenuHelper:layout_settings(own_team_rose_item.config.layout_settings)
+		local own_team_rose_item = self:find_item_by_name("left_team_rose")
+		local layout_settings = MenuHelper:layout_settings(own_team_rose_item.config.layout_settings)
 
-	own_team_rose_item.config.texture = player_team_name == "red" and layout_settings.texture_red or layout_settings.texture_white
+		own_team_rose_item.config.texture = layout_settings.texture_purple
 
-	local enemy_team_rose_item = self:find_item_by_name("right_team_rose")
-	local layout_settings = MenuHelper:layout_settings(enemy_team_rose_item.config.layout_settings)
+		local enemy_team_rose_item = self:find_item_by_name("right_team_rose")
+		local layout_settings = MenuHelper:layout_settings(enemy_team_rose_item.config.layout_settings)
 
-	enemy_team_rose_item.config.texture = player_team_name == "red" and layout_settings.texture_white or layout_settings.texture_red
+		enemy_team_rose_item.config.texture = player_team_name == "red" and layout_settings.texture_white or layout_settings.texture_red
 
-	local own_team_text_item = self:find_item_by_name("left_team_text")
-	local layout_settings = MenuHelper:layout_settings(own_team_text_item.config.layout_settings)
+		local own_team_text_item = self:find_item_by_name("left_team_text")
+		local layout_settings = MenuHelper:layout_settings(own_team_text_item.config.layout_settings)
 
-	own_team_text_item.config.text = player_team_name == "red" and string.upper(L("lancaster")) or string.upper(L("york"))
-	own_team_text_item.config.color = player_team_name == "red" and layout_settings.color_red or layout_settings.color_white
+		own_team_text_item.config.text = string.upper("purple")
+		own_team_text_item.config.color = layout_settings.color_purple
 
-	local enemy_team_text_item = self:find_item_by_name("right_team_text")
-	local layout_settings = MenuHelper:layout_settings(enemy_team_text_item.config.layout_settings)
+		local enemy_team_text_item = self:find_item_by_name("right_team_text")
+		local layout_settings = MenuHelper:layout_settings(enemy_team_text_item.config.layout_settings)
 
-	enemy_team_text_item.config.text = player_team_name == "red" and string.upper(L("york")) or string.upper(L("lancaster"))
-	enemy_team_text_item.config.color = player_team_name == "red" and layout_settings.color_white or layout_settings.color_red
+		enemy_team_text_item.config.text = ""
+		enemy_team_text_item.config.color = player_team_name == "red" and layout_settings.color_white or layout_settings.color_red
 
-	local own_team_text_item = self:find_item_by_name("left_team_num_members")
-	local layout_settings = MenuHelper:layout_settings(own_team_text_item.config.layout_settings)
+		local own_team_text_item = self:find_item_by_name("left_team_num_members")
+		local layout_settings = MenuHelper:layout_settings(own_team_text_item.config.layout_settings)
 
-	own_team_text_item.config.text = player_team.num_members .. " " .. L("menu_players_lower")
-	own_team_text_item.config.color = player_team_name == "red" and layout_settings.color_red or layout_settings.color_white
+		own_team_text_item.config.text = player_team.num_members .. " " .. L("menu_players_lower")
+		own_team_text_item.config.color = layout_settings.color_purple
 
-	local enemy_team_text_item = self:find_item_by_name("right_team_num_members")
-	local layout_settings = MenuHelper:layout_settings(enemy_team_text_item.config.layout_settings)
+		local enemy_team_text_item = self:find_item_by_name("right_team_num_members")
+		local layout_settings = MenuHelper:layout_settings(enemy_team_text_item.config.layout_settings)
 
-	enemy_team_text_item.config.text = enemy_team.num_members .. " " .. L("menu_players_lower")
-	enemy_team_text_item.config.color = player_team_name == "red" and layout_settings.color_white or layout_settings.color_red
+		enemy_team_text_item.config.text = ""
+		enemy_team_text_item.config.color = player_team_name == "red" and layout_settings.color_white or layout_settings.color_red
 
-	local layout_settings = MenuHelper:layout_settings(self.config.layout_settings)
+		local layout_settings = MenuHelper:layout_settings(self.config.layout_settings)
 
-	self._left_team_players:render(dt, t, self._gui, layout_settings.left_team_players)
-	self._right_team_players:render(dt, t, self._gui, layout_settings.right_team_players)
-	self._player_details:render(dt, t, self._gui, layout_settings.player_details)
-	ScoreboardMenuPage.super.render(self, dt, t)
+		self._left_team_players:render(dt, t, self._gui, layout_settings.left_team_players)
+		self._player_details:render(dt, t, self._gui, layout_settings.player_details)
+		ScoreboardMenuPage.super.render(self, dt, t)
+	else
+		local player_team = local_player.team
+		local player_team_name = player_team.name
+		local enemy_team_name = player_team_name == "red" and "white" or "red"
+		local enemy_team = Managers.state.team:team_by_name(enemy_team_name)
+		local red_team_score = Managers.state.game_mode:hud_score_text("red")
+		local white_team_score = Managers.state.game_mode:hud_score_text("white")
+		local own_team_score_item = self:find_item_by_name("left_team_score")
+
+		own_team_score_item.config.text = player_team_name == "red" and red_team_score or white_team_score
+
+		local enemy_team_score_item = self:find_item_by_name("right_team_score")
+
+		enemy_team_score_item.config.text = player_team_name == "red" and white_team_score or red_team_score
+
+		local own_team_rose_item = self:find_item_by_name("left_team_rose")
+		local layout_settings = MenuHelper:layout_settings(own_team_rose_item.config.layout_settings)
+
+		own_team_rose_item.config.texture = player_team_name == "red" and layout_settings.texture_red or layout_settings.texture_white
+
+		local enemy_team_rose_item = self:find_item_by_name("right_team_rose")
+		local layout_settings = MenuHelper:layout_settings(enemy_team_rose_item.config.layout_settings)
+
+		enemy_team_rose_item.config.texture = player_team_name == "red" and layout_settings.texture_white or layout_settings.texture_red
+
+		local own_team_text_item = self:find_item_by_name("left_team_text")
+		local layout_settings = MenuHelper:layout_settings(own_team_text_item.config.layout_settings)
+
+		own_team_text_item.config.text = player_team_name == "red" and string.upper(L("lancaster")) or string.upper(L("york"))
+		own_team_text_item.config.color = player_team_name == "red" and layout_settings.color_red or layout_settings.color_white
+
+		local enemy_team_text_item = self:find_item_by_name("right_team_text")
+		local layout_settings = MenuHelper:layout_settings(enemy_team_text_item.config.layout_settings)
+
+		enemy_team_text_item.config.text = player_team_name == "red" and string.upper(L("york")) or string.upper(L("lancaster"))
+		enemy_team_text_item.config.color = player_team_name == "red" and layout_settings.color_white or layout_settings.color_red
+
+		local own_team_text_item = self:find_item_by_name("left_team_num_members")
+		local layout_settings = MenuHelper:layout_settings(own_team_text_item.config.layout_settings)
+
+		own_team_text_item.config.text = player_team.num_members .. " " .. L("menu_players_lower")
+		own_team_text_item.config.color = player_team_name == "red" and layout_settings.color_red or layout_settings.color_white
+
+		local enemy_team_text_item = self:find_item_by_name("right_team_num_members")
+		local layout_settings = MenuHelper:layout_settings(enemy_team_text_item.config.layout_settings)
+
+		enemy_team_text_item.config.text = enemy_team.num_members .. " " .. L("menu_players_lower")
+		enemy_team_text_item.config.color = player_team_name == "red" and layout_settings.color_white or layout_settings.color_red
+
+		local layout_settings = MenuHelper:layout_settings(self.config.layout_settings)
+
+		self._left_team_players:render(dt, t, self._gui, layout_settings.left_team_players)
+		self._right_team_players:render(dt, t, self._gui, layout_settings.right_team_players)
+		self._player_details:render(dt, t, self._gui, layout_settings.player_details)
+		ScoreboardMenuPage.super.render(self, dt, t)
+	end
 end
 
 function ScoreboardMenuPage:_update_player_details(player)

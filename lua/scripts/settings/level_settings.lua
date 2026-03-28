@@ -90,6 +90,7 @@ LevelSettings = {
 		game_modes = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {},
@@ -164,6 +165,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.battle,
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {
@@ -215,6 +217,7 @@ LevelSettings = {
 			GameModeSettings.sp,
 			GameModeSettings.fly_through,
 			GameModeSettings.battle,
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {
@@ -256,6 +259,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.battle,
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {
@@ -306,6 +310,7 @@ LevelSettings = {
 			GameModeSettings.grail,
 			GameModeSettings.con,
 			GameModeSettings.battle,
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {
@@ -351,6 +356,7 @@ LevelSettings = {
 		},
 		game_modes = {
 			GameModeSettings.tdm,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -392,6 +398,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.grail,
 			GameModeSettings.con,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -434,6 +441,7 @@ LevelSettings = {
 		game_modes = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -571,6 +579,7 @@ LevelSettings = {
 		game_modes = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -611,6 +620,7 @@ LevelSettings = {
 		game_modes = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -652,6 +662,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.battle,
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {},
@@ -689,6 +700,7 @@ LevelSettings = {
 		},
 		game_modes = {
 			GameModeSettings.tdm,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -726,6 +738,7 @@ LevelSettings = {
 			p2 = Vector3Box(245.883, 128.848, 0)
 		},
 		game_modes = {
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {
@@ -768,6 +781,7 @@ LevelSettings = {
 		game_modes = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {},
@@ -809,6 +823,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.ass,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -858,6 +873,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.battle,
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {
@@ -906,6 +922,7 @@ LevelSettings = {
 		game_modes = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -945,6 +962,7 @@ LevelSettings = {
 		},
 		game_modes = {
 			GameModeSettings.tdm,
+			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {},
@@ -984,6 +1002,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.battle,
+			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
 		level_particle_effects = {

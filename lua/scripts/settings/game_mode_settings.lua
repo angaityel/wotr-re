@@ -102,6 +102,29 @@ GameModeSettings.tdm.ui_description = {
 GameModeSettings.tdm.tip_of_the_day = {
 	"tdm_tip_01"
 }
+GameModeSettings.ffa = table.clone(GameModeSettings.base)
+GameModeSettings.ffa.key = "ffa"
+GameModeSettings.ffa.class_name = "GameModeFFA"
+GameModeSettings.ffa.time_limit = 60
+GameModeSettings.ffa.display_name = "gm_ffa"
+GameModeSettings.ffa.battle_details = {
+	lost = "battle_details_tdm_lost",
+	won = "battle_details_grail_won",
+	draw = "battle_details_tdm_draw"
+}
+GameModeSettings.ffa.object_sets = {
+	gm_tdm = true
+}
+GameModeSettings.ffa.visible = true
+GameModeSettings.ffa.show_in_server_browser = true
+GameModeSettings.ffa.ui_description = {
+	unassigned = "gm_description_unassigned_tdm",
+	defenders = "gm_description_defenders_tdm",
+	attackers = "gm_description_attackers_tdm"
+}
+GameModeSettings.ffa.tip_of_the_day = {
+	"tdm_tip_01"
+}
 GameModeSettings.battle = table.clone(GameModeSettings.base)
 GameModeSettings.battle.key = "battle"
 GameModeSettings.battle.class_name = "GameModeBattle"

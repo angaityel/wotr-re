@@ -11,6 +11,8 @@ TeamSelectionMenuPage = class(TeamSelectionMenuPage, TeamsMenuPage)
 function TeamSelectionMenuPage:init(config, item_groups, world)
 	TeamSelectionMenuPage.super.init(self, config, item_groups, world)
 
+	self._game_mode_key = Managers.state.game_mode:game_mode_key()
+
 	self._local_player = config.local_player
 
 	local layout_settings = MenuHelper:layout_settings(self.config.layout_settings)
@@ -258,7 +260,11 @@ function TeamSelectionMenuPage:cb_join_team_selected(team_name)
 end
 
 function TeamSelectionMenuPage:cb_join_team_selection_disabled(team_name)
-	return self._joining_team or not Managers.state.team:verify_join_team(self._local_player, team_name)
+	if self._game_mode_key == "ffa" or (self._game_mode_key == "sp" and team_name == "red") then
+		return true
+	else
+		return self._joining_team or not Managers.state.team:verify_join_team(self._local_player, team_name)
+	end
 end
 
 function TeamSelectionMenuPage:cb_auto_join_team()
@@ -279,7 +285,15 @@ function TeamSelectionMenuPage:cb_auto_join_team()
 		join_team = player_team
 	end
 
-	if join_team then
+	if self._game_mode_key == "ffa" then
+		join_team = "unassigned"
+		Managers.state.team:request_join_team(self._local_player, join_team)
+		self._joining_team = true
+	elseif self._game_mode_key == "sp" then
+		join_team = "white"
+		Managers.state.team:request_join_team(self._local_player, join_team)
+		self._joining_team = true
+	elseif join_team then
 		Managers.state.team:request_join_team(self._local_player, join_team)
 
 		self._joining_team = true

@@ -227,10 +227,18 @@ function TeamManager:is_on_same_team(unit1, unit2)
 end
 
 function TeamManager:is_team_kill(player1, player2)
+	if player1.team.name == "unassigned" or player2.team.name == "unassigned" then
+		return false
+	end
+
 	return player1.team == player2.team
 end
 
 function TeamManager:is_team_knock_down(player1, player2)
+	if player1.team.name == "unassigned" or player2.team.name == "unassigned" then
+		return false
+	end
+
 	return player1.team == player2.team
 end
 

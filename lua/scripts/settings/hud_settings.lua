@@ -75,6 +75,12 @@ HUDSettings.player_colors.enemy = {
 	111,
 	32
 }
+HUDSettings.player_colors.ffa = {
+	255,
+	148,
+	65,
+	196
+}
 HUDSettings.player_colors.shadow = {
 	255,
 	0,

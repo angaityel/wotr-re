@@ -61,6 +61,7 @@ FinalScoreboardMenuSettings.items.left_team_rose = FinalScoreboardMenuSettings.i
 FinalScoreboardMenuSettings.items.left_team_rose[1680] = FinalScoreboardMenuSettings.items.left_team_rose[1680] or {}
 FinalScoreboardMenuSettings.items.left_team_rose[1680][1050] = FinalScoreboardMenuSettings.items.left_team_rose[1680][1050] or {
 	texture_red = "big_rose_red",
+	texture_purple = "big_rose_purple",
 	padding_bottom = 0,
 	padding_left = 0,
 	texture_width = 444,
@@ -73,6 +74,7 @@ FinalScoreboardMenuSettings.items.center_team_rose = FinalScoreboardMenuSettings
 FinalScoreboardMenuSettings.items.center_team_rose[1680] = FinalScoreboardMenuSettings.items.center_team_rose[1680] or {}
 FinalScoreboardMenuSettings.items.center_team_rose[1680][1050] = FinalScoreboardMenuSettings.items.center_team_rose[1680][1050] or {
 	texture_red = "big_rose_red",
+	texture_purple = "big_rose_purple",
 	padding_bottom = 0,
 	padding_left = 0,
 	texture_width = 444,
@@ -85,6 +87,7 @@ FinalScoreboardMenuSettings.items.right_team_rose = FinalScoreboardMenuSettings.
 FinalScoreboardMenuSettings.items.right_team_rose[1680] = FinalScoreboardMenuSettings.items.right_team_rose[1680] or {}
 FinalScoreboardMenuSettings.items.right_team_rose[1680][1050] = FinalScoreboardMenuSettings.items.right_team_rose[1680][1050] or {
 	texture_red = "big_rose_red",
+	texture_purple = "big_rose_purple",
 	padding_bottom = 0,
 	padding_left = 0,
 	texture_width = 444,
@@ -144,6 +147,7 @@ FinalScoreboardMenuSettings.items.left_team_text[1680][1050] = FinalScoreboardMe
 	font = MenuSettings.fonts.hell_shark_32,
 	color_red = HUDSettings.player_colors.red_team,
 	color_white = HUDSettings.player_colors.white_team,
+	color_purple = HUDSettings.player_colors.ffa,
 	drop_shadow_color = {
 		120,
 		0,
@@ -172,6 +176,7 @@ FinalScoreboardMenuSettings.items.right_team_text[1680][1050] = FinalScoreboardM
 	font = MenuSettings.fonts.hell_shark_32,
 	color_red = HUDSettings.player_colors.red_team,
 	color_white = HUDSettings.player_colors.white_team,
+	color_purple = HUDSettings.player_colors.ffa,
 	drop_shadow_color = {
 		120,
 		0,

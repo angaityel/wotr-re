@@ -239,6 +239,11 @@ function HUDHelper:player_color(local_player, other_player)
 	local color_table
 
 	if local_player.team and local_player.team == other_player.team then
+		if local_player.team.name == "unassigned" then
+			color_table = HUDSettings.player_colors.ffa
+			return color_table
+		end
+
 		if local_player.squad_index and local_player.squad_index == other_player.squad_index then
 			color_table = HUDSettings.player_colors.squad_member
 		else

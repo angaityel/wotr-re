@@ -59,6 +59,11 @@ function flow_callback_create_spawn_area(params)
 	end
 
 	Managers.state.spawn:create_spawn_area(params.spawn_name, areas)
+
+	local game_mode_key = Managers.state.game_mode:game_mode_key()
+	if game_mode_key == "ffa" then
+		Managers.state.spawn:activate_spawn_area(params.spawn_name, "unassigned", Vector3.forward())
+	end
 end
 
 function flow_callback_activate_spawn_area(params)

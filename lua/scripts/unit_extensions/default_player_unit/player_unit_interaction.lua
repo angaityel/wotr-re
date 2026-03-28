@@ -111,7 +111,11 @@ function PlayerUnitInteraction:revive(unit, t)
 	local damage_ext = ScriptUnit.extension(unit, "damage_system")
 	local can_revive = self._locomotion:can("can_revive", t)
 
-	return can_revive and damage_ext:can_be_revived() and owner and owner.team == self._player.team
+	if owner.team.name == "unassigned" or self._player.team.name == "unassigned" then
+		return false
+	else
+		return can_revive and damage_ext:can_be_revived() and owner and owner.team == self._player.team
+	end
 end
 
 function PlayerUnitInteraction:execute(unit, t)
@@ -120,7 +124,11 @@ function PlayerUnitInteraction:execute(unit, t)
 	local damage_ext = ScriptUnit.extension(unit, "damage_system")
 	local can_execute = self._locomotion:can("can_execute", t)
 
-	return can_execute and damage_ext:can_be_executed() and owner and owner.team ~= self._player.team
+	if owner.team.name == "unassigned" or self._player.team.name == "unassigned" then
+		return can_execute and damage_ext:can_be_executed() and owner
+	else
+		return can_execute and damage_ext:can_be_executed() and owner and owner.team ~= self._player.team
+	end
 end
 
 function PlayerUnitInteraction:bandage(unit, t)
@@ -129,7 +137,11 @@ function PlayerUnitInteraction:bandage(unit, t)
 	local damage_ext = ScriptUnit.extension(unit, "damage_system")
 	local can_bandage = self._locomotion:can("can_bandage", t)
 
-	return can_bandage and damage_ext:can_be_bandaged() and damage_ext:is_wounded() and owner and owner.team == self._player.team
+	if owner.team.name == "unassigned" or self._player.team.name == "unassigned" then
+		return false
+	else
+		return can_bandage and damage_ext:can_be_bandaged() and damage_ext:is_wounded() and owner and owner.team == self._player.team
+	end
 end
 
 function PlayerUnitInteraction:climb(unit, t)

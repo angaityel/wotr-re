@@ -502,6 +502,8 @@ end
 StatsContexts.player.player_stats.data = {
 	ass_round_won = 0,
 	ass_round_played = 0,
+	ffa_round_won = 0,
+	ffa_round_played = 0,
 	con_round_played = 0,
 	battle_round_played = 0,
 	grail_round_won = 0,

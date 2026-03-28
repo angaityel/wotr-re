@@ -51,8 +51,11 @@ function SpawnPointMenuContainer:_update_objectives_description_text(gui, layout
 	if self._local_player.team then
 		local game_mode_key = Managers.state.game_mode:game_mode_key()
 		local objectives_desc = GameModeSettings[game_mode_key].ui_description[self._local_player.team.side]
-
-		self._objectives_description:set_text(L(objectives_desc), layout_settings.objectives_description, gui)
+		if objectives_desc then
+			self._objectives_description:set_text(L(objectives_desc), layout_settings.objectives_description, gui)
+		else
+			self._objectives_description:set_text("", layout_settings.objectives_description, gui)
+		end
 	else
 		self._objectives_description:set_text("", layout_settings.objectives_description, gui)
 	end

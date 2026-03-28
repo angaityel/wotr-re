@@ -165,6 +165,10 @@ GameModeObjectives = {
 		announcement = "kill_the_enemy_team",
 		param1 = "enemy_team_ui_name_definite_plural"
 	},
+	bow_head_barbed_fluff = {
+		announcement = "kill_the_enemy_team",
+		param1 = "enemy_team_ui_name_definite_plural"
+	},
 	sp_tutorial_name_tournament_archery_event = {},
 	sp_tutorial_name_tournament_ride_event = {},
 	sp_tutorial_description_objective_capture = {},
