@@ -524,15 +524,21 @@ function Commands:list_levels()
 end
 
 function Commands:vote_map(map_pair, player)
-	--if not Managers.lobby.server then
-	local network_manager = Managers.state.network
+	local round_time = Managers.time:time("round")
+	if round_time < 60 then
+		local round_timer = math.ceil(60 - round_time)
+		Managers.state.hud:output_console_text("No voting, wait " .. round_timer .. " sec.")
+	else
+		--if not Managers.lobby.server then
+		local network_manager = Managers.state.network
 
-	if network_manager:game() then
-		network_manager:send_rpc_server("rpc_vote_map", player:player_id(), map_pair or "")
+		if network_manager:game() then
+			network_manager:send_rpc_server("rpc_vote_map", player:player_id(), map_pair or "")
+		end
+		--else
+		--	return true, "/vote_map can't be executed as an RCON command."
+		--end
 	end
-	--else
-	--	return true, "/vote_map can't be executed as an RCON command."
-	--end
 end
 
 Commands.v = Commands.vote_map
