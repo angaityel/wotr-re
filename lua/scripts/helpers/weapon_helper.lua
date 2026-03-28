@@ -1736,8 +1736,7 @@ function WeaponHelper:add_damage(world, victim_unit, player, player_unit, damage
 	real_damage = real_damage or damage
 
 	local damage_extension = ScriptUnit.has_extension(victim_unit, "damage_system") and ScriptUnit.extension(victim_unit, "damage_system")
-	local friendly_fire_multiplier = Managers.state.team:friendly_fire_multiplier(player_unit, victim_unit, damage_range_type)
-	local ff_damage = friendly_fire_multiplier * damage
+	local ff_damage = damage
 	local hit_zones = Unit.get_data(victim_unit, "hit_zone_lookup_table")
 	local hit_zone_hit = hit_zones and hit_zones[actor]
 	local armour_type = self:_armour_values(victim_unit, hit_zone_hit, actor, impact_direction)

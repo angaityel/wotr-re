@@ -50,3 +50,4 @@ scripts/settings/hud_settings.lua
 scripts/settings/menu_settings.lua
 scripts/settings/ai_profiles.lua
 scripts/entity_system/systems/behaviour/behaviour_trees.lua
+scripts/helpers/weapon_helper.lua
