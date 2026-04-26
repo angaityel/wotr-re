@@ -328,7 +328,7 @@ end
 function StateSplashScreen:_show_changelog()
 	if self._changelog_text then
 		local omit_revision = Application.user_setting("omit_revision_changelog")
-		local current_revision = script_data.settings.content_revision
+		local current_revision = GameSettingsDevelopment.new_revision
 
 		if current_revision and (not omit_revision or omit_revision < current_revision) then
 			self._splash_screen_menu:goto("changelog_popup")
@@ -343,7 +343,7 @@ end
 function StateSplashScreen:cb_changelog_popup_enter(args)
 	Window.set_show_cursor(true)
 
-	local header = string.format(L("latest_updates_in_revision"), script_data.settings.content_revision)
+	local header = string.format(L("latest_updates_in_revision"), GameSettingsDevelopment.fix_version)
 
 	args.popup_page:find_item_by_name("popup_header"):set_text(header)
 	args.popup_page:find_item_by_name("popup_text"):set_text(self._changelog_text)
@@ -351,7 +351,7 @@ end
 
 function StateSplashScreen:cb_changelog_popup_item_selected(args)
 	local checkbox = args.popup_page:find_item_by_name("omit_changelog_checkbox")
-	local current_revision = script_data.settings.content_revision
+	local current_revision = GameSettingsDevelopment.new_revision
 
 	if checkbox:selected() then
 		Application.set_user_setting("omit_revision_changelog", current_revision)
