@@ -59,18 +59,18 @@ function flow_callback_create_spawn_area(params)
 	end
 
 	Managers.state.spawn:create_spawn_area(params.spawn_name, areas)
-
-	local game_mode_key = Managers.state.game_mode:game_mode_key()
-	if game_mode_key == "ffa" then
-		Managers.state.spawn:activate_spawn_area(params.spawn_name, "unassigned", Vector3.forward())
-	end
 end
 
 function flow_callback_activate_spawn_area(params)
 	local team_name = Managers.state.team:name(params.side)
 
 	fassert(team_name, "Trying to activate spawn area for side %s that doesn't exist.", params.side)
-	Managers.state.spawn:activate_spawn_area(params.spawn_name, team_name, params.spawn_direction or Vector3.forward())
+	local game_mode_key = Managers.state.game_mode:game_mode_key()
+	if game_mode_key == "ffa" then
+		Managers.state.spawn:activate_spawn_area(params.spawn_name, "unassigned", params.spawn_direction or Vector3.forward())
+	else
+		Managers.state.spawn:activate_spawn_area(params.spawn_name, team_name, params.spawn_direction or Vector3.forward())
+	end
 end
 
 function flow_callback_deactivate_spawn_area(params)
