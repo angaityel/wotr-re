@@ -15,6 +15,7 @@ function HUDGameModeStatus:init(world, player)
 
 	local game_mode_key = Managers.state.game_mode:game_mode_key()
 	self._is_ffa = game_mode_key == "ffa"
+	self._is_domination = game_mode_key == "domination"
 
 	self:_setup()
 	Managers.state.event:register(self, "refresh_game_mode_objective", "event_refresh_objective")
@@ -245,9 +246,13 @@ function HUDGameModeStatus:post_update(dt, t)
 		self._enemy_team_score.config.text = Managers.state.game_mode:hud_score_text(enemy_team_name)
 	end
 
-	local timer_text, timer_alert = Managers.state.game_mode:hud_timer_text()
+	local timer_text, timer_alert, timer_text_domination = Managers.state.game_mode:hud_timer_text()
 
 	self._round_timer.config.text = timer_text
+
+	if self._is_domination then
+		self._objective_text = timer_text_domination
+	end
 
 	if timer_alert then
 		local round_timer_layout_settings = HUDHelper:layout_settings(self._round_timer.config.layout_settings)

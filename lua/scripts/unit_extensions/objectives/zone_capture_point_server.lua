@@ -31,6 +31,11 @@ function ZoneCapturePointServer:init(world, unit)
 	self._oldest_unit = {}
 	self._capturing_team = false
 	self._forced_synch = nil
+
+	local game_mode_settings = Managers.state.game_mode:game_mode_settings()
+	self._capture_speed_multiplier = game_mode_settings and game_mode_settings.capture_speed_multiplier or 1
+	self._instant_capture = game_mode_settings and game_mode_settings.instant_capture or self._instant_capture
+	self._blackboard.instant_capture = self._instant_capture
 end
 
 function ZoneCapturePointServer:_init_teams()
@@ -53,8 +58,8 @@ function ZoneCapturePointServer:update(unit, input, dt, context, t)
 	self:_update_units(dt, t)
 
 	local largest_team, num, number_of_capturing_teams = self:_largest_team()
-	local capture_speed = (not (self._owner ~= "neutral" and not self._instant_capture) and CAPTURE_SPEED or NEUTRALIZE_SPEED) * (1 + 0.2 * (num - 1) - 4 * ((num - 1) / 64)^2)
-	local idle_revert_speed = not (self._owner ~= "neutral" and not self._instant_capture) and IDLE_REVERT_SPEED_NEUTRALIZED or IDLE_REVERT_SPEED
+	local capture_speed = (not (self._owner ~= "neutral" and not self._instant_capture) and CAPTURE_SPEED or NEUTRALIZE_SPEED) * (1 + 0.2 * (num - 1) - 4 * ((num - 1) / 64)^2) * self._capture_speed_multiplier
+	local idle_revert_speed = not (self._owner ~= "neutral" and not self._instant_capture) and IDLE_REVERT_SPEED_NEUTRALIZED or IDLE_REVERT_SPEED * self._capture_speed_multiplier
 	local was_being_captured = self._blackboard.being_captured
 
 	if number_of_capturing_teams > 1 then

@@ -177,6 +177,25 @@ GameModeSettings.con.tip_of_the_day = {
 	"con_tip_02",
 	"con_tip_03"
 }
+GameModeSettings.domination = table.clone(GameModeSettings.base)
+GameModeSettings.domination.key = "domination"
+GameModeSettings.domination.display_name = "gm_domination"
+GameModeSettings.domination.class_name = "GameModeDomination"
+GameModeSettings.domination.time_limit = 900
+GameModeSettings.domination.object_sets = {
+	gm_conquest = true
+}
+GameModeSettings.domination.visible = true
+GameModeSettings.domination.show_in_server_browser = true
+GameModeSettings.domination.instant_capture = true
+GameModeSettings.domination.capture_speed_multiplier = 1.7
+GameModeSettings.domination.domination_timer = 45
+GameModeSettings.domination.start_score = 100
+GameModeSettings.domination.ui_description = {
+	unassigned = "gm_description_unassigned_con",
+	defenders = "gm_description_defenders_con",
+	attackers = "gm_description_attackers_con"
+}
 GameModeSettings.ttdm = table.clone(GameModeSettings.base)
 GameModeSettings.ttdm.key = "ttdm"
 GameModeSettings.ttdm.display_name = "gm_tactical_team_deathmatch"

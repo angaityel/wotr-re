@@ -7,6 +7,7 @@ require("scripts/settings/game_mode_objectives")
 require("scripts/managers/game_mode/game_mode_events")
 require("scripts/managers/game_mode/game_modes/game_mode_tdm")
 require("scripts/managers/game_mode/game_modes/game_mode_ffa")
+require("scripts/managers/game_mode/game_modes/game_mode_domination")
 require("scripts/managers/game_mode/game_modes/game_mode_battle")
 require("scripts/managers/game_mode/game_modes/game_mode_conquest")
 require("scripts/managers/game_mode/game_modes/game_mode_assault")
@@ -307,6 +308,12 @@ function GameModeManager:_hot_join_synch_object_sets(sender, player)
 	end
 end
 
+function GameModeManager:flow_cb_side_dominating(side, dominating)
+	local game_mode = self._game_mode
+
+	self:trigger_event("side_dominating", side, dominating)
+end
+
 function GameModeManager:flow_cb_set_team_set_variation(side, set_name)
 	local team_name
 
@@ -437,9 +444,11 @@ end
 function GameModeManager:round_started()
 	local level = LevelHelper:current_level(self._world)
 	local round_started_string = self._game_mode_key .. "_round_started"
-	if self._game_mode_key == "ffa" then
+
+	if self._game_mode_key == "ffa" or self._game_mode_key == "domination" then
 		round_started_string = "tdm_round_started"
 	end
+
 	Managers.state.event:trigger("event_round_pre_started")
 	Level.trigger_event(level, round_started_string)
 
@@ -451,6 +460,7 @@ function GameModeManager:round_started()
 
 	Managers.state.event:trigger("event_round_started", {})
 	self._spawning:round_started()
+
 	if self._game_mode_key == "ffa" then
 		Managers.state.team:flow_cb_set_team_side("unassigned", "defenders")
 	end
@@ -476,6 +486,9 @@ function GameModeManager:server_update(dt, t)
 	self._spawning:update(dt, t)
 
 	if not self._end_conditions_met and not EDITOR_LAUNCH then
+		if self._game_mode_key == "domination" then
+			self._game_mode:update_mode(dt, t)
+		end
 		local ended, winning_team, end_of_round_only = self._game_mode:evaluate_end_conditions()
 		local win_scale = self._game_mode:win_scale()
 
@@ -514,7 +527,11 @@ function GameModeManager:server_update(dt, t)
 
 				self._winning_team_name = winning_team_name
 
-				self:trigger_event("end_conditions_met", winning_team_name, math.floor(red_team_score_clamped), math.floor(white_team_score_clamped), end_of_round_only or false)
+				if self._game_mode_key == "domination" then
+					self:trigger_event("end_conditions_met", winning_team_name, red_team_score, white_team_score, end_of_round_only or false)
+				else
+					self:trigger_event("end_conditions_met", winning_team_name, math.floor(red_team_score_clamped), math.floor(white_team_score_clamped), end_of_round_only or false)
+				end
 			end
 		end
 	elseif self._end_timer and (self._ready_to_transition and t >= self._end_timer or t >= self._end_timer + GameSettingsDevelopment.backend_save_timeout) then
@@ -552,6 +569,10 @@ function GameModeManager:trigger_end(round_end, t)
 	else
 		self._end_timer = t + 5
 	end
+end
+
+function GameModeManager:game_mode_settings()
+	return GameModeSettings[self._game_mode_key]
 end
 
 function GameModeManager:game_mode_key()

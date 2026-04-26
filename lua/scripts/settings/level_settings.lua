@@ -165,6 +165,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.battle,
+			GameModeSettings.domination,
 			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},

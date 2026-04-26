@@ -3303,6 +3303,18 @@ function GameNetworkManager:rpc_set_object_set_variation(sender, key, team_name_
 	Managers.state.game_mode:rpc_set_object_set_variation(key, NetworkLookup.team[team_name_id])
 end
 
+function GameNetworkManager:gm_event_side_dominating(side, dominating)
+	local side_id = NetworkLookup.team[side]
+
+	self:send_rpc_clients("rpc_gm_event_side_dominating", side_id, dominating)
+end
+
+function GameNetworkManager:rpc_gm_event_side_dominating(sender, side_id, dominating)
+	local side = NetworkLookup.team[side_id]
+
+	Managers.state.game_mode:trigger_event("side_dominating", side, dominating)
+end
+
 function GameNetworkManager:rpc_rcon(sender, hash, command)
 	local rcon_settings = Managers.admin:settings().rcon
 	local is_rcon_admin = sender == Managers.admin:rcon_admin()

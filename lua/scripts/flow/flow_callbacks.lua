@@ -232,6 +232,11 @@ function flow_callback_objective_activate(params)
 end
 
 function flow_callback_objective_deactivate(params)
+	local current_game_mode = Managers.state.game_mode:game_mode_key()
+	if current_game_mode == "domination" then
+		return
+	end
+
 	local ext = ScriptUnit.extension(params.self_unit, "objective_system")
 
 	ext:flow_cb_set_active(params.team, false)
@@ -242,6 +247,11 @@ function flow_callback_set_team_side(params)
 end
 
 function flow_callback_give_score_to_side(params)
+	local current_game_mode = Managers.state.game_mode:game_mode_key()
+	if current_game_mode == "domination" then
+		return
+	end
+	
 	local side = params.game_mode_side
 	local score = params.score
 
