@@ -51,7 +51,7 @@ Check server_settings.ini and map_rotation.ini first.
 
 Maps and available modes:
 ```
-St_Albans - town_02 - tdm, con, battle, ass, ffa
+St_Albans - town_02 - tdm, con, battle, ass, ffa, domination
 Mortimers_Cross - village_02 - tdm, con, battle, ass, ffa
 Bamburgh_Castle - castle_02 - tdm, con, battle, ass, ffa
 Clitheroe_Forest - forest_01 - tdm, con, battle, ass, grail, ffa
