@@ -94,7 +94,7 @@ GameSettingsDevelopment.bone_lod_husks.lod_in_range = 15
 GameSettingsDevelopment.bone_lod_ais = GameSettingsDevelopment.bone_lod_ais or {}
 GameSettingsDevelopment.bone_lod_ais.lod_out_range = 15
 GameSettingsDevelopment.bone_lod_ais.lod_in_range = 15
-GameSettingsDevelopment.min_team_size_to_save_stats = 1
+GameSettingsDevelopment.min_team_size_to_save_stats = 0
 GameSettingsDevelopment.backend_save_timeout = 5
 GameSettingsDevelopment.allow_decapitation = true
 

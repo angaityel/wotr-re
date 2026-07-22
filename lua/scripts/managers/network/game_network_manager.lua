@@ -1633,10 +1633,13 @@ function GameNetworkManager:game_object_sync_done(remote_id)
 
 		local squad_screen, auto_team = Managers.state.game_mode:squad_screen_spawning()
 		local skip_team_selection = false
+		local game_mode_key = Managers.state.game_mode:game_mode_key()
 
 		if not squad_screen then
 			Managers.state.team:add_player_to_team_by_side(player, auto_team)
 		elseif player.team.name ~= "unassigned" then
+			skip_team_selection = true
+		elseif game_mode_key == "ffa" then
 			skip_team_selection = true
 		end
 

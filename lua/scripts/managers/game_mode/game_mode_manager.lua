@@ -452,6 +452,10 @@ function GameModeManager:round_started()
 	Managers.state.event:trigger("event_round_pre_started")
 	Level.trigger_event(level, round_started_string)
 
+	if self._game_mode_key == "ffa" then
+		Managers.state.team:flow_cb_set_team_side("unassigned", "defenders")
+	end
+
 	local game_mode_scale = self._server_game_mode_scale or 64
 
 	if game_mode_scale then
@@ -460,10 +464,6 @@ function GameModeManager:round_started()
 
 	Managers.state.event:trigger("event_round_started", {})
 	self._spawning:round_started()
-
-	if self._game_mode_key == "ffa" then
-		Managers.state.team:flow_cb_set_team_side("unassigned", "defenders")
-	end
 end
 
 function GameModeManager:next_spawn_time(player)

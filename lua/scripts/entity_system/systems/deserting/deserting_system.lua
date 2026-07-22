@@ -141,6 +141,12 @@ function DesertingSystem:flow_cb_activate_boundary_area(params)
 	local area = params.boundary_area
 
 	self._active_team_boundary_areas[team_name][area] = true
+
+	local game_mode_key = Managers.state.game_mode:game_mode_key()
+	if game_mode_key == "ffa" and params.side == "attackers" then
+		local team_defenders = Managers.state.team:name("defenders")
+		self._active_team_boundary_areas[team_defenders][area] = true
+	end
 end
 
 function DesertingSystem:flow_cb_deactivate_boundary_area(params)
