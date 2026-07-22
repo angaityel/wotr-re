@@ -13,6 +13,17 @@ function GameModeAssault:init(settings, world, ...)
 	Managers.state.event:register(self, "gm_event_objective_captured", "gm_event_objective_captured")
 	Managers.state.event:register(self, "gm_event_time_extended", "gm_event_time_extended")
 	Managers.state.event:register(self, "gm_event_assault_announcement", "gm_event_assault_announcement")
+	Managers.state.event:register(self, "event_round_started", "on_round_started")
+end
+
+function GameModeAssault:on_round_started()
+	local level_key = Managers.state.game_mode:level_key()
+	if level_key == "ravenspurn_01" then
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_town_a", "white", 1)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_village_a", "white", 2)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_beach_a", "red", 1)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_village_a", "red", 2)
+	end
 end
 
 function GameModeAssault:evaluate_end_conditions()
@@ -68,6 +79,14 @@ function GameModeAssault:gm_event_flag_planted(planter_player, interactable_unit
 end
 
 function GameModeAssault:gm_event_objective_captured(capuring_player, captured_unit)
+	if Managers.lobby.server then
+		local level_key = Managers.state.game_mode:level_key()
+		if level_key == "ravenspurn_01" then
+			local ext = ScriptUnit.extension(captured_unit, "objective_system")
+			ext:flow_cb_set_active("defenders", false)
+		end
+	end
+
 	if not capuring_player.team or not Unit.alive(captured_unit) then
 		return
 	end
