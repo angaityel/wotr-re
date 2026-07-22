@@ -638,7 +638,9 @@ function StateIngame:on_exit()
 		Managers.time:unregister_timer("round")
 	end
 
-	Application.set_time_step_policy("throttle", 60)
+	if not script_data.settings.dedicated_server then
+		Application.set_time_step_policy("throttle", 60)
+	end
 end
 
 function StateIngame:_clear_players()
