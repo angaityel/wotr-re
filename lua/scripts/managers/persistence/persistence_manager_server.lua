@@ -312,11 +312,6 @@ function PersistenceManagerServer:_save_profiles()
 
 	local profile_stats_to_save = {}
 
-	local response = {
-		attributes = {},
-		error = nil
-	}
-
 	for profile_id, profile_data in pairs(self._profiles) do
 		local player = profile_data.player
 		local network_id = player:network_id()
@@ -324,6 +319,10 @@ function PersistenceManagerServer:_save_profiles()
 		local profile_attributes_to_save = {}
 		local profile_attributes_to_save_string = ""
 
+		local response = {
+			attributes = {},
+			error = nil
+		}
 
 		if table.find(argv, "-localbackend") then
 			local file = io.open("stats/" .. network_id, "r")
@@ -418,6 +417,10 @@ function PersistenceManagerServer:_save_profiles()
 		cprint("[Backend] Saving profile stats")
 
 		--local callback = callback(self, "cb_stats_saved")
+
+		local response = {
+			error = nil
+		}
 
 		self:cb_stats_saved(response)
 
