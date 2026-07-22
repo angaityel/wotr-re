@@ -259,3 +259,10 @@ function IngameMenuCallbacks:cb_voice_over_changed(option)
 	Application.set_user_setting("announcement_voice_over", option.key)
 	Application.save_user_settings()
 end
+
+function IngameMenuCallbacks:cb_open_link(url)
+	if url then
+		Application.open_url_in_browser(url)
+		Window.minimize()
+	end
+end

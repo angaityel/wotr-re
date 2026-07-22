@@ -1654,6 +1654,26 @@ IngameMenuDefinition = {
 					on_select = "cb_return_to_battle",
 					type = "TextMenuItem",
 					layout_settings = MainMenuSettings.items.text_right_aligned
+				},
+				{
+					remove_func = "cb_controller_enabled",
+					name = "discord",
+					on_select = "cb_open_link",
+					type = "TextureLinkButtonMenuItem",
+					on_select_args = {
+						GameSettingsDevelopment.discord_url
+					},
+					layout_settings = MainMenuSettings.items.discord
+				},
+				{
+					remove_func = "cb_controller_enabled",
+					name = "steam_chat",
+					on_select = "cb_open_link",
+					type = "TextureLinkButtonMenuItem",
+					on_select_args = {
+						GameSettingsDevelopment.steam_chat_url
+					},
+					layout_settings = MainMenuSettings.items.steam_chat
 				}
 			}
 		}
