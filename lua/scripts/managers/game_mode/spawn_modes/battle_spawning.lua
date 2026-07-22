@@ -16,7 +16,7 @@ function BattleSpawning:init(settings, game_mode)
 	self._teams_ready = false
 	self._spawn_time_left = self._spawn_timer
 	self._game_mode = game_mode
-	self._minimum_players_per_team = settings.minimum_players_per_team or 1
+	self._minimum_players_per_team = 1
 	self._tie_break_started = false
 end
 
