@@ -311,6 +311,7 @@ function StateInGameRunning:_set_battle_report_data(local_player_won)
 	loading_context.awarded_prizes = self._awarded_prizes
 	loading_context.awarded_medals = self._awarded_medals
 	loading_context.awarded_ranks = self._awarded_ranks
+	loading_context.chat_text_data = Managers.state.hud:get_hud(self.player, "chat_window"):text_data()
 end
 
 function StateInGameRunning:_set_all_menus_active(active)

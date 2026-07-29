@@ -562,3 +562,26 @@ end
 function ChatOutputWindow:enabled()
 	return true
 end
+
+function ChatOutputWindow:set_text_data(text_data)
+	if text_data and text_data.texts then
+		local text = text_data.texts
+		local total = 0
+		for i = 1, #text do
+			text[i].time = -15
+			total = total + #text[i].message_table * tweak_variables.font_size
+		end
+
+		self._texts = text
+		self._total_extents = total
+	else
+		self._total_extents = 0
+	end
+end
+
+function ChatOutputWindow:text_data()
+	return {
+		texts = self._texts,
+		text_extents = self._total_extents
+	}
+end

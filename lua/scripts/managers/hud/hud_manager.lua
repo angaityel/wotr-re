@@ -153,3 +153,9 @@ function ChatOutputWindow:network_output_console_text(text_id, color, display_ti
 		huds.chat_window:network_output_console_text(text_id, color, display_time)
 	end
 end
+
+function HUDManager:get_hud(player, hud_name)
+	fassert(hud_name and player, "[HUDManager:get_hud] You need to specify a hud name AND a player")
+
+	return self._huds[player] and self._huds[player][hud_name]
+end

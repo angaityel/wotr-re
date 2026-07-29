@@ -98,6 +98,7 @@ function StateIngame:on_enter()
 
 			player_manager:add_player(PlayerCoatOfArms, i, input_slot, input_source, viewport_name, self.world_name)
 
+			local player = player_manager:player(i)
 			local params = {
 				player = i,
 				viewport_name = viewport_name
@@ -107,6 +108,13 @@ function StateIngame:on_enter()
 
 			Managers.state.camera:apply_level_particle_effects(LevelSettings[level_key].level_particle_effects, viewport_name)
 			Managers.state.camera:apply_level_screen_effects(LevelSettings[level_key].level_screen_effects, viewport_name)
+
+			if self.parent.loading_context.chat_text_data then
+				Managers.state.hud:get_hud(player, "chat_window"):set_text_data(self.parent.loading_context.chat_text_data)
+			else
+				self.parent.loading_context.chat_text_data = Managers.state.hud:get_hud(player, "chat_window"):text_data()
+				Managers.state.hud:get_hud(player, "chat_window"):set_text_data(self.parent.loading_context.chat_text_data)
+			end
 		end
 	end
 
@@ -529,7 +537,7 @@ function StateIngame:_check_exit(t)
 
 		local next_level_settings = network_manager:next_level_settings()
 
-		Managers.state.hud:output_console_text("Reloading level")
+		--Managers.state.hud:output_console_text("Reloading level")
 		Managers.transition:fade_in(MenuSettings.transitions.fade_in_speed, nil)
 	end
 
@@ -542,7 +550,7 @@ function StateIngame:_check_exit(t)
 
 		local next_level_settings = network_manager:next_level_settings()
 
-		Managers.state.hud:output_console_text("Loading next level: " .. L(LevelSettings[next_level_settings.level_key].display_name) .. " ( " .. L(GameModeSettings[next_level_settings.game_mode_key].display_name) .. " )")
+		--Managers.state.hud:output_console_text("Loading next level: " .. L(LevelSettings[next_level_settings.level_key].display_name) .. " ( " .. L(GameModeSettings[next_level_settings.game_mode_key].display_name) .. " )")
 		Managers.transition:fade_in(MenuSettings.transitions.fade_in_speed, nil)
 	end
 
