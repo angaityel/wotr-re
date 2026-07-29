@@ -258,7 +258,7 @@ function VotingManager:start_vote(vote_type, vote_player, ...)
 	end
 
 	local data_table = {
-		yes = 1,
+		yes = 0,
 		voters = 0,
 		no = 0,
 		object_destroy_func = NetworkLookup.game_object_functions[type_settings.object_destroy_func],
