@@ -75,3 +75,4 @@ scripts/managers/game_mode/game_modes/game_mode_domination.lua
 scripts/managers/changelog/changelog_token.lua
 scripts/managers/game_mode/game_modes/game_mode_assault.lua
 scripts/managers/hud/hud_manager.lua
+scripts/managers/game_mode/game_modes/game_mode_base.lua

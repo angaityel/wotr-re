@@ -122,6 +122,10 @@ function GameModeBase:win_score()
 	return self._win_score
 end
 
+function GameModeBase:start_score()
+	return nil
+end
+
 function GameModeBase:objective(player)
 	return "", nil, nil
 end

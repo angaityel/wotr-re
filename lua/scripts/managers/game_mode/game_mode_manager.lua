@@ -509,6 +509,7 @@ function GameModeManager:server_update(dt, t)
 
 			self:trigger_end(end_of_round_only, t)
 
+			local start_score = self._game_mode:start_score()
 			local win_score = self._game_mode:win_score()
 			if self._game_mode_key == "ffa" then
 				local purple_team_score = Managers.state.team:team_by_name("unassigned").score
@@ -520,18 +521,14 @@ function GameModeManager:server_update(dt, t)
 				self:trigger_event("end_conditions_met", winning_team_name, math.floor(purple_team_score_clamped), 0, end_of_round_only or false)
 			else
 				local red_team_score = Managers.state.team:team_by_name("red").score
-				local red_team_score_clamped = math.clamp(red_team_score, 0, win_score)
+				local red_team_score_clamped = math.clamp(red_team_score, 0, start_score or win_score)
 				local white_team_score = Managers.state.team:team_by_name("white").score
-				local white_team_score_clamped = math.clamp(white_team_score, 0, win_score)
+				local white_team_score_clamped = math.clamp(white_team_score, 0, start_score or win_score)
 				local winning_team_name = winning_team and winning_team.name or "draw"
 
 				self._winning_team_name = winning_team_name
 
-				if self._game_mode_key == "domination" then
-					self:trigger_event("end_conditions_met", winning_team_name, red_team_score, white_team_score, end_of_round_only or false)
-				else
-					self:trigger_event("end_conditions_met", winning_team_name, math.floor(red_team_score_clamped), math.floor(white_team_score_clamped), end_of_round_only or false)
-				end
+				self:trigger_event("end_conditions_met", winning_team_name, math.floor(red_team_score_clamped), math.floor(white_team_score_clamped), end_of_round_only or false)
 			end
 		end
 	elseif self._end_timer and (self._ready_to_transition and t >= self._end_timer or t >= self._end_timer + GameSettingsDevelopment.backend_save_timeout) then
