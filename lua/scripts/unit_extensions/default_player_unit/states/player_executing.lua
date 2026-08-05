@@ -22,8 +22,12 @@ function ExecutionHelper.pick_execution(attacker_unit, victim_unit, wielded_slot
 		elseif two_handed_slot.gear:settings().gear_type == "two_handed_sword" then
 			return "sword_omni"
 		end
-	elseif one_handed_slot and one_handed_slot.gear:settings().gear_type == "one_handed_sword" then
-		return "sword_omni"
+	elseif one_handed_slot then 
+		if one_handed_slot.gear:settings().gear_type == "one_handed_sword" then
+			return "sword_omni"
+		elseif one_handed_slot.gear:settings().gear_type == "one_handed_club" then
+			return "club"
+		end
 	elseif wielded_slots.dagger then
 		return "dagger"
 	end
