@@ -23,6 +23,71 @@ function GameModeAssault:on_round_started()
 		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_village_a", "white", 2)
 		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_beach_a", "red", 1)
 		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_village_a", "red", 2)
+	elseif level_key == "towton_01" or level_key == "towton_01_day" then
+		local level = LevelHelper:current_level(self._world)
+		local zones = {
+			--{ index = 483, name = "capture_zone_ass_d" },
+			{ index = 483, name = "capture_zone_3" },
+			{ index = 485, name = "capture_zone_ass_a" },
+			{ index = 482, name = "capture_zone_ass_b" },
+			{ index = 484, name = "capture_zone_ass_c" }
+		}
+
+		for _, zone in ipairs(zones) do
+			local unit = Level.unit_by_index(level, zone.index)
+
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "defenders"
+			})
+			flow_callback_set_zone_name({
+				unit = unit,
+				volume_name = zone.name
+			})
+			flow_callback_set_objective_owner({
+				self_unit = unit,
+				team = "defenders"
+			})
+			if zone.index == 485 then
+				flow_callback_objective_activate({
+					self_unit = unit,
+					team = "attackers"
+				})
+			end
+		end
+
+		flow_callback_deactivate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_ass_forest_a"
+		}) --old D
+		flow_callback_activate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_con_3",
+			spawn_direction = Vector3.backward()
+		}) --new D, conquest C
+
+		--flow_callback_activate_spawn_area({
+		--	side = "defenders",
+		--	spawn_name = "spawn_col_ass_field_a"
+		--}) --C
+		flow_callback_activate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_con_4",
+			spawn_direction = Vector3.backward()
+		}) --A
+		flow_callback_activate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_con_2",
+			spawn_direction = Vector3.backward()
+		}) --B
+
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_towton_a", "white", 1)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_con_2", "white", 2)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_con_4", "white", 3)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_ass_saxton_a", "red", 1)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_con_4", "red", 2)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_con_3", "red", 3)
+		Managers.state.spawn:set_spawn_area_priority("spawn_col_con_2", "red", 4)
 	end
 end
 
@@ -84,6 +149,60 @@ function GameModeAssault:gm_event_objective_captured(capuring_player, captured_u
 		if level_key == "ravenspurn_01" then
 			local ext = ScriptUnit.extension(captured_unit, "objective_system")
 			ext:flow_cb_set_active("defenders", false)
+		elseif level_key == "towton_01" or level_key == "towton_01_day" then
+			local level = LevelHelper:current_level(self._world)
+			local unit_index = Level.unit_index(level, captured_unit)
+
+			local ext = ScriptUnit.extension(captured_unit, "objective_system")
+			ext:flow_cb_set_active("defenders", false)
+
+			if unit_index == 483 then
+				flow_callback_deactivate_spawn_area({
+					side = "defenders",
+					spawn_name = "spawn_col_con_3"
+				}) --D
+				flow_callback_deactivate_spawn_area({
+					side = "attackers",
+					spawn_name = "spawn_col_ass_forest_a"
+				}) --old D
+				flow_callback_activate_spawn_area({
+					side = "attackers",
+					spawn_name = "spawn_col_con_3",
+				}) --new D, conquest C
+			elseif unit_index == 485 then
+				flow_callback_deactivate_spawn_area({
+					side = "defenders",
+					spawn_name = "spawn_col_con_4"
+				}) --A
+				flow_callback_activate_spawn_area({
+					side = "attackers",
+					spawn_name = "spawn_col_con_4"
+				}) --A
+				local unit_b = Level.unit_by_index(level, 482)
+				flow_callback_objective_activate({
+					self_unit = unit_b,
+					team = "attackers"
+				})
+				local unit_d = Level.unit_by_index(level, 483)
+				flow_callback_objective_activate({
+					self_unit = unit_d,
+					team = "attackers"
+				})
+			elseif unit_index == 482 then
+				flow_callback_deactivate_spawn_area({
+					side = "defenders",
+					spawn_name = "spawn_col_con_2"
+				}) --B
+				flow_callback_activate_spawn_area({
+					side = "attackers",
+					spawn_name = "spawn_col_con_2"
+				}) --B
+				local unit = Level.unit_by_index(level, 484)
+				flow_callback_objective_activate({
+					self_unit = unit,
+					team = "attackers"
+				})
+			end
 		end
 	end
 

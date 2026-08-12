@@ -622,6 +622,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.ffa,
+			GameModeSettings.ass,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
@@ -924,6 +925,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.con,
 			GameModeSettings.ffa,
+			GameModeSettings.ass,
 			GameModeSettings.battle
 		},
 		level_particle_effects = {
