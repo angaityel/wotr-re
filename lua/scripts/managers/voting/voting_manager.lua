@@ -277,9 +277,7 @@ function VotingManager:start_vote(vote_type, vote_player, ...)
 		id = id,
 		settings = type_settings,
 		voted = {
-			yes = {
-				vote_player_id = true
-			},
+			yes = {},
 			no = {}
 		},
 		voter_eligible = callback(type_settings, "voter_eligible", ...),
@@ -288,6 +286,8 @@ function VotingManager:start_vote(vote_type, vote_player, ...)
 		cancel = callback(type_settings, "cancel", ...),
 		valid = is_valid_callback
 	}
+
+	self:_add_vote("yes", vote_player_id)
 
 	return id
 end
