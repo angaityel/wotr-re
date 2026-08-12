@@ -37,12 +37,18 @@ function PlayerShieldBashing:_update_shield_bash(dt, t)
 	local block_input = controller and controller:get("block") > BUTTON_THRESHOLD
 	local inventory = internal:inventory()
 	local slot_name = inventory:wielded_block_slot()
-	local gear_name = inventory:_gear(slot_name):name()
-	local charge_time = Gear[gear_name].attacks.shield_bash.charge_time
-	local attack_time = Gear[gear_name].attacks.shield_bash.attack_time
+	
+	if slot_name == "shield" then
+		local gear_name = inventory:_gear(slot_name):name()
+		local charge_time = Gear[gear_name].attacks.shield_bash.charge_time
+		local attack_time = Gear[gear_name].attacks.shield_bash.attack_time
 
-	if not shield_bash_pose_input and self:_can_swing_shield_bash(t, charge_time) then
-		self:_swing_shield_bash(t, charge_time, attack_time)
+		if not shield_bash_pose_input and self:_can_swing_shield_bash(t, charge_time) then
+			self:_swing_shield_bash(t, charge_time, attack_time)
+		end
+	else
+		internal.swinging_shield_bash = false
+		self:change_state("onground")
 	end
 end
 

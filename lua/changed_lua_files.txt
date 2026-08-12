@@ -77,3 +77,4 @@ scripts/managers/game_mode/game_modes/game_mode_assault.lua
 scripts/managers/hud/hud_manager.lua
 scripts/managers/game_mode/game_modes/game_mode_base.lua
 scripts/unit_extensions/default_player_unit/states/player_executing.lua
+scripts/unit_extensions/default_player_unit/states/player_shield_bashing.lua
