@@ -218,6 +218,7 @@ LevelSettings = {
 			GameModeSettings.sp,
 			GameModeSettings.fly_through,
 			GameModeSettings.battle,
+			GameModeSettings.domination,
 			GameModeSettings.ffa,
 			GameModeSettings.ass
 		},
@@ -399,6 +400,7 @@ LevelSettings = {
 			GameModeSettings.tdm,
 			GameModeSettings.grail,
 			GameModeSettings.con,
+			GameModeSettings.domination,
 			GameModeSettings.ffa,
 			GameModeSettings.battle
 		},

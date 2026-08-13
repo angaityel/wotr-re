@@ -35,28 +35,79 @@ function GameModeDomination:on_round_started()
 	Managers.state.team:team_by_side("attackers"):set_score(100)
 	Managers.state.team:team_by_side("defenders"):set_score(100)
 
-	local level = LevelHelper:current_level(self._world)
-	local zones = {
-		{ index = 423, name = "capture_zone_3" },
-		{ index = 424, name = "capture_zone_2" },
-		{ index = 425, name = "capture_zone_1" },
-	}
+	local level_key = Managers.state.game_mode:level_key()
+	if level_key == "town_02" then
+		local level = LevelHelper:current_level(self._world)
+		local zones = {
+			{ index = 423, name = "capture_zone_3" },
+			{ index = 424, name = "capture_zone_2" },
+			{ index = 425, name = "capture_zone_1" },
+		}
 
-	for _, zone in ipairs(zones) do
-		local unit = Level.unit_by_index(level, zone.index)
-		
-		flow_callback_objective_activate({
-			self_unit = unit,
-			team = "defenders"
-		})
-		flow_callback_objective_activate({
-			self_unit = unit,
-			team = "attackers"
-		})
-		flow_callback_set_zone_name({
-			unit = unit,
-			volume_name = zone.name
-		})
+		for _, zone in ipairs(zones) do
+			local unit = Level.unit_by_index(level, zone.index)
+			
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "defenders"
+			})
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "attackers"
+			})
+			flow_callback_set_zone_name({
+				unit = unit,
+				volume_name = zone.name
+			})
+		end
+	elseif level_key == "moor_01" then
+		local level = LevelHelper:current_level(self._world)
+		local zones = {
+			{ index = 1576, name = "capture_zone_3" },
+			{ index = 1575, name = "capture_zone_2" },
+			{ index = 1574, name = "capture_zone_1" },
+		}
+
+		for _, zone in ipairs(zones) do
+			local unit = Level.unit_by_index(level, zone.index)
+			
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "defenders"
+			})
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "attackers"
+			})
+			flow_callback_set_zone_name({
+				unit = unit,
+				volume_name = zone.name
+			})
+		end
+	elseif level_key == "village_02" then
+		local level = LevelHelper:current_level(self._world)
+		local zones = {
+			{ index = 1893, name = "capture_zone_4" },
+			{ index = 1894, name = "capture_zone_3" },
+			{ index = 1895, name = "capture_zone_2" },
+		}
+
+		for _, zone in ipairs(zones) do
+			local unit = Level.unit_by_index(level, zone.index)
+			
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "defenders"
+			})
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "attackers"
+			})
+			flow_callback_set_zone_name({
+				unit = unit,
+				volume_name = zone.name
+			})
+		end
 	end
 end
 
@@ -203,6 +254,26 @@ function GameModeDomination:evaluate_end_conditions()
 end
 
 function GameModeDomination:gm_event_objective_captured(capuring_player, captured_unit)
+	if Managers.lobby.server then
+		local level_key = Managers.state.game_mode:level_key()
+		if level_key == "village_02" then
+			local level = LevelHelper:current_level(self._world)
+			local unit_index = Level.unit_index(level, captured_unit)
+
+			if unit_index == 1893 then
+				local unit = Level.unit_by_index(level, 1892)
+				local ext = ScriptUnit.extension(unit, "objective_system")
+				ext:flow_cb_set_active("defenders", false)
+				ext:flow_cb_set_active("attackers", false)
+			elseif unit_index == 1895 then
+				local unit = Level.unit_by_index(level, 1896)
+				local ext = ScriptUnit.extension(unit, "objective_system")
+				ext:flow_cb_set_active("defenders", false)
+				ext:flow_cb_set_active("attackers", false)
+			end
+		end
+	end
+
 	if not capuring_player.team or not Unit.alive(captured_unit) then
 		return
 	end
