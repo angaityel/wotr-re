@@ -224,6 +224,7 @@ GameModeSettings.ass.key = "ass"
 GameModeSettings.ass.display_name = "gm_assault"
 GameModeSettings.ass.class_name = "GameModeAssault"
 GameModeSettings.ass.time_limit = 300
+GameModeSettings.ass.instant_capture = true
 GameModeSettings.ass.object_sets = {
 	gm_assault = true
 }
