@@ -8,6 +8,60 @@ function GameModeGrail:init(settings, world, ...)
 	GameModeGrail.super.init(self, settings, world, ...)
 
 	Managers.state.event:register(self, "gm_event_flag_planted", "gm_event_flag_planted")
+	Managers.state.event:register(self, "event_round_started", "on_round_started")
+end
+
+function GameModeGrail:on_round_started()
+	flow_callback_activate_boundary_area({
+		side = "defenders",
+		boundary_area = "boundary_tdm_medium",
+	})
+	flow_callback_activate_boundary_area({
+		side = "attackers",
+		boundary_area = "boundary_tdm_medium",
+	})
+
+	local level_key = Managers.state.game_mode:level_key()
+	if level_key == "castle_02" then
+		flow_callback_activate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_con_2",
+		})
+		flow_callback_activate_spawn_area({
+			side = "attackers",
+			spawn_name = "spawn_col_con_3",
+		})
+		Managers.state.spawn:activate_spawning()
+	elseif level_key == "moor_01" or level_key == "forest_01" then
+		flow_callback_deactivate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_con_1"
+		})
+		flow_callback_deactivate_spawn_area({
+			side = "attackers",
+			spawn_name = "spawn_col_con_1"
+		})
+
+		flow_callback_activate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_tdm_defenders_medium_a",
+			spawn_direction = Vector3.right()
+		})
+		flow_callback_activate_spawn_area({
+			side = "defenders",
+			spawn_name = "spawn_col_tdm_defenders_medium_b"
+		})
+		flow_callback_activate_spawn_area({
+			side = "attackers",
+			spawn_name = "spawn_col_tdm_attackers_medium_a",
+			spawn_direction = Vector3.left()
+		})
+		flow_callback_activate_spawn_area({
+			side = "attackers",
+			spawn_name = "spawn_col_tdm_attackers_medium_b",
+			spawn_direction = Vector3.backward()
+		})
+	end
 end
 
 function GameModeGrail:gm_event_flag_planted(planter_player, interactable_unit)
@@ -15,7 +69,7 @@ function GameModeGrail:gm_event_flag_planted(planter_player, interactable_unit)
 		return
 	end
 	
-	local param1 = planter_player.team.ui_name .. " team has captured the flag"
+	local param1 = planter_player.team.ui_name .. " has captured the flag"
 
 	Managers.state.event:trigger("game_mode_announcement", "team_interacted_with_objective", param1)
 end

@@ -386,10 +386,10 @@ PlayerUnitMovementSettings.interaction.priorities = {
 	"bandage",
 	"dismount",
 	"climb",
-	"mount",
 	"trigger",
 	"flag_drop",
-	"flag_spawn"
+	"flag_spawn",
+	"mount"
 }
 PlayerUnitMovementSettings.interaction.settings = {
 	flag_plant = {

@@ -265,7 +265,6 @@ GameModeSettings.mou.display_name = "gm_tourney_mounted"
 GameModeSettings.grail = table.clone(GameModeSettings.base)
 GameModeSettings.grail.key = "grail"
 GameModeSettings.grail.class_name = "GameModeGrail"
-GameModeSettings.grail.deserter_timer = 3600
 GameModeSettings.grail.display_name = "gm_grail"
 GameModeSettings.grail.battle_details = {
 	lost = "battle_details_grail_lost",

@@ -34,7 +34,8 @@ function GenericUnitInteractable:_create_game_object()
 		object_destroy_func = NetworkLookup.game_object_functions.cb_generic_unit_interactable_destroyed,
 		owner_destroy_func = NetworkLookup.game_object_functions.cb_do_nothing,
 		level_unit_index = Unit.get_data(self._unit, "level_unit_index"),
-		interactor = self._interactor
+		interactor = self._interactor,
+		owner = NetworkLookup.team["neutral"]
 	}
 
 	for side, active in pairs(self._active) do
