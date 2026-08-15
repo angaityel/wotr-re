@@ -772,7 +772,7 @@ function WeaponOneHanded:_hit_character(hit_unit, position, normal, actor, hit_z
 		local own_player = self._player
 		local interrupt = true
 
-		if hit_player and own_player and hit_player.team == own_player.team then
+		if hit_player and own_player and hit_player.team == own_player.team and own_player.team.name ~= "unassigned" then
 			stun = false
 			interrupt = false
 		elseif (settings.properties.stun or table.contains(self._properties, "stun")) and PlayerUnitDamageSettings.stun.damage_types_with_stun_property[damage_type] then
