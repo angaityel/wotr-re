@@ -108,6 +108,30 @@ function GameModeDomination:on_round_started()
 				volume_name = zone.name
 			})
 		end
+	elseif level_key == "face_01" then
+		local level = LevelHelper:current_level(self._world)
+		local zones = {
+			{ index = 1499, name = "capture_zone_4" },
+			{ index = 1498, name = "capture_zone_3" },
+			{ index = 1497, name = "capture_zone_2" },
+		}
+
+		for _, zone in ipairs(zones) do
+			local unit = Level.unit_by_index(level, zone.index)
+			
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "defenders"
+			})
+			flow_callback_objective_activate({
+				self_unit = unit,
+				team = "attackers"
+			})
+			flow_callback_set_zone_name({
+				unit = unit,
+				volume_name = zone.name
+			})
+		end
 	end
 end
 
@@ -267,6 +291,21 @@ function GameModeDomination:gm_event_objective_captured(capuring_player, capture
 				ext:flow_cb_set_active("attackers", false)
 			elseif unit_index == 1895 then
 				local unit = Level.unit_by_index(level, 1896)
+				local ext = ScriptUnit.extension(unit, "objective_system")
+				ext:flow_cb_set_active("defenders", false)
+				ext:flow_cb_set_active("attackers", false)
+			end
+		elseif level_key == "face_01" then
+			local level = LevelHelper:current_level(self._world)
+			local unit_index = Level.unit_index(level, captured_unit)
+
+			if unit_index == 1497 then
+				local unit = Level.unit_by_index(level, 1496)
+				local ext = ScriptUnit.extension(unit, "objective_system")
+				ext:flow_cb_set_active("defenders", false)
+				ext:flow_cb_set_active("attackers", false)
+			elseif unit_index == 1499 then
+				local unit = Level.unit_by_index(level, 1500)
 				local ext = ScriptUnit.extension(unit, "objective_system")
 				ext:flow_cb_set_active("defenders", false)
 				ext:flow_cb_set_active("attackers", false)

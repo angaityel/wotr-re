@@ -1019,6 +1019,55 @@ LevelSettings = {
 			texture_1366 = "tower_loading_1920"
 		}
 	},
+	face_01 = {
+		package_name = "resource_packages/levels/forest_01",
+		game_server_map_name = "Facing_Worlds",
+		show_in_server_browser = true,
+		ghost_mode_setting = "ghost_mode",
+		map_id = 24,
+		sort_index = 23,
+		display_name = "level_face_01",
+		voice_intro = "vo_intro_mp_clitheroe_both_01",
+		stop_music = "Stop_field_music",
+		visible = true,
+		single_player = false,
+		minimap_texture = "map_face",
+		ui_description = "level_description_mp_face_01",
+		executed_setting = "executed",
+		wounded_setting = "wounded",
+		music = "Play_field_music",
+		knocked_down_setting = "knocked_down",
+		level_name = "levels/face_01/world",
+		sp_progression_id = 4,
+		sp_requirement_id = 0,
+		tip_of_the_day = DEFAULT_TIP_LIST,
+		minimap = {
+			p1 = Vector3Box(-140, -85, 0),
+			p2 = Vector3Box(140, 85, 0)
+		},
+		game_modes = {
+			GameModeSettings.tdm,
+			GameModeSettings.grail,
+			GameModeSettings.con,
+			GameModeSettings.battle,
+			GameModeSettings.ffa,
+			GameModeSettings.domination
+		},
+		level_particle_effects = {
+			"fx/environment_flies_forest"
+		},
+		level_screen_effects = {},
+		loading_screen_preview = {
+			texture_1920 = "face_loading_1920",
+			texture_1366 = "face_loading_1920"
+		},
+		custom_win_scale_criteria = {
+			ass = {
+				critical = 0.6,
+				intense = 0.6
+			}
+		}
+	},
 	character_sheet = {
 		ui_description = "level_description_missing",
 		level_name = "levels/outfit_display/character_sheet/world",

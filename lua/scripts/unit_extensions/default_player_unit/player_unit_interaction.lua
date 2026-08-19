@@ -8,6 +8,7 @@ function PlayerUnitInteraction:init(world, unit, player_index)
 	self._interaction_target = nil
 	self._interaction_type = nil
 	self._unit = unit
+	self._world = world
 	self._locomotion = ScriptUnit.extension(unit, "locomotion_system")
 	self._player = Managers.player:player(player_index)
 end
@@ -68,6 +69,42 @@ end
 
 function PlayerUnitInteraction:_can_interact(unit, interact_type, t)
 	return Unit.has_data(unit, "interacts", interact_type) and self[interact_type](self, unit, t)
+end
+
+function PlayerUnitInteraction:telep(unit, t)
+	local level = LevelHelper:current_level(self._world)
+	local teleport_index = Level.unit_index(level, unit)
+
+	local rotation_z = Vector3(0, 0, 1)
+	local rot_180 = Quaternion.axis_angle(rotation_z, math.degrees_to_radians(180))
+	local new_rot = Quaternion.multiply(Unit.world_rotation(self._unit, 0), rot_180)
+
+	if teleport_index == 6 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(75.5838, -1.3294, 55.5669), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 3 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(78.0837, -1.3556, -4.346), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 7 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(62.4548, -0.912965, 16.0169), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 5 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(73.8851, 11.5629, -4.346), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 8 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(65.6391, -0.899768, 26.2569), new_rot, new_rot)
+	elseif teleport_index == 4 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(78.6343, 11.4034, -4.346), new_rot, new_rot)
+	elseif teleport_index == 12 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(-75.8255, 0.379626, 54.7988), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 9 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(-76.7221, 0.367354, -4.92368), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 13 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(-61.1203, -0.0781005, 15.537), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 11 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(-71.985, -12.637, -4.92368), Unit.world_rotation(self._unit, 0), Unit.world_rotation(self._unit, 0))
+	elseif teleport_index == 14 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(-64.5525, 0.0247619, 25.777), new_rot, new_rot)
+	elseif teleport_index == 10 then
+		Managers.state.network:send_rpc_server("rpc_teleport_unit_to", Managers.state.network:game_object_id(self._unit), Vector3(-77.4233, -12.3134, -4.92368), new_rot, new_rot)
+	end
+	return false
 end
 
 function PlayerUnitInteraction:mount(unit, t)

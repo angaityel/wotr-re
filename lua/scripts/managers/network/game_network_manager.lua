@@ -3272,11 +3272,21 @@ function GameNetworkManager:rpc_teleport_unit_to(sender, unit_id, position, rota
 	local unit = self._units[unit_id]
 
 	if Unit.alive(unit) then
+		local level_key = Managers.state.game_mode:level_key()
+		
 		if Managers.lobby.server then
-			local player = self:player_from_peer_id(sender)
-			Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " teleport_unit_to", "rpc_admin_chat_message")
-			print("[CHEAT] " .. sender .. " " .. player:name() .. " teleport_unit_to")
-			--self:send_rpc_clients("rpc_teleport_unit_to", unit_id, position, rotation, camera_rotation)
+			if level_key == "face_01" then
+				self:send_rpc_clients("rpc_teleport_unit_to", unit_id, position, rotation, camera_rotation)
+			else
+				local player = self:player_from_peer_id(sender)
+				Managers.chat:send_chat_message(1, sender .. " " .. player:name() .. " teleport_unit_to", "rpc_admin_chat_message")
+				print("[CHEAT] " .. sender .. " " .. player:name() .. " teleport_unit_to")
+				--self:send_rpc_clients("rpc_teleport_unit_to", unit_id, position, rotation, camera_rotation)
+			end
+		end
+
+		if level_key == "face_01" then
+			Managers.state.event:trigger("teleport_unit_to", unit, position, rotation, camera_rotation)
 		end
 
 		--Managers.state.event:trigger("teleport_unit_to", unit, position, rotation, camera_rotation)

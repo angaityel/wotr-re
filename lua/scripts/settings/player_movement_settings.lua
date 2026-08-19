@@ -389,7 +389,8 @@ PlayerUnitMovementSettings.interaction.priorities = {
 	"trigger",
 	"flag_drop",
 	"flag_spawn",
-	"mount"
+	"mount",
+	"telep"--teleport
 }
 PlayerUnitMovementSettings.interaction.settings = {
 	flag_plant = {

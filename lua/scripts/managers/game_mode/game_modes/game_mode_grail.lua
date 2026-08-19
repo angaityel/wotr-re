@@ -32,7 +32,7 @@ function GameModeGrail:on_round_started()
 			spawn_name = "spawn_col_con_3",
 		})
 		Managers.state.spawn:activate_spawning()
-	elseif level_key == "moor_01" or level_key == "forest_01" then
+	elseif level_key == "moor_01" or level_key == "forest_01" or level_key == "face_01" then
 		flow_callback_deactivate_spawn_area({
 			side = "defenders",
 			spawn_name = "spawn_col_con_1"
