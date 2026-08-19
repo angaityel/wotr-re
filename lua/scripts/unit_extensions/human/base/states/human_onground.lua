@@ -100,6 +100,10 @@ function HumanOnground:can_call_horse(unit, t)
 	local mount_locomotion = Unit.alive(owned_mount) and ScriptUnit.extension(owned_mount, "locomotion_system")
 	local mount_stolen = mount_locomotion and Unit.get_data(owned_mount, "user_unit")
 
+	if internal.carried_flag then
+		return false
+	end
+	
 	return internal:has_perk("cavalry") and internal._player_profile.mount and not mount_stolen and not internal.call_horse_release_button and t >= internal.call_horse_blackboard.cooldown_time and not internal.posing and not internal.swinging and not internal.wielding and not internal.blocking and not internal.parrying and not internal.reloading and not internal.attempting_pose and not internal.attempting_parry and not internal.aiming and (not internal.swing_recovery_time or t > internal.swing_recovery_time) and not internal.ghost_mode
 end
 
