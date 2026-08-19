@@ -52,14 +52,14 @@ Check server_settings.ini and map_rotation.ini first.
 Maps and available modes:
 ```
 St_Albans - town_02 - tdm, con, battle, ass, ffa, domination
-Mortimers_Cross - village_02 - tdm, con, battle, ass, ffa
+Mortimers_Cross - village_02 - tdm, con, battle, ass, ffa, domination
 Bamburgh_Castle - castle_02 - tdm, con, battle, ass, ffa
 Clitheroe_Forest - forest_01 - tdm, con, battle, ass, grail, ffa
 London_Tournament - tournament_01 - tdm, battle, ffa
-Edgecote_Moor - moor_01 - tdm, con, battle, grail, ffa
+Edgecote_Moor - moor_01 - tdm, con, battle, grail, ffa, domination
 Barnet - field_01 - tdm, con, battle, ffa
 Wakefield1 - wakefield_01 - tdm, con, battle, ffa
-Towton - towton_01 - tdm, con, battle, ffa
+Towton - towton_01 - tdm, con, battle, ffa, ass
 Ravenspurn - ravenspurn_01 - tdm, con, battle, ass, ffa
 Greenwood - greenwood_01 - tdm, battle, ffa
 Wakefield - wakefield_02 - ass, ffa
@@ -67,9 +67,10 @@ Practice - practice - tdm, ffa
 Whitebox - whitebox - tdm, ffa
 Dust2 - de_dust2 - tdm, con, battle, ass, ffa
 Bamburgh_Castle_Night - castle_02_night - tdm, con, battle, ass, ffa
-Towton_Day - towton_01_day - tdm, con, battle, ffa
+Towton_Day - towton_01_day - tdm, con, battle, ffa, ass
 Tower_of_London - tower_01 - tdm, con, battle, ass, ffa
 Seasick - seasick_01 - tdm, battle, ffa
+Facing_Worlds - face_01 - tdm, ffa, con, battle, grail, domination
 ```
 To launch (number = server_port from server_settings.ini - 10):
 ```
