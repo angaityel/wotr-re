@@ -3,3 +3,10 @@ lua/jit/
 lua/lua51.dll
 lua/luajit.exe
 game_assets/bundle/
+environment/
+fx/
+gui/
+levels/
+materials/
+units/
+global.network_config
