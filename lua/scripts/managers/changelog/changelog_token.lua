@@ -18,7 +18,28 @@ function ChangelogToken:info()
 	if self:done() and UrlLoader.success(self._loader, self._job) then
 		info.body = UrlLoader.text(self._loader, self._job)
 	else
-		info.body = [[[0.3.5 - 26.04.2026]
+		info.body = [[[0.3.6 - 19.08.2026]
+- New map for testing:
+Facing_Worlds - face_01 - tdm, ffa, con, battle, grail, domination
+- Grail mode: added boundary zones, changed spawns for teams and flags, re-enabled horses but you can't mount while carrying the flag.
+- FFA mode: fixed stun and interruption, added boundary zones, team selection skip, and fixed saving stats.
+- Added assault mode to the Towton map.
+- Added domination mode to the Edgecote_Moor and Mortimers_Cross maps.
+- Chat history now persists between rounds.
+- Restored 1h mace execution.
+- Added proper collision for the new models and for spawn zones on the new maps.
+- Added spawn priority to assault mode on Ravenspurn (And defenders can no longer recapture objective A).
+- Fixed a game crash when your shield destroyed during a shield bash.
+- Fixed a domination mode crash at the end of the round.
+- Server no longer votes "yes" when a vote starts.
+- Server no longer resets the max fps during map transitions.
+- Battle mode now starts with only 2+ players (You no longer need to change the config for this).
+- New players no longer get another player's stats (This time for sure).
+- Added Discord and Steam chat links to the in-game menu as well.
+
+
+
+[0.3.5 - 26.04.2026]
 - Domination mode for St_Albans map.
 - Less spawns for ffa mode (only tdm spawns). And ffa game_mode_size setting can be adjusted in the map_rotation.ini.
 
