@@ -1038,6 +1038,7 @@ LevelSettings = {
 		music = "Play_field_music",
 		knocked_down_setting = "knocked_down",
 		level_name = "levels/face_01/world",
+		skybox_rotation = Application.user_setting("skybox_rotation"),
 		sp_progression_id = 4,
 		sp_requirement_id = 0,
 		tip_of_the_day = DEFAULT_TIP_LIST,

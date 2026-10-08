@@ -464,6 +464,11 @@ function GameModeManager:round_started()
 
 	Managers.state.event:trigger("event_round_started", {})
 	self._spawning:round_started()
+
+	if self._level_key == "face_01" and LevelSettings[self._level_key].skybox_rotation == false then
+		local unit = Level.unit_by_index(level, 2214)
+		Unit.stop_simple_animation(unit)
+	end
 end
 
 function GameModeManager:next_spawn_time(player)

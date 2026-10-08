@@ -1273,6 +1273,13 @@ MainMenuDefinition = {
 													layout_settings = MainMenuSettings.items.text_right_aligned
 												},
 												{
+													text = "menu_skybox_rotation",
+													on_init_options = "cb_skybox_rotation_options",
+													on_option_changed = "cb_skybox_rotation_option_changed",
+													type = "EnumMenuItem",
+													layout_settings = MainMenuSettings.items.text_right_aligned
+												},
+												{
 													disabled = true,
 													type = "TextureMenuItem",
 													layout_settings = MainMenuSettings.items.delimiter_texture

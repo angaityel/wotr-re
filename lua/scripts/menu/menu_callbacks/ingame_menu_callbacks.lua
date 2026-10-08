@@ -266,3 +266,157 @@ function IngameMenuCallbacks:cb_open_link(url)
 		Window.minimize()
 	end
 end
+
+function IngameMenuCallbacks:cb_chat_font_size()
+	local options = {
+		{
+			value = "16",
+			key = 16
+		},
+		{
+			value = "18",
+			key = 18
+		},
+		{
+			value = "20",
+			key = 20
+		},
+		{
+			value = "22",
+			key = 22
+		},
+		{
+			value = "24",
+			key = 24
+		},
+		{
+			value = "26",
+			key = 26
+		},
+		{
+			value = "28",
+			key = 28
+		},
+		{
+			value = "30",
+			key = 30
+		},
+		{
+			value = "32",
+			key = 32
+		},
+		{
+			value = "34",
+			key = 34
+		},
+		{
+			value = "36",
+			key = 36
+		},
+		{
+			value = "38",
+			key = 38
+		},
+		{
+			value = "40",
+			key = 40
+		},
+		{
+			value = "42",
+			key = 42
+		},
+		{
+			value = "44",
+			key = 44
+		},
+		{
+			value = "46",
+			key = 46
+		},
+		{
+			value = "48",
+			key = 48
+		},
+		{
+			value = "50",
+			key = 50
+		},
+		{
+			value = "52",
+			key = 52
+		},
+		{
+			value = "54",
+			key = 54
+		},
+		{
+			value = "56",
+			key = 56
+		}
+	}
+	local default_value = 26
+	local user_settings_value = Application.user_setting("chat_font_size")
+	local default_index, selected_index
+
+	for i, option in ipairs(options) do
+		if option.key == user_settings_value then
+			selected_index = i
+		end
+
+		if option.key == default_value then
+			default_index = i
+		end
+	end
+
+	if user_settings_value then
+		return options, selected_index
+	else
+		return options, default_index
+	end
+end
+
+function IngameMenuCallbacks:cb_chat_font_size_changed(option)
+	Application.set_user_setting("chat_font_size", option.key)
+	Application.save_user_settings()
+
+	HUDSettings.chat_font_size = option.key
+end
+
+function IngameMenuCallbacks:cb_skybox_rotation_options()
+	local options = {
+		{
+			key = true,
+			value = L("main_menu_yes")
+		},
+		{
+			key = false,
+			value = L("main_menu_no")
+		}
+	}
+	local selected_index = LevelSettings["face_01"].skybox_rotation == false and 2 or 1
+
+	return options, selected_index
+end
+
+function IngameMenuCallbacks:cb_skybox_rotation_option_changed(option)
+	Application.set_win32_user_setting("skybox_rotation", option.key)
+	Application.save_win32_user_settings()
+
+	local level_key = Managers.state.game_mode:level_key()
+
+	if level_key == "face_01" then
+		if option.key == false then
+			local world = Managers.world:world("level_world")
+			local level = LevelHelper:current_level(world)
+			local unit = Level.unit_by_index(level, 2214)
+			Unit.stop_simple_animation(unit)
+		else
+			local world = Managers.world:world("level_world")
+			local level = LevelHelper:current_level(world)
+			local unit = Level.unit_by_index(level, 2214)
+			Unit.play_simple_animation(unit, nil, nil, true, 0.005) -- unit, from, to, loop, speed
+		end
+	end
+
+	LevelSettings["face_01"].skybox_rotation = option.key
+end

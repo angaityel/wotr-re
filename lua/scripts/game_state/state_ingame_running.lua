@@ -1041,6 +1041,15 @@ function StateInGameRunning:event_game_started(skip_team_selection)
 	local level = LevelHelper:current_level(world)
 
 	Level.trigger_event(level, "game_started")
+
+	if not Managers.lobby.server then
+		local level_key = Managers.state.game_mode:level_key()
+
+		if level_key == "face_01" and LevelSettings[level_key].skybox_rotation == false then
+			local unit = Level.unit_by_index(level, 2214)
+			Unit.stop_simple_animation(unit)
+		end
+	end
 end
 
 function StateInGameRunning:event_join_team_confirmed()

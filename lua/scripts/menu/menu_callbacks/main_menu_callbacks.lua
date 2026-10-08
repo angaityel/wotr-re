@@ -90,6 +90,29 @@ function MainMenuCallbacks:cb_show_hud_option_changed(option)
 	HUDSettings.show_hud = option.key
 end
 
+function MainMenuCallbacks:cb_skybox_rotation_options()
+	local options = {
+		{
+			key = true,
+			value = L("main_menu_yes")
+		},
+		{
+			key = false,
+			value = L("main_menu_no")
+		}
+	}
+	local selected_index = LevelSettings["face_01"].skybox_rotation == false and 2 or 1
+
+	return options, selected_index
+end
+
+function MainMenuCallbacks:cb_skybox_rotation_option_changed(option)
+	Application.set_win32_user_setting("skybox_rotation", option.key)
+	Application.save_win32_user_settings()
+
+	LevelSettings["face_01"].skybox_rotation = option.key
+end
+
 function MainMenuCallbacks:cb_show_reticule_options()
 	local options = {
 		{
