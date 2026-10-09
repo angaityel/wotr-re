@@ -1156,3 +1156,12 @@ function server_map_name_to_level_key(name)
 		end
 	end
 end
+
+function server_map_id_to_level_key(id)
+	for level_key, level_settings in pairs(LevelSettings) do
+		if level_settings.map_id and level_settings.map_id == id then
+			return level_key
+		end
+	end
+end
+

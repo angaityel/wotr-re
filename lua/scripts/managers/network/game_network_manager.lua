@@ -3536,10 +3536,9 @@ function GameNetworkManager:rpc_map_rotation(sender)
 	local maps_table = {}
 
 	for _, map in pairs(maps) do
-		if not maps_table[LevelSettings[map.level].game_server_map_name] then
-			maps_table[LevelSettings[map.level].game_server_map_name] = {}
-		end
-		table.insert(maps_table[LevelSettings[map.level].game_server_map_name], map.game_mode)
+		local map_table_name = LevelSettings[map.level].game_server_map_name .. "(" .. LevelSettings[map.level].map_id .. ")"
+		maps_table[map_table_name] = maps_table[map_table_name] or {}
+		table.insert(maps_table[map_table_name], map.game_mode)
 	end
 
 	for map_name, mode_names in pairs(maps_table) do
@@ -3586,10 +3585,17 @@ function GameNetworkManager:rpc_vote_map(sender, voter_id, map_game_mode_pair)
 		return
 	end
 
-	local level_key = server_map_name_to_level_key(map)
+	local level_key
+	local map_id = tonumber(map)
+
+	if map_id then
+		level_key = server_map_id_to_level_key(map_id)
+	else
+		level_key = server_map_name_to_level_key(map)
+	end
 
 	if not level_key then
-		RPC.rpc_vote_map_error(sender, sprintf("Invalid map name: %s", map))
+		RPC.rpc_vote_map_error(sender, sprintf("Invalid map name or id: %s", map))
 
 		return
 	end
@@ -3603,6 +3609,8 @@ function GameNetworkManager:rpc_vote_map(sender, voter_id, map_game_mode_pair)
 	end
 
 	local voter = Managers.player:player(self:temp_player_index(voter_id))
+
+	map_game_mode_pair = LevelSettings[level_key].game_server_map_name:lower() .. " " .. game_mode
 
 	Managers.state.voting:start_vote("change_level", voter, map_game_mode_pair)
 end

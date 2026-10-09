@@ -373,10 +373,17 @@ function Commands:change_level(map_pair)
 			return true, "Game mode missing. For example: /rcon <password> /change_level St_Albans tdm"
 		end
 
-		local level_key = server_map_name_to_level_key(server_map_name)
+		local level_key
+		local map_id = tonumber(server_map_name)
+
+		if map_id then
+			level_key = server_map_id_to_level_key(map_id)
+		else
+			level_key = server_map_name_to_level_key(server_map_name)
+		end
 
 		if not level_key then
-			return true, sprintf("Invalid map name: %s", server_map_name)
+			return true, sprintf("Invalid map name or id: %s", server_map_name)
 		end
 
 		local settings = Managers.admin:map_rotation_settings(level_key, game_mode)
